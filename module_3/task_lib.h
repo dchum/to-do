@@ -16,3 +16,12 @@ enum class STATUS
     SUCCES,
     FAILURE
 };
+
+typedef struct
+{
+    int  hours,
+         minutes,
+         day,
+         month, 
+         year;
+}data_t;

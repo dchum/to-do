@@ -56,14 +56,6 @@
 
 using namespace std;
 
-typedef struct
-{
-    int  hours,
-         minutes,
-         day,
-         month, 
-         year;
-}data_t;
 
 typedef pair<string, STATUS> SUB_ITEMS;
 
