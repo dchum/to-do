@@ -90,13 +90,13 @@ class Task
         }
 
         /*! @brief  Возвращает название задачи */
-        std::string& get_name(void)
+        std::string get_name(void) const
         {
             return _name;
         }
 
         /*! @brief  Возвращает описание задачи */
-        std::string& get_description(void)
+        std::string get_description(void) const
         {
             return _description;
         }
@@ -149,7 +149,7 @@ class Task
                 if ( iter->first == description )   break;
             }
             
-            if ( iter == _sub_items.end() ) throw logic_error("ERROR: The item is missing/n");
+            if ( iter == _sub_items.end() ) throw logic_error("ERROR: The item is missing - change_items_status\n");
 
             switch (attribute)
             {
@@ -242,3 +242,8 @@ class Task
 
         std::list<SUB_ITEMS> _sub_items;
 };
+
+inline bool operator<(const Task& lhs, const Task& rhs) 
+{
+    return std::lexicographical_compare(lhs.get_name().begin(), lhs.get_name().end(), rhs.get_name().begin(), rhs.get_name().end()); 
+}
