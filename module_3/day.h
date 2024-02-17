@@ -63,7 +63,7 @@ public:
         _count_task_done = 0;
         for (auto tmp : _set_task)
         {
-            if (tmp.change_task_status(ATTRIBUTE_TASK::INVARIABLY) == STATUS::SUCCES)
+            if (tmp.change_task_status(STATUS::INVARIABLY) == STATUS::SUCCES)
                 _count_task_done++;
         }
 

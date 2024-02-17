@@ -56,8 +56,7 @@
 
 using namespace std;
 
-
-typedef pair<string, STATUS> SUB_ITEMS;
+typedef std::pair<string, STATUS> SUB_ITEMS;
 
 class Task
 {
@@ -124,24 +123,24 @@ class Task
                                               NO_READY  -           не готовую
                                               INVARIABLY- не изменять текущее состояние признака
         */
-        STATUS change_task_status( ATTRIBUTE_TASK attribute )
+        STATUS change_task_status( STATUS attribute )
         {
             switch (attribute)
             {
-                case ATTRIBUTE_TASK::DONE:
+                case STATUS::SUCCES:
                     _is_done = STATUS::SUCCES;
                     break;
-                case ATTRIBUTE_TASK::NO_READY:
+                case STATUS::FAILURE:
                     _is_done = STATUS::FAILURE;
                     break;
-                case ATTRIBUTE_TASK::INVARIABLY:
+                case STATUS::INVARIABLY:
                 default:
                     break;
             }
             return _is_done;
         }
 
-        STATUS change_items_status( const string& description,  ATTRIBUTE_TASK attribute )
+        STATUS change_items_status( const string& description,  STATUS attribute )
         {
             auto iter = _sub_items.begin();
             while (iter != _sub_items.end()) 
@@ -153,13 +152,13 @@ class Task
 
             switch (attribute)
             {
-                case ATTRIBUTE_TASK::DONE:
+                case STATUS::SUCCES:
                     iter->second = STATUS::SUCCES;
                     break;
-                case ATTRIBUTE_TASK::NO_READY:
+                case STATUS::FAILURE:
                     iter->second = STATUS::FAILURE;
                     break;
-                case ATTRIBUTE_TASK::INVARIABLY:
+                case STATUS::INVARIABLY:
                 default:
                     break;
             }
@@ -195,10 +194,11 @@ class Task
         }
 
         /*Добавить пункт в задачу*/
-        void add_items(  string& items )
+        void add_items( string& items )
         {
-            _sub_items.push_back(make_pair(items, STATUS::FAILURE));
+            _sub_items.push_back(std::make_pair(items, STATUS::FAILURE));
         }
+
         /*Удалить пункт из задачи по описанию пункта*/
         STATUS delete_items( const string& description )
         {
