@@ -52,7 +52,7 @@
 #include <ctime>
 #include <stdexcept>
 
-#include "task_lib.h"
+#include "global_lib.h"
 
 using namespace std;
 
@@ -119,9 +119,9 @@ class Task
 
         /*! 
             @brief Возвращает признак готовности задачи 
-            @param attribute  (см task_lib.h) DONE      - пометить как готовую 
-                                              NO_READY  -           не готовую
-                                              INVARIABLY- не изменять текущее состояние признака
+            @param attribute  (см global_lib.h) DONE      - пометить как готовую 
+                                                NO_READY  -           не готовую
+                                                INVARIABLY- не изменять текущее состояние признака
         */
         STATUS change_task_status( STATUS attribute )
         {

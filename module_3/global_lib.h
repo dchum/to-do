@@ -21,7 +21,7 @@ typedef struct
 } data_t;
 
 /*Дни недели*/
-enum class Week
+enum WEEKDAY
 {
     MONDAY,
     TUESDAY,
@@ -29,5 +29,14 @@ enum class Week
     THURSDAY,
     FRIDAY,
     SATURDAY,
-    SUNDAY
+    SUNDAY,
+    NUM_DAY_WEEK
+};
+
+/*Классы обслуживания для канбан-доски*/
+enum class SERVISE_CLASS
+{
+    BACKLOG,        /*Запланировано*/
+    IN_PROGRESS,    /*В процессе*/
+    DONE            /*Готово*/
 };
