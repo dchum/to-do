@@ -11,7 +11,7 @@
 [x]{ } констуктор по умолчанию
 [x]{ } получить нужную задачу
 [x]{ } удалить/добавить задачу
-[x]{ } получить кол-во выполненных/всех задач
+[x]{ } получить кол-во выполненных задач
 [x]{ } получить дату для дня (день, месяц)
 
 //TODO - возможно появится необходимость реализовать доступ по итераторам для for range цикла
@@ -38,35 +38,25 @@ private:
     set<Task> _set_task;
 
 public:
-
     Day()
     {
         auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        std::tm* timeInfo = std::localtime(&currentTime);
-            
+        std::tm *timeInfo = std::localtime(&currentTime);
+
         date = {
-            .hours   = -1,
+            .hours = -1,
             .minutes = -1,
-            .day     = timeInfo->tm_mday,
-            .month   = timeInfo->tm_mon + 1, // tm_mon начинается с 0
-            .year    = -1,
+            .day = timeInfo->tm_mday,
+            .month = timeInfo->tm_mon + 1, // tm_mon начинается с 0
+            .year = -1,
         };
-
     }
 
-    /**Кол-во всех задач в дне */
-    int get_count_task( void ) const
-    {
-        return _set_task.size();
-    }
-
-    /**Узнать дату дня */
-    pair<int, int> get_date(void) const
+    pair<int, int> get_date(void)
     {
         return make_pair(date.day, date.month);
     }
 
-    /**Кол-во выполненных задач */
     int get_count_task_done(void)
     {
         _count_task_done = 0;
@@ -79,7 +69,11 @@ public:
         return _count_task_done;
     }
 
-    /**Добавить задачу в день */
+    int get_count_task(void)
+    {
+        return _set_task.size();
+    }
+
     STATUS add_new_task(Task task)
     {
         auto ret = _set_task.insert(task);
@@ -87,7 +81,6 @@ public:
         return ret.second ? STATUS::SUCCES : STATUS::FAILURE;
     }
 
-    /**Удалить задачу */
     STATUS delete_task(const string &name_task)
     {
         int ret = 0;
@@ -97,16 +90,15 @@ public:
             const Task &task = get_task(name_task);
             ret = _set_task.erase(task);
         }
-        catch(const std::logic_error& e)
+        catch (const std::logic_error &e)
         {
             std::cerr << e.what() << '\n';
             return STATUS::FAILURE;
         }
-        
+
         return ret != 0 ? STATUS::SUCCES : STATUS::FAILURE;
     }
 
-    /**Получить задачу по названию */
     const Task &get_task(const string &name_task) const
     {
         for (const auto &tmp : _set_task)
