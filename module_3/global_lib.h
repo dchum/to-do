@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vector>
+#include <string>
+#include <iostream>
+
 using namespace std;
 
 /* Признак успешности работы ф-и, выполненности пункта/задачи и т.д.
@@ -43,9 +47,11 @@ enum class WEEKDAY
 };
 
 /*Классы обслуживания для канбан-доски, по-умолчанию*/
-enum class SERVISE_CLASS
+enum SERVISE_CLASS
 {
     BACKLOG,     /*Запланировано*/
     IN_PROGRESS, /*В процессе*/
     DONE         /*Готово*/
 };
+
+std::ostream &operator<<(std::ostream &os, const vector<string>& vector_to_string);

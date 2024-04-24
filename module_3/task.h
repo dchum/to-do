@@ -22,9 +22,6 @@
                                                             Значение от 0 до 1.
 [x]  _count_items  : (int)                                -количество подзадач. Размер словаря _sub_items
 
-    update: (то есть возможно добавление в след версии)
-        1) Возможность прикреплять теги к пунктам. Тогда такой тег относится и к пункту, и к задаче, чтобы найти какие пункты соответствуют нужному тегу
-
     Методы класса:
     //NOTE -  v 1.0
         Возможны несколько видов конструкторов:
@@ -37,10 +34,12 @@
 [x]{ }   добавить/убрать тег/и к задаче
 [x]{ }   добавить/убрать пункты задачи
 [x]{ }   выставить/снять признак готовности пункта
-[x]{ }   найти тег. Ответ на вопрос, имеет ли текущая задача конкретный тег или нет /*TODO - реализовать поиск
+[x]{ }   найти тег. Ответ на вопрос, имеет ли текущая задача конкретный тег или нет
 [x]{ }   получить/обновить _progress по задаче
 [x]{ }   получить кол-во пунктов
 
+    update: (то есть возможно добавление в след версии)
+        1) Возможность прикреплять теги к пунктам. Тогда такой тег относится и к пункту, и к задаче, чтобы найти какие пункты соответствуют нужному тегу
 *******************************************************************************************************************************************/
 #pragma once
 
@@ -48,188 +47,15 @@
 #include <list>
 #include <set>
 #include <utility> /* для pair */
-#include <chrono>  /* для учета времени */
-#include <ctime>
-#include <stdexcept>
 
 #include "global_lib.h"
 
 using namespace std;
 
-typedef std::pair<string, STATUS> SUB_ITEMS;
 
+typedef std::pair<string, STATUS> SUB_ITEMS;
 class Task
 {
-public:
-    Task() = default;
-
-    Task(const std::string &name, const std::string &description = ""s, STATUS is_done = STATUS::FAILURE, float progress = 0.,
-         const data_t &ending_date = {0, 0, 0, 0, 0},
-         const std::set<std::string> &tags = {})
-        : _name(name),
-          _description(description),
-          _is_done(is_done),
-          _progress(progress),
-          _ending_date(ending_date),
-          _tags(tags)
-    {
-        _count_items = 0;
-
-        auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        std::tm *timeInfo = std::localtime(&currentTime);
-
-        _creation_date = {
-            .hours = timeInfo->tm_hour,
-            .minutes = timeInfo->tm_min,
-            .day = timeInfo->tm_mday,
-            .month = timeInfo->tm_mon + 1, // tm_mon начинается с 0
-            .year = 1900 + timeInfo->tm_year,
-        };
-    }
-
-    /*! @brief  Возвращает название задачи */
-    std::string get_name(void) const
-    {
-        return _name;
-    }
-
-    /*! @brief  Возвращает описание задачи */
-    std::string get_description(void) const
-    {
-        return _description;
-    }
-
-    /*! @brief  Возвращает прогресс по задачи */
-    float get_progress(void)
-    {
-        return _progress;
-    }
-
-    /*! @brief Обновление значения прогресса по задаче исходя из выполненных пунктов */
-    void update_progress(void)
-    {
-        int number_completed_items = 0;
-        for (const auto &[name, is_done] : _sub_items)
-        {
-            if (is_done == STATUS::SUCCES)
-                number_completed_items++;
-        }
-        _progress = (number_completed_items * 1.) / (_sub_items.size() * 1.);
-    }
-
-    /*!
-        @brief Возвращает признак готовности задачи
-        @param attribute  (см task_lib.h) DONE      - пометить как готовую
-                                          NO_READY  -           не готовую
-                                          INVARIABLY- не изменять текущее состояние признака
-    */
-    STATUS change_task_status(STATUS attribute)
-    {
-        switch (attribute)
-        {
-        case STATUS::SUCCES:
-            _is_done = STATUS::SUCCES;
-            break;
-        case STATUS::FAILURE:
-            _is_done = STATUS::FAILURE;
-            break;
-        case STATUS::INVARIABLY:
-        default:
-            break;
-        }
-        return _is_done;
-    }
-
-    STATUS change_items_status(const string &description, STATUS attribute)
-    {
-        auto iter = _sub_items.begin();
-        while (iter != _sub_items.end())
-        {
-            if (iter->first == description)
-                break;
-        }
-
-        if (iter == _sub_items.end())
-            throw logic_error("ERROR: The item is missing - change_items_status\n");
-
-        switch (attribute)
-        {
-        case STATUS::SUCCES:
-            iter->second = STATUS::SUCCES;
-            break;
-        case STATUS::FAILURE:
-            iter->second = STATUS::FAILURE;
-            break;
-        case STATUS::INVARIABLY:
-        default:
-            break;
-        }
-        return iter->second;
-    }
-
-    /*! @brief Возвращает кол-во пунктов */
-    int get_size_sub_items(void)
-    {
-        return _sub_items.size();
-    }
-
-    /*! @brief Добавить тег */
-    STATUS add_tag(const std::string &tag)
-    {
-        auto ret = _tags.insert(tag);
-
-        return ret.second ? STATUS::SUCCES : STATUS::FAILURE;
-    }
-
-    /*! @brief Удалить тег */
-    STATUS remove_tag(const std::string &tag)
-    {
-        auto ret = _tags.erase(tag);
-
-        return ret == 1 ? STATUS::SUCCES : STATUS::FAILURE;
-    }
-
-    /*! @brief Имеет ли задача данный тег или нет */
-    STATUS have_tag(const std::string &tag)
-    {
-        return _tags.count(tag) ? STATUS::SUCCES : STATUS::FAILURE;
-    }
-
-    /*Добавить пункт в задачу*/
-    void add_items(string &items)
-    {
-        _sub_items.push_back(std::make_pair(items, STATUS::FAILURE));
-    }
-
-    /*Удалить пункт из задачи по описанию пункта*/
-    STATUS delete_items(const string &description)
-    {
-        auto iter = _sub_items.begin();
-        while (iter != _sub_items.end())
-        {
-            if (iter->first == description)
-                break;
-        }
-
-        auto ret = _sub_items.erase(iter);
-
-        return iter != _sub_items.end() ? STATUS::SUCCES : STATUS::FAILURE;
-    }
-
-    void add_ending_date(data_t date)
-    {
-        _ending_date.day = date.day;
-        _ending_date.hours = date.hours;
-        _ending_date.minutes = date.minutes;
-        _ending_date.month = date.month;
-        _ending_date.year = date.year;
-    }
-
-    void delete_ending_date(void)
-    {
-        _ending_date = {.hours = 0, .minutes = 0, .day = 0, .month = 0, .year = 0};
-    }
-
 private:
     std::string _name = ""s,
                 _description = ""s;
@@ -243,9 +69,71 @@ private:
     std::set<std::string> _tags;
 
     std::list<SUB_ITEMS> _sub_items;
+
+public:
+    Task() = default;
+
+    Task(const std::string &name, const std::string &description = ""s, STATUS is_done = STATUS::FAILURE, float progress = 0.,
+         const data_t &ending_date = {0, 0, 0, 0, 0},
+         const std::set<std::string> &tags = {});
+
+    /*! @brief  Возвращает название задачи */
+    std::string name(void) const;
+
+    /*! @brief  Возвращает описание задачи */
+    std::string description(void) const;
+
+    /*! @brief  Возвращает прогресс по задачи */
+    float progress(void);
+
+    /*! @brief Изменить название задачи */
+    STATUS set_name_task(const string& name_task);
+
+    /*! @brief Изменить описание задачи */
+    STATUS set_description_task(const string& description_task);
+
+    /*!
+        @brief Возвращает признак готовности задачи
+        @param attribute  (см task_lib.h) DONE      - пометить как готовую
+                                          NO_READY  -           не готовую
+                                          INVARIABLY- не изменять текущее состояние признака
+    */
+    STATUS change_task_status(STATUS attribute);
+    
+    /*! @brief Изменить статус подзадачи*/
+    STATUS change_items_status(const string &description, STATUS attribute);
+
+    /*! @brief Возвращает кол-во пунктов */
+    int size_sub_items(void);
+
+    /*! @brief Добавить тег */
+    STATUS add_tag(const std::string &tag);
+
+    /*! @brief Удалить тег */
+    STATUS remove_tag(const std::string &tag);
+
+    /*! @brief Имеет ли задача данный тег или нет */
+    STATUS have_tag(const std::string &tag);
+
+    /*! @brief Добавить пункт в задачу*/
+    void add_items(string &items);
+
+    /*! @brief Удалить пункт из задачи по описанию пункта*/
+    STATUS delete_items(const string &description);
+
+    /*! @brief Добавить дату окончания */
+    void add_ending_date(data_t date);
+
+    /*! @brief Удалить дату окончания */
+    void delete_ending_date(void);
+
+private:
+    /*! @brief Обновление значения прогресса по задаче исходя из выполненных пунктов */
+    void update_progress(void);
 };
+
 
 inline bool operator<(const Task &lhs, const Task &rhs)
 {
-    return std::lexicographical_compare(lhs.get_name().begin(), lhs.get_name().end(), rhs.get_name().begin(), rhs.get_name().end());
+    return std::lexicographical_compare(lhs.name().begin(), lhs.name().end(), rhs.name().begin(), rhs.name().end());
 }
