@@ -38,6 +38,48 @@ STATUS Service_Class::remove_task(const string &name_task)
     return STATUS::FAILURE;
 }
 
+void Service_Class::search(const string &query)
+{
+    vector<string> name_tasks;
+    name_tasks.reserve(_tasks.size());
+
+    for(const auto& tmp : _tasks)
+        name_tasks.push_back(tmp.name());
+
+    search_server.AddDocument(name_tasks);
+
+    for (const auto tmp : search_server.FindTopDocuments(query))
+    {
+        cout << " index: "            << tmp.index 
+             << " comparable_words: " << tmp.comparable_words 
+             << " relevance: "        << tmp.relevance 
+        << endl; 
+    }
+}
+
+void Service_Class::search_tag(const string &query)
+{
+    vector<string> tag_tasks;
+
+    for(const auto& tmp : _tasks)
+    {
+        for (const auto& tag : tmp.get_tags())
+        {
+            tag_tasks.push_back(tag);
+        }
+    }
+
+    search_server.AddDocument(tag_tasks);
+
+    for (const auto tmp : search_server.FindTopDocuments(query))
+    {
+        cout << " index: "            << tmp.index 
+             << " comparable_words: " << tmp.comparable_words 
+             << " relevance: "        << tmp.relevance 
+        << endl; 
+    }
+}
+
 STATUS Service_Class::add_task(const string &name_task)
 {
     vector<Task>::iterator it = find_if(_tasks.begin(), _tasks.end(),
@@ -140,6 +182,18 @@ int Board::count_all_task_in_service_class(const string &name_service_class)
         return (*it).count_all_task();
     else
         return 0;
+}
+
+void Board::search(const string &query)
+{
+    for(auto& tmp : _service_classes)
+        tmp.search(query);
+}
+
+void Board::search_tag(const string &query)
+{
+    for(auto& tmp : _service_classes)
+        tmp.search_tag(query);
 }
 
 int Board::count_done_task_in_service_class(const string &name_service_class)

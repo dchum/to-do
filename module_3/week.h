@@ -2,8 +2,8 @@
     Класс "Неделя" - Week. Используется в интерфейсах "Еженедельное планирование"
     Поля класса:
     //NOTE -  v 1.0
-[x] _count_done_task : int                      - кол-во выполненных задач на неделе
-[x] _count_all_task  : int                      - кол-во всех задач на неделе
+[x] _count_done_task : int                       - кол-во выполненных задач на неделе
+[x] _count_all_task  : int                       - кол-во всех задач на неделе
 [x] _days_week       : _days_week[NUM_DAY_WEEK]  - вектор дней недели
 
     Методы класса:
@@ -26,6 +26,8 @@
 #include "day.h"
 #include "global_lib.h"
 
+#include "search/search.h"
+
 using namespace std;
 
 class Week
@@ -35,6 +37,7 @@ private:
         _count_all_task = 0;
 
     vector<Day> _days_week;
+
 
 public:
     Week();

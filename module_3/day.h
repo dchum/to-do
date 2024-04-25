@@ -2,7 +2,7 @@
     Класс "День" - Day. Используется в интерфейсах "Еженедельное планирование"
     Поля класса:
     //NOTE -  v 1.0
-[x]  _set_task          : set<int, Task>            - список всех задач Task для этого дня
+[x]  _tasks_day          : set<int, Task>            - список всех задач Task для этого дня
 [x]  _date              : date_t                    - день, месяц
 [x]  _count_done_task   : int                       - кол-во выполненных задач в дне
 
@@ -13,7 +13,7 @@
 [x]{ } удалить/добавить задачу
 [x]{ } получить кол-во выполненных задач
 [x]{ } получить дату для дня (день, месяц)
-[ ]{ } найти задачу /*TODO реализовать поиск
+[x]{ } найти задачу
 
 //TODO - возможно появится необходимость реализовать доступ по итераторам для for range цикла
 ****************************************************************************************************************************** */
@@ -27,6 +27,8 @@
 #include "task.h"
 #include "global_lib.h"
 
+#include "search/search.h"
+
 using namespace std;
 
 class Day
@@ -35,7 +37,9 @@ private:
     int _count_done_task = 0;
     data_t _date = {.hours = -1, .minutes = -1, .day = 0, .month = 0, .year = 0};
 
-    set<Task> _set_task;
+    set<Task> _tasks_day;
+
+    SearchServer search_server;
 
 public:
     Day();
@@ -49,6 +53,8 @@ public:
     STATUS add_new_task(Task task);
 
     STATUS delete_task(const string &name_task);
+
+    void search(const string& query);//STUB - пока неизвестно, какой должен быть вывод на запрос
 
     const Task &get_task(const string &name_task) const;
 };

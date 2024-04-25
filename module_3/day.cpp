@@ -28,7 +28,7 @@ pair<int, int> Day::date(void)
 int Day::count_done_task(void)
 {
     _count_done_task = 0;
-    for (auto tmp : _set_task)
+    for (auto tmp : _tasks_day)
     {
         if (tmp.change_task_status(STATUS::INVARIABLY) == STATUS::SUCCES)
             _count_done_task++;
@@ -39,12 +39,12 @@ int Day::count_done_task(void)
 
 int Day::count_all_task(void) const
 {
-    return _set_task.size();
+    return _tasks_day.size();
 }
 
 STATUS Day::add_new_task(Task task)
 {
-    auto ret = _set_task.insert(task);
+    auto ret = _tasks_day.insert(task);
 
     return ret.second ? STATUS::SUCCES : STATUS::FAILURE;
 }
@@ -56,7 +56,7 @@ STATUS Day::delete_task(const string &name_task)
     try
     {
         const Task &task = get_task(name_task);
-        ret = _set_task.erase(task);
+        ret = _tasks_day.erase(task);
     }
     catch (const std::logic_error &e)
     {
@@ -67,17 +67,36 @@ STATUS Day::delete_task(const string &name_task)
     return ret != 0 ? STATUS::SUCCES : STATUS::FAILURE;
 }
 
+void Day::search(const string &query)
+{
+    vector<string> name_tasks;
+    name_tasks.reserve(_tasks_day.size());
+
+    for(const auto& tmp : _tasks_day)
+        name_tasks.push_back(tmp.name());
+
+    search_server.AddDocument(name_tasks);
+
+    for (const auto tmp : search_server.FindTopDocuments(query))
+    {
+        cout << " index: "            << tmp.index 
+             << " comparable_words: " << tmp.comparable_words 
+             << " relevance: "        << tmp.relevance 
+        << endl; 
+    }
+}
+
 const Task& Day::get_task(const string &name_task) const
 {
     set<Task>::iterator it;
 
-    it = find_if(_set_task.begin(), _set_task.end(), 
+    it = find_if(_tasks_day.begin(), _tasks_day.end(), 
                 [&](const Task& tmp)
                 {
                     return tmp.name() == name_task;
                 });
 
-    if ( it != _set_task.end() )
+    if ( it != _tasks_day.end() )
         return (*it);
     else
         throw logic_error("ERROR: There is no task - task()\n");

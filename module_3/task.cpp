@@ -137,6 +137,10 @@ STATUS Task::have_tag(const std::string &tag)
     return _tags.count(tag) ? STATUS::SUCCES : STATUS::FAILURE;
 }
 
+std::set<std::string> Task::get_tags(void) const
+{
+    return _tags;
+}
 
 void Task::add_items(string &items)
 {

@@ -12,7 +12,7 @@
 [x]{} получить кол-во задач
 [x]{} получить кол-во выполненных задач
 [x]{} получить название логического уровня
-[ ]{} поиск нужной задачи /*TODO - реализовать поиск
+[x]{} поиск нужной задачи
 [x]{} удалить задачу
 [x]{} добавить задачу
 
@@ -33,7 +33,7 @@
 [x]{ } получить кол-во используемых классов обслуживания для доски
 [x]{ } получить кол-во всех/выполненнных задач в рамках одного класса обслуживания
 [x]{ } получить кол-во всех/выполненнных задач всей доски
-[ ]{ } поиск задачи /*TODO - реализовать поиск
+[x]{ } поиск задачи
 [ ]{ } поиск среди всех задач по тегу /*TODO - реализовать поиск
 
     update:
@@ -51,6 +51,8 @@
 #include "task.h"
 #include "str_switch.h"
 
+#include "search/search.h"
+
 #define COUNT_TASKS_IN_SERVICE_CLASS 3
 #define COUNT_SERVICE_CLASS_IN_BOARD 3
 
@@ -64,6 +66,8 @@ private:
     string _name_level = "";
     vector<Task> _tasks;
 
+    SearchServer search_server;
+
 public:
     explicit Service_Class(const string &str);
 
@@ -74,6 +78,10 @@ public:
     string name_level(void) const noexcept;
 
     STATUS remove_task(const string &name_task);
+
+    void search(const string& query);//STUB - пока неизвестно, какой должен быть вывод на запрос
+
+    void search_tag(const string& query);//STUB - пока неизвестно, какой должен быть вывод на запрос
 
     STATUS add_task(const string &name_task);
 
@@ -104,6 +112,10 @@ public:
     int count_servive_class(void);
 
     int count_all_task_in_service_class(const string &name_service_class);
+
+    void search(const string& query);//STUB - пока неизвестно, какой должен быть вывод на запрос
+
+    void search_tag(const string& query);//STUB - пока неизвестно, какой должен быть вывод на запрос
 
     int count_done_task_in_service_class(const string &name_service_class);
 
