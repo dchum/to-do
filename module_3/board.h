@@ -49,7 +49,6 @@
 
 #include "global_lib.h"
 #include "task.h"
-#include "str_switch.h"
 
 #include "search/search.h"
 
