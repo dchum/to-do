@@ -1,4 +1,4 @@
-#include "week.h"
+#include "baseclass_week.h"
 
 #include <cassert>
 #include <stdexcept>
@@ -35,43 +35,6 @@ int Week::count_notready_task(void) noexcept
     return _count_all_task - _count_done_task;
 }
 
-/**Поиск задачи в недели */
-std::vector<std::pair<Day, Task>> Week::task_search(const string &name_task)
-{
-    std::vector<std::pair<Day, Task>> found_tasks;
-    for (const auto &_day : _days_week)
-    {
-        try
-        {
-            Task task = _day.get_task(name_task);
-            found_tasks.push_back(std::make_pair(_day, task));
-        }
-        catch (const std::logic_error &e)
-        {
-            std::cerr << "ERROR: task not found\n";
-        }
-    }
-    return found_tasks;
-}
-
-/**Поиск задачи по тегу среди недели */
-std::vector<std::pair<Day, Task>> Week::tag_search(const string &name_tag)
-{
-    std::vector<std::pair<Day, Task>> found_tasks;
-    for (const auto &_day : _days_week)
-    {
-        try
-        {
-            Task task = _day.get_task(name_tag);
-            found_tasks.push_back(std::make_pair(_day, task));
-        }
-        catch (const std::logic_error &e)
-        {
-            std::cerr << "ERROR: task not found\n";
-        }
-    }
-    return found_tasks;
-}
 
 /**Обновляем текущую статистику */
 void Week::update(void)

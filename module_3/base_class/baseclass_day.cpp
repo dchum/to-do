@@ -1,4 +1,4 @@
-#include "day.h"
+#include "baseclass_day.h"
 
 #include <stdexcept>
 #include <algorithm>
@@ -67,24 +67,6 @@ STATUS Day::delete_task(const string &name_task)
     return ret != 0 ? STATUS::SUCCES : STATUS::FAILURE;
 }
 
-void Day::search(const string &query)
-{
-    vector<string> name_tasks;
-    name_tasks.reserve(_tasks_day.size());
-
-    for(const auto& tmp : _tasks_day)
-        name_tasks.push_back(tmp.name());
-
-    search_server.AddDocument(name_tasks);
-
-    for (const auto tmp : search_server.FindTopDocuments(query))
-    {
-        cout << " index: "            << tmp.index 
-             << " comparable_words: " << tmp.comparable_words 
-             << " relevance: "        << tmp.relevance 
-        << endl; 
-    }
-}
 
 const Task& Day::get_task(const string &name_task) const
 {
