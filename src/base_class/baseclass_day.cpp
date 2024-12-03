@@ -8,21 +8,11 @@
 
 Day::Day()
 {
-    auto currentTime = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     tm *timeInfo = localtime(&currentTime);
 
-    _date = {
-        .hours = -1,
-        .minutes = -1,
-        .day = timeInfo->tm_mday,
-        .month = timeInfo->tm_mon + 1, // tm_mon начинается с 0
-        .year = -1,
-    };
-}
-
-pair<int, int> Day::date(void)
-{
-    return make_pair(_date.day, _date.month);
+    memset(&_date, -1, sizeof(_date));
+    _date = { .day = timeInfo->tm_mday, .month = timeInfo->tm_mon + 1, /* tm_mon начинается с 0 */ };
 }
 
 int Day::count_done_task(void)
@@ -49,7 +39,7 @@ STATUS Day::add_new_task(Task task)
     return ret.second ? STATUS::SUCCES : STATUS::FAILURE;
 }
 
-STATUS Day::delete_task(const string &name_task)
+STATUS Day::delete_task(const std::string &name_task)
 {
     int ret = 0;
 
@@ -68,18 +58,15 @@ STATUS Day::delete_task(const string &name_task)
 }
 
 
-const Task& Day::get_task(const string &name_task) const
+const Task& Day::get_task(const std::string &name_task) const
 {
-    set<Task>::iterator it;
+    std::set<Task>::iterator it;
 
     it = find_if(_tasks_day.begin(), _tasks_day.end(), 
-                [&](const Task& tmp)
-                {
-                    return tmp.name() == name_task;
-                });
+                [&](const Task& tmp) { return tmp.name() == name_task; });
 
     if ( it != _tasks_day.end() )
         return (*it);
     else
-        throw logic_error("ERROR: There is no task - task()\n");
+        throw std::logic_error("ERROR: There is no task - task()\n");
 }

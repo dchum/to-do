@@ -16,42 +16,43 @@
 
     update:
     1. Добавить теги и поиск по ним
+    2. Поиск
 ****************************************************************************************************************************** */
 #pragma once
 
 #include <string>
 #include <vector>
-#include <utility>
 
-#include "day.h"
+#include "baseclass_day.h"
+
 #include "global_lib.h"
 
-#include "search/search.h"
 
-using namespace std;
+
 
 class Week
 {
 private:
-    int _count_done_task = 0,
-        _count_all_task = 0;
+    int _count_done_task,
+        _count_all_task;
 
-    vector<Day> _days_week;
-
+    std::vector<Day> _days_week;
 
 public:
     Week();
 
     /**Кол-во выполненных задач */
-    int count_done_task(void) noexcept;
+    int count_done_task(void) const noexcept { return _count_done_task; }
+    int count_done_task(void) noexcept       { return _count_done_task; }
 
     /**Кол-во всех задач */
-    int count_all_task(void) noexcept;
+    int count_all_task(void) const noexcept  { return _count_all_task; }
+    int count_all_task(void) noexcept        { return _count_all_task; }
 
     /**Кол-во невыполненных задач */
-    int count_notready_task(void) noexcept;
+    int count_notready_task(void) const noexcept { return _count_all_task - _count_done_task; }
+    int count_notready_task(void) noexcept       { return _count_all_task - _count_done_task; } 
 
-private:
     /**Обновляем текущую статистику */
     void update(void);
 };

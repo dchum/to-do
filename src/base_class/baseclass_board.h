@@ -40,44 +40,47 @@
     update:
     1) Реализовать возможность самому создавать классы обслуживания, настраивать какие классы будут отображаться по умолчанию
     2) Работа с тегами
+    3) Поиск
 ****************************************************************************************************************************** */
 #pragma once
 
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
+
+#include "baseclass_task.h"
 
 #include "global_lib.h"
-#include "task.h"
 
-#include "search/search.h"
 
 #define COUNT_TASKS_IN_SERVICE_CLASS 3
 #define COUNT_SERVICE_CLASS_IN_BOARD 3
 
-using namespace std;
 
 class Service_Class
 {
 private:
     int _count_done_task = 0,
         _count_all_task = 0;
-    string _name_level = "";
-    vector<Task> _tasks;
+    std::string _name_level = "";
+    std::vector<Task> _tasks;
+    SERVISE_CLASS _id;
 
 public:
-    explicit Service_Class(const string &str);
+    // explicit Service_Class(SERVISE_CLASS id, );
 
-    int count_all_task(void) const noexcept;
+    int count_all_task(void) const noexcept { return _count_all_task; };
+    int count_all_task(void) noexcept       { return _count_all_task; };
 
-    int count_done_task(void) const noexcept;
+    int count_done_task(void) const noexcept { return _count_done_task; };
+    int count_done_task(void) noexcept       { return _count_done_task; };
 
-    string name_level(void) const noexcept;
+    std::string name_level(void) const noexcept { return _name_level; }
+    std::string name_level(void) noexcept       { return _name_level; }
 
-    STATUS remove_task(const string &name_task);
+    STATUS remove_task(const std::string &name_task);
 
-    STATUS add_task(const string &name_task);
+    STATUS add_task(const std::string &name_task);
 
 private:
     void update(void);
@@ -87,27 +90,29 @@ private:
 class Board
 {
 private:
-    vector<Service_Class> _service_classes;
+    std::vector<Service_Class> _service_classes;
     int _count_done_task,
         _count_all_task,
         _id;
 
 public:
-    explicit Board(int id);
+    Board(int id); //FIXME нужен инициализатор для доски
 
-    STATUS add_task_in_servise_class(const string &name_service_class, const string &name_task);
+    int count_all_task(void) const noexcept { return _count_all_task; }
+    int count_all_task(void) noexcept       { return _count_all_task; }
 
-    STATUS remove_task_in_servise_class(const string &name_service_class, const string &name_task);
+    int count_done_task(void) const noexcept { return _count_done_task; }
+    int count_done_task(void) noexcept       { return _count_done_task; }
 
-    int count_all_task(void);
+    int count_servive_class(void) const noexcept { return _service_classes.size(); }
+    int count_servive_class(void) noexcept       { return _service_classes.size(); }
 
-    int count_done_task(void);
+    std::vector<Service_Class> get_service_classes() const noexcept { return _service_classes; }
+    std::vector<Service_Class> get_service_classes() noexcept       { return _service_classes; }
 
-    int count_servive_class(void);
+    int count_all_task_in_service_class(const std::string &name_service_class);
 
-    int count_all_task_in_service_class(const string &name_service_class);
-
-    int count_done_task_in_service_class(const string &name_service_class);
+    int count_done_task_in_service_class(const std::string &name_service_class);
 
 private:
     void update(void);

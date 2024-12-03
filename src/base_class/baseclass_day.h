@@ -19,6 +19,10 @@
 [x]{ } получить дату для дня (день, месяц)
 
 //TODO - возможно появится необходимость реализовать доступ по итераторам для for range цикла
+update: (то есть возможно добавление в след версии)
+        1) расширенная информация о дате
+        2) работа с тегами
+        3) Поиск
 ****************************************************************************************************************************** */
 
 #pragma once
@@ -27,27 +31,22 @@
 #include <utility>
 #include <string>
 
-#include "task.h"
+#include "baseclass_task.h"
 #include "global_lib.h"
-
-#include "search/search.h"
-
-using namespace std;
 
 class Day
 {
 private:
     int _count_done_task = 0;
-    data_t _date = {.hours = -1, .minutes = -1, .day = 0, .month = 0, .year = 0};
+    data_t _date;
 
-    set<Task> _tasks_day;
-
-    SearchServer search_server;
+    std::set<Task> _tasks_day;
 
 public:
     Day();
 
-    pair<int, int> date(void);
+    data_t date(void) const noexcept { return _date; }
+    data_t date(void) noexcept       { return _date; }
 
     int count_done_task(void);
 
@@ -55,7 +54,7 @@ public:
 
     STATUS add_new_task(Task task);
 
-    STATUS delete_task(const string &name_task);
+    STATUS delete_task(const std::string &name_task);
 
-    const Task &get_task(const string &name_task) const;
+    const Task &get_task(const std::string &name_task) const;
 };

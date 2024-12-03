@@ -4,7 +4,8 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
+#define STR(x) #x
+
 
 /* Признак успешности работы ф-и, выполненности пункта/задачи и т.д.
    Использовать везде, где требуется дать односложный ответ "да/нет"
@@ -54,4 +55,4 @@ enum SERVISE_CLASS
     DONE         /*Готово*/
 };
 
-std::ostream &operator<<(std::ostream &os, const vector<string>& vector_to_string);
+std::ostream &operator<<(std::ostream &os, const std::vector<std::string>& vector_to_string);
