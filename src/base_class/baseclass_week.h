@@ -12,7 +12,7 @@
 
     Методы класса:
     //NOTE -  v 1.0
-[x]{ } выдать число всех/выпо/невыполненных задач
+[x]{ } выдать число всех/выпо задач
 
     update:
     1. Добавить теги и поиск по ним
@@ -41,18 +41,15 @@ private:
 public:
     Week();
 
-    /**Кол-во выполненных задач */
+    /*! @brief Кол-во выполненных задач */
     int count_done_task(void) const noexcept { return _count_done_task; }
     int count_done_task(void) noexcept       { return _count_done_task; }
 
-    /**Кол-во всех задач */
+    /*! @brief Кол-во всех задач */
     int count_all_task(void) const noexcept  { return _count_all_task; }
     int count_all_task(void) noexcept        { return _count_all_task; }
 
-    /**Кол-во невыполненных задач */
-    int count_notready_task(void) const noexcept { return _count_all_task - _count_done_task; }
-    int count_notready_task(void) noexcept       { return _count_all_task - _count_done_task; } 
-
-    /**Обновляем текущую статистику */
+private:
+    /*! @brief Обновляем текущую статистику */
     void update(void);
 };

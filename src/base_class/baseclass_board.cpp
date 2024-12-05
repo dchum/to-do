@@ -5,12 +5,14 @@
 
 
 
-// Service_Class::Service_Class(SERVISE_CLASS id)
-//     : _count_done_task(0), _name_level(str), _count_all_task(0), _id(id)
-// {
-//     _tasks.reserve(COUNT_TASKS_IN_SERVICE_CLASS);
-//     _tasks.shrink_to_fit();
-// }
+
+Service_Class::Service_Class(std::string name, SERVISE_CLASS id)
+    : _count_done_task(0), _count_all_task(0),
+      _name_level(name), _id(id)
+{
+    _tasks.reserve(COUNT_TASKS_IN_SERVICE_CLASS);
+    _tasks.shrink_to_fit();
+}
 
 STATUS Service_Class::remove_task(const std::string &name_task)
 {
@@ -52,17 +54,18 @@ void Service_Class::update(void)
 
 
 
-// Board::Board(int id) : _count_all_task(0),
-//                        _count_done_task(0),
-//                        _id(id)
-// {
-//     _service_classes.reserve(COUNT_SERVICE_CLASS_IN_BOARD);
-//     _service_classes.shrink_to_fit();
+Board::Board(std::string name, int id) 
+        : _count_all_task(0),
+        _count_done_task(0),
+        _id(id)
+{
+    _service_classes.reserve(COUNT_SERVICE_CLASS_IN_BOARD);
+    _service_classes.shrink_to_fit();
 
-//     _service_classes.push_back(Service_Class{STR(BACKLOG)});
-//     _service_classes.push_back(Service_Class{STR(IN_PROGRESS)});
-//     _service_classes.push_back(Service_Class{STR(DONE)});
-// }
+    _service_classes.push_back(Service_Class{ STR(BACKLOG),     BACKLOG     });
+    _service_classes.push_back(Service_Class{ STR(IN_PROGRESS), IN_PROGRESS });
+    _service_classes.push_back(Service_Class{ STR(DONE),        DONE        });
+}
 
 int Board::count_all_task_in_service_class(const std::string &name_service_class)
 {

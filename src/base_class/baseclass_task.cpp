@@ -25,8 +25,7 @@ Task::Task(const std::string &name, const std::string &description, STATUS is_do
     };
 }
 
-
-STATUS Task::change_task_status(STATUS attribute)
+STATUS Task::change_task_status(STATUS attribute) noexcept
 {
     if ( attribute != STATUS::INVARIABLY ) 
         _status = attribute;
@@ -34,8 +33,7 @@ STATUS Task::change_task_status(STATUS attribute)
     return _status;
 }
 
-
-void Task::add_ending_date(data_t date)
+void Task::add_ending_date(data_t date) noexcept
 {
     memcpy(&_ending_date, &date, sizeof(data_t));
 }

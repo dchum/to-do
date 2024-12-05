@@ -27,34 +27,51 @@ update: (то есть возможно добавление в след вер�
 
 #pragma once
 
-#include <set>
+#include <list>
 #include <utility>
 #include <string>
 
 #include "baseclass_task.h"
 #include "global_lib.h"
 
+
+
+
+using const_Task = std::list<Task>::const_iterator;
 class Day
 {
 private:
-    int _count_done_task = 0;
+    int _count_done_task,
+        _count_all_task;
+
     data_t _date;
 
-    std::set<Task> _tasks_day;
+    std::list<Task> _tasks_day;
 
 public:
     Day();
-
+    
+    /*! @brief Получить дату */
     data_t date(void) const noexcept { return _date; }
     data_t date(void) noexcept       { return _date; }
 
-    int count_done_task(void);
+    /*! @brief Кол-во всех задач в текущем дне*/
+    int count_all_task(void) const noexcept { return _tasks_day.size(); }
+    int count_all_task(void) noexcept       { return _tasks_day.size(); }
 
-    int count_all_task(void) const;
+    /*! @brief Кол-во решенных задач в дне */
+    int count_done_task(void) const noexcept { return _count_done_task; }
+    int count_done_task(void) noexcept       { return _count_done_task; }
 
-    STATUS add_new_task(Task task);
+    /*! @brief Добавить новую задачу */
+    STATUS add_new_task(Task task) { _tasks_day.push_back(task); return STATUS::SUCCES; }
 
+    /*! @brief Удалить задачу */
     STATUS delete_task(const std::string &name_task);
 
-    const Task &get_task(const std::string &name_task) const;
+    /*! @brief Получить константный итератор на задачу */
+    const_Task get_task(const std::string &name_task) const;
+
+private: 
+    void update();
 };

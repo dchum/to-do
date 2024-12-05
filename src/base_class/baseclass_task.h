@@ -10,7 +10,7 @@
 [x]  _description  : (string)                             -описание задачи (опционально)
 [x]  _creation_date: (пользовательский тип data_t)        -дата создания   (инициализация при создании объекта класса)
 [x]  _ending_date  : (пользовательский тип data_t)        -дата окончания  (опционально)
-[x]  _status      : (bool)                               -готова ли задача
+[x]  _status       : (bool)                               -готова ли задача
 
     Методы класса:
     //NOTE -  v 1.0
@@ -50,7 +50,7 @@ private:
 public:
     Task() = default;
 
-    Task(const std::string &name, const std::string &description = ""s, STATUS is_done = STATUS::FAILURE,
+    Task(const std::string &name, const std::string& description = "", STATUS is_done = STATUS::FAILURE,
          const data_t &ending_date = {0, 0, 0, 0, 0});
 
     /*! @brief  Возвращает название задачи */

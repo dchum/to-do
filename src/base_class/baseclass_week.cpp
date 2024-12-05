@@ -7,12 +7,10 @@
 
 Week::Week()
 {
-    _days_week.reserve(static_cast<size_t>(WEEKDAY::NUM_DAY_WEEK));
+    _days_week.reserve(static_cast<std::size_t>(WEEKDAY::NUM_DAY_WEEK));
     _days_week.shrink_to_fit();
 }
 
-
-/**Обновляем текущую статистику */
 void Week::update(void)
 {
     _count_all_task = std::accumulate(_days_week.begin(), _days_week.end(), 0, 
