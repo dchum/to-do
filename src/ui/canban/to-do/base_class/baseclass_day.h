@@ -8,15 +8,14 @@
     //NOTE -  v 1.0
 [x]  _tasks_day         : set<int, Task>            - список всех задач Task для этого дня
 [x]  _date              : date_t                    - день, месяц
-[x]  _count_done_task   : int                       - кол-во выполненных задач в дне
 
     Методы класса:
     //NOTE -  v 1.0
-[x]{ } констуктор по умолчанию
-[x]{ } получить нужную задачу
-[x]{ } удалить/добавить задачу
-[x]{ } получить кол-во выполненных задач
-[x]{ } получить дату для дня (день, месяц)
+[x]{x} констуктор по умолчанию
+[x]{x} получить нужную задачу
+[x]{x} удалить/добавить задачу
+[x]{x} получить кол-во выполненных задач
+[x]{x} получить дату для дня (день, месяц)
 
 //TODO - возможно появится необходимость реализовать доступ по итераторам для for range цикла
 update: (то есть возможно добавление в след версии)
@@ -28,6 +27,7 @@ update: (то есть возможно добавление в след вер�
 #pragma once
 
 #include <list>
+#include <algorithm>
 #include <utility>
 #include <string>
 
@@ -37,13 +37,12 @@ update: (то есть возможно добавление в след вер�
 
 
 
-using const_Task = std::list<Task>::const_iterator;
+using const_it_Task = std::list<Task>::const_iterator;
+using it_Task = std::list<Task>::iterator;
+
 class Day
 {
 private:
-    int _count_done_task,
-        _count_all_task;
-
     data_t _date;
 
     std::list<Task> _tasks_day;
@@ -60,8 +59,10 @@ public:
     int count_all_task(void) noexcept       { return _tasks_day.size(); }
 
     /*! @brief Кол-во решенных задач в дне */
-    int count_done_task(void) const noexcept { return _count_done_task; }
-    int count_done_task(void) noexcept       { return _count_done_task; }
+    int count_done_task(void) const noexcept { return std::count_if(_tasks_day.begin(), _tasks_day.end(), 
+                                                                    [] ( const Task& tmp ) { return tmp.status() == STATUS::SUCCES; }); }
+    int count_done_task(void) noexcept       { return std::count_if(_tasks_day.begin(), _tasks_day.end(), 
+                                                                    [] ( const Task& tmp ) { return tmp.status() == STATUS::SUCCES; }); }
 
     /*! @brief Добавить новую задачу */
     STATUS add_new_task(Task task) { _tasks_day.push_back(task); return STATUS::SUCCES; }
@@ -69,9 +70,15 @@ public:
     /*! @brief Удалить задачу */
     STATUS delete_task(const std::string &name_task);
 
-    /*! @brief Получить константный итератор на задачу */
-    const_Task get_task(const std::string &name_task) const;
+    /*! @brief Получить итератор на задачу */
+    it_Task       get_task(const std::string &name_task);
+    const_it_Task get_const_task(const std::string &name_task) const;
 
-private: 
-    void update();
+    auto begin()  { return _tasks_day.begin();  };
+    auto cbegin() { return _tasks_day.cbegin(); };
+
+    auto end()  { return _tasks_day.end();  };
+    auto cend() { return _tasks_day.cend(); };
+
+    // void update(); //NOTE - на случай если потребуется обновление состояния
 };

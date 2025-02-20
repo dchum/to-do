@@ -3,15 +3,13 @@
 #include <algorithm>
 #include <chrono>  /* для учета времени */
 #include <ctime>
-#include <stdexcept>
 
 
 
 
-Task::Task(const std::string &name, const std::string &description, STATUS is_done,
-        const data_t &ending_date)
-        :_name(name), _description(description), 
-        _status(is_done), _ending_date(ending_date)
+Task::Task(const std::string &name, const std::string &description, STATUS is_done, const data_t &ending_date)
+        :_name(name),      _description(description), 
+         _status(is_done), _ending_date(ending_date)
 {
     auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::tm *timeInfo = std::localtime(&currentTime);
@@ -25,7 +23,7 @@ Task::Task(const std::string &name, const std::string &description, STATUS is_do
     };
 }
 
-STATUS Task::change_task_status(STATUS attribute) noexcept
+STATUS Task::change_status(STATUS attribute) noexcept
 {
     if ( attribute != STATUS::INVARIABLY ) 
         _status = attribute;

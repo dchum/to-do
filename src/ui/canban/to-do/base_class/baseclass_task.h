@@ -15,12 +15,11 @@
     Методы класса:
     //NOTE -  v 1.0
         Возможны несколько видов конструкторов:
-[x]{ }   дефолтный
-[x]{ }   c заполнением всех полей(некоторые поля, могут быть не проинициализированными, важно учитывать!)
-[x]{ }   получить значение/изменить _name
-[x]{ }   получить значение/изменить _description
-[x]{ }   добавить/убрать дату окончания
-[x]{ }   выставить/убрать признак готовности задачи
+[x]{x}   -c заполнением всех полей(некоторые поля, могут быть не проинициализированными, важно учитывать!)
+[x]{x}   получить значение/изменить _name
+[x]{x}   получить значение/изменить _description
+[x]{x}   добавить/убрать дату окончания
+[x]{x}   выставить/убрать признак готовности задачи
 
     update: (то есть возможно добавление в след версии)
         1) Возможность прикреплять теги к пунктам. Тогда такой тег относится и к пункту, и к задаче, 
@@ -48,7 +47,7 @@ private:
            _ending_date  {};
 
 public:
-    Task() = default;
+    Task() = delete;
 
     Task(const std::string &name, const std::string& description = "", STATUS is_done = STATUS::FAILURE,
          const data_t &ending_date = {0, 0, 0, 0, 0});
@@ -66,17 +65,17 @@ public:
     STATUS status( void) noexcept       { return _status; }
 
     /*! @brief Изменить название задачи */
-    STATUS set_name_task ( const std::string& name_task ) noexcept {  _name = name_task;
-                                                                      return STATUS::SUCCES; };
+    STATUS set_name ( const std::string& name_task ) noexcept { _name = name_task;
+                                                                return STATUS::SUCCES; };
 
     /*! @brief Изменить описание задачи */
-    STATUS set_description_task(const std::string& description_task) noexcept { _description = description_task;
+    STATUS set_description(const std::string& description_task) noexcept { _description = description_task;
                                                                                 return STATUS::SUCCES; }
     /*! @brief Возвращает признак готовности задачи
         @param attribute  (см task_lib.h) DONE      - пометить как готовую
                                           NO_READY  -           не готовую
                                           INVARIABLY- не изменять текущее состояние признака */
-    STATUS change_task_status(STATUS attribute) noexcept;
+    STATUS change_status(STATUS attribute) noexcept;
 
     /*! @brief Добавить дату окончания */
     void add_ending_date(data_t date) noexcept;

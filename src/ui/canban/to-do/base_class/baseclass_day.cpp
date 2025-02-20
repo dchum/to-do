@@ -1,7 +1,6 @@
 #include "baseclass_day.h"
 
 #include <stdexcept>
-#include <algorithm>
 #include <iostream>
 #include <chrono>  /* для учета времени */
 #include <ctime>
@@ -33,17 +32,25 @@ STATUS Day::delete_task(const std::string &name_task)
     }
 }
 
-const_Task Day::get_task(const std::string &name_task) const
+it_Task Day::get_task(const std::string &name_task) 
 {
-    auto it = find_if(_tasks_day.begin(), _tasks_day.end(), 
-                [&](const Task& tmp) { return tmp.name() == name_task; });
+    auto it = find_if(_tasks_day.begin(), _tasks_day.end(), [&](const Task& tmp) 
+                                                            { return tmp.name() == name_task; });
 
     if ( it != _tasks_day.end() ) return it;
     else throw std::runtime_error("Task not found: " + name_task);
 }
 
-void Day::update()
+const_it_Task Day::get_const_task(const std::string & name_task) const
 {
-    _count_done_task = std::count_if(_tasks_day.begin(), _tasks_day.end(), 
-                                    [] ( const Task& tmp ) { return tmp.status() == STATUS::SUCCES; });
+    const auto it = std::find_if(_tasks_day.cbegin(), _tasks_day.cend(), [&](const Task& tmp) 
+                                                                         { return tmp.name() == name_task; });
+
+    if ( it != _tasks_day.cend() ) return it;
+    else throw std::runtime_error("Task not found: " + name_task);
 }
+
+// void Day::update()
+// {
+
+// }
