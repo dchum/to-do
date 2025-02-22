@@ -31,6 +31,6 @@ namespace pos
         FRAME_KANBAB frame;
         std::vector<std::shared_ptr<Window*>> windows;
         //некая справочная информация
-    }kadr_t;
+    }Kadr;
 }
 

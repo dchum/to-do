@@ -28,7 +28,7 @@ STATUS Day::delete_task(const std::string &name_task)
     catch (const std::runtime_error &e)
     {
         std::cerr << e.what() << '\n';
-        return STATUS::FAILURE;
+        return STATUS::FAIL;
     }
 }
 

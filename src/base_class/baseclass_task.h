@@ -49,7 +49,7 @@ private:
 public:
     Task() = delete;
 
-    Task(const std::string &name, const std::string& description = "", STATUS is_done = STATUS::FAILURE,
+    Task(const std::string &name, const std::string& description = "", STATUS is_done = STATUS::FAIL,
          const data_t &ending_date = {0, 0, 0, 0, 0});
 
     /*! @brief  Возвращает название задачи */

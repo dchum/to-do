@@ -12,7 +12,7 @@ void Test_Task()
         string name = "Уборка в доме",
             description = "какое-то описание задачи";
 
-        STATUS status = STATUS::FAILURE;
+        STATUS status = STATUS::FAIL;
 
         Task task{name};
         task.set_description(description);

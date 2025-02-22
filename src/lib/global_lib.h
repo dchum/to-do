@@ -9,11 +9,11 @@
 
 /* Признак успешности работы ф-и, выполненности пункта/задачи и т.д.
    Использовать везде, где требуется дать односложный ответ "да/нет"
-   INVARIABLY - аналогичен void, исползовать когда не требуется изменятьтекущее состояние*/
+   INVARIABLY - аналогичен void, исползовать когда не требуется изменять текущее состояние*/
 enum class STATUS
 {
     SUCCES,
-    FAILURE,
+    FAIL,
     INVARIABLY
 };
 
@@ -54,5 +54,11 @@ enum SERVISE_CLASS
     IN_PROGRESS, /*В процессе*/
     DONE         /*Готово*/
 };
+
+typedef struct Rect
+{
+    int w_,  h_,
+        xc_, yc_;
+}Rect;
 
 std::ostream &operator<<(std::ostream &os, const std::vector<std::string>& vector_to_string);

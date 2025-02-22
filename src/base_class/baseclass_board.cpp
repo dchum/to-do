@@ -24,7 +24,7 @@ STATUS Service_Class::remove_task(const std::string &name_task)
         _tasks.erase(it);
         return STATUS::SUCCES;
     }
-    return STATUS::FAILURE;
+    return STATUS::FAIL;
 }
 
 STATUS Service_Class::add_task(const std::string &name_task)
@@ -39,7 +39,7 @@ STATUS Service_Class::add_task(const std::string &name_task)
         return STATUS::SUCCES;
     }
 
-    return STATUS::FAILURE;
+    return STATUS::FAIL;
 }
 
 void Service_Class::update(void)
