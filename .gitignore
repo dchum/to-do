@@ -1,5 +1,5 @@
 .vscode
-*Makefile
-CMake*
 *.cmake
+*.a
+*.o
 

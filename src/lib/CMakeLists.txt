@@ -1,0 +1,15 @@
+
+file(GLOB LIB_INCLUDES
+"${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+"${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
+)
+
+file(GLOB LIB_SOURCES
+"${CMAKE_CURRENT_SOURCE_DIR}/*.c"
+"${CMAKE_CURRENT_SOURCE_DIR}/*.cc"
+"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+)
+
+add_library(global_lib ${LIB_SOURCES} ${LIB_INCLUDES})
+
+target_include_directories(global_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

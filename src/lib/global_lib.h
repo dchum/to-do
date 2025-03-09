@@ -57,8 +57,8 @@ enum SERVISE_CLASS
 
 typedef struct Rect
 {
-    int w_,  h_,
-        xc_, yc_;
+    int xc_, yc_,
+        w_,  h_;
 }Rect;
 
 std::ostream &operator<<(std::ostream &os, const std::vector<std::string>& vector_to_string);
