@@ -16,7 +16,7 @@ class Message
 
 public:
     Message() = delete;
-    Message(std::string& str); //сам разобьет на массив и посчитает кол-во строк
+    Message(const std::string& str); //сам разобьет на массив и посчитает кол-во строк
 
     ~Message();
 

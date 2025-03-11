@@ -1,5 +1,5 @@
 /******************************************************************************************************************************************
-    Класс Окна - Window. Абстрактный класс. Описывает общие моменты касательно понятия
+    Класс Окна - Widget. Абстрактный класс. Описывает общие моменты касательно понятия
     окна, не относящиеся напрямую к UI.
      _______________________________________________
     |                                               |
@@ -30,36 +30,44 @@
 namespace pos
 {
 
-class Window
+class Widget
 {
+private:
     int w_,  h_,
         xc_, yc_;
-        
-    public:
-        virtual ~Window() {}
 
-        void set_size(Rect& new_size) //TODO - move-семантика
-        {
-            w_  = new_size.w_;
-            h_  = new_size.h_;
-            xc_ = new_size.xc_;
-            yc_ = new_size.yc_;
-        }
-        
-        Rect size( void ) const
-        {   return Rect{.xc_ = xc_, .yc_ = yc_, .w_ = w_, .h_ = h_};    }
+public:
+    virtual ~Widget() {}
 
-        Rect size( void ) 
-        {   return Rect{.xc_ = xc_, .yc_ = yc_, .w_ = w_, .h_ = h_};    }
 
-        virtual int draw( void ) = 0;
+    void set_size(Rect& new_size) //TODO - move-семантика
+    {
+        w_  = new_size.w_;
+        h_  = new_size.h_;
+        xc_ = new_size.xc_;
+        yc_ = new_size.yc_;
+    }
+    
+    Rect size( void ) const
+    {   return Rect{.xc_ = xc_, .yc_ = yc_, .w_ = w_, .h_ = h_};    }
 
-    protected:
-        Window() = delete;
+    Rect size( void ) 
+    {   return Rect{.xc_ = xc_, .yc_ = yc_, .w_ = w_, .h_ = h_};    }
 
-        explicit Window( Rect size = {0} )
-          : w_(size.w_), h_(size.h_), xc_(size.xc_), yc_(size.yc_)
-        {}
+    int get_priority( void ) const noexcept {   return priority_;   }
+    int get_priority( void ) noexcept       {   return priority_;   }
+
+    virtual int draw( void ) = 0;
+
+protected:
+    bool is_active_; //< Признак, что требуюет взамодействия с пользователем
+    int  priority_;  //< Приоритет отрисовки виджета на текущем окне
+
+    Widget() = delete;
+
+    explicit Widget( Rect size = {0} )
+        : w_(size.w_), h_(size.h_), xc_(size.xc_), yc_(size.yc_), is_active_(false), priority_(0)
+    {}
 };
 
 }

@@ -9,14 +9,17 @@ extern "C"
 #include <stdexcept>
 
 
-cui::CUIDialog::CUIDialog(cui::CUIScreen& cdkscreen, Message& message, Message& buttons, int x, int y, bool box, bool separator, bool shadow)
-	: Window(Rect{x, y, 0, 0}),
+cui::CUIDialog::CUIDialog(cui::CUIScreen& cdkscreen, Message& message, Message& buttons, int x, int y, bool box, bool separator, bool shadow, int priority)
+	: Widget(Rect{x, y, 0, 0}),
 	  dialog_(NULL)
 {
+	Widget::is_active_ = true;
+	Widget::priority_ = priority;
+
 	dialog_ = newCDKDialog (cdkscreen.get(), x,y,
 				(CDK_CSTRING2) message.get(), message.count(),
 				(CDK_CSTRING2) buttons.get(), buttons.count(),
-				COLOR_PAIR (2) | A_REVERSE,
+				COLOR_PAIR (buttons.count()) | A_REVERSE,
 				box       ? 1:0,
 				separator ? 1:0,
 				shadow    ? 1:0);

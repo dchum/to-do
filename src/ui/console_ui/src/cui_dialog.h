@@ -1,5 +1,4 @@
 #pragma once
-#include <utility>
 
 extern "C"
 {
@@ -7,29 +6,29 @@ extern "C"
 }
 
 
+#include "pos_widget.h"
 #include "cui_screen.h"
 #include "cui_lib.h"
-#include "pos_window.h"
 
 namespace cui
 {
 
-using pos::Window;
-using std::string;
+using pos::Widget;
 
-class CUIDialog : public Window
+class CUIDialog : public Widget
 {
 
 private:
     CDKDIALOG* dialog_;
 
 public:
-
-    CUIDialog( cui::CUIScreen& cdkscreen, 
+    CUIDialog() = delete;
+    CUIDialog( CUIScreen& cdkscreen, 
                Message& mes,
                Message& buttons,
                int x, int y,
-               bool box = true, bool separator = true, bool shadow = true );
+               bool box = true, bool separator = true, bool shadow = true,
+               int priority = 1 );
     
     ~CUIDialog(){   destroyCDKDialog(dialog_);   }
 

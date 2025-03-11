@@ -8,29 +8,51 @@ POS - пользовательская операционная система. 
 #include <vector>
 #include <memory>
 
-#include <pos_window.h>
+#include <pos_widget.h>
 
 namespace pos
 {
-    enum class FRAME_KANBAB
-    {
-        FRAME_INIT = 0,
-        FRAME_BACKLOG,
-        FRAME_IN_PROGRESS,
-        FRAME_DONE,
-    };
+
+enum class FRAME_KANBAB
+{
+    FRAME_INIT = 0,
+    FRAME_BACKLOG,
+    FRAME_IN_PROGRESS,
+    FRAME_DONE,
+};
     
     
+/** черновик структуры для передачи всей информации о кадре
+ * Кадр состоит из окон. Данная структура содержит описание
+ * всех окон текущего кадра.
+ */
+
+class Window 
+{
     
-    /** черновик структуры для передачи всей информации о кадре
-     * Кадр состоит из окон. Данная структура содержит описание
-     * всех окон текущего кадра.
-     */
-    typedef struct 
-    {
-        FRAME_KANBAB frame;
-        std::vector<std::shared_ptr<Window*>> windows;
-        //некая справочная информация
-    }Kadr;
+private:
+    FRAME_KANBAB frame_;
+
+    std::vector<std::shared_ptr<Widget>> window_;
+
+public:
+    Window(FRAME_KANBAB frame);
+    Window(const Window&) = delete;
+
+    Window& operator=(const Window&) = delete;
+
+    ~Window() = default;
+
+    void add_widget(std::shared_ptr<Widget> wdgt);
+
+    void update ( void ) noexcept;
+
+    const std::vector<std::shared_ptr<Widget>>& get_widgets( void ) const noexcept;
+
+    const std::vector<std::shared_ptr<Widget>>& get_widgets( void ) noexcept;
+};
+
+
+
 }
 
