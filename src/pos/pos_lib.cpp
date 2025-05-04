@@ -3,35 +3,38 @@
 #include <algorithm>
 #include <memory>
 
+// #include "baseclass_board.h"
+#include "baseclass_task.h"
+
 namespace pos
 {
 
-pos::Window::Window(FRAME_KANBAB frame)
-    :frame_(frame){   }
+// pos::Frame::Frame(FRAME_KANBAB frame)
+//     :frame_(frame)
+// { }
 
-void pos::Window::add_widget(std::shared_ptr<Widget> wdgt)
+// void Frame::add_bclass(ptr_bclass bclass)
+// {
+//     base_classes.push_back(bclass);
+// }
+
+
+
+Kanban::Kanban()
 {
-    window_.push_back(wdgt);
+    init();
 }
 
-void Window::update(void) noexcept
+
+STATUS Kanban::init(void)
 {
-    std::sort(window_.begin(), window_.end(), 
-             [](const std::shared_ptr<Widget> lhs, std::shared_ptr<Widget> rhs)
-             {
-                return lhs.get()->get_priority() < rhs.get()->get_priority();
-             });
+    base_classes.push_back(std::make_shared<pos::Task>("task#1"));
+    base_classes.push_back(std::make_shared<pos::Task>("task#2"));
+    base_classes.push_back(std::make_shared<pos::Task>("task#3"));
+
+    return STATUS::SUCCES;
 }
 
-const std::vector<std::shared_ptr<Widget>>& Window::get_widgets(void) const noexcept
-{
-    return window_;
-}
 
-const std::vector<std::shared_ptr<Widget>>& Window::get_widgets(void) noexcept
-{
-    return static_cast<const Window&>(*this).get_widgets();
-}
 
 }
-

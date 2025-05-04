@@ -17,13 +17,6 @@ enum class STATUS
     INVARIABLY
 };
 
-/*Признак ф-й для чтения и записи свойств*/
-enum class STATUS_PROPERTY
-{
-    READ,
-    WRITE
-};
-
 /*Структура для представления времени в проекте*/
 typedef struct
 {
@@ -60,5 +53,12 @@ typedef struct Rect
     int xc_, yc_,
         w_,  h_;
 }Rect;
+
+enum class UI_type
+{
+    GUI = 0,
+    CUI,
+    NUM_UI,
+};
 
 std::ostream &operator<<(std::ostream &os, const std::vector<std::string>& vector_to_string);

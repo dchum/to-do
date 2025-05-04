@@ -1,18 +1,30 @@
 cmake_minimum_required(VERSION 3.22)
-project(test_cui)
+project(console_ui)
 
 include_directories(
-    src
-    ../../pos
+    cui_widgets
     ../../lib
+    ..
 )
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
-add_executable(test_cui test.cpp)
+file(GLOB LIB_INCLUDES
+     "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
+)
 
-add_subdirectory(src)
+file(GLOB LIB_SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cc"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+)
 
-target_link_libraries(test_cui PUBLIC lib_cui)
-target_link_libraries(test_cui PUBLIC pos)
-target_link_libraries(test_cui PUBLIC global_lib)
-target_link_libraries(test_cui PUBLIC cdk_lib)
+
+add_subdirectory(cui_widgets)
+
+add_library(console_ui ${LIB_SOURCES} ${LIB_INCLUDES})
+
+target_link_libraries(console_ui PUBLIC cui_widgets)
+# target_link_libraries(console_ui PUBLIC global_lib)
+# target_link_libraries(console_ui PUBLIC cdk_lib)
+
+target_include_directories(console_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -8,50 +8,49 @@ POS - пользовательская операционная система. 
 #include <vector>
 #include <memory>
 
-#include <pos_widget.h>
+#include "global_lib.h"
+#include "baseclass.h"
 
 namespace pos
 {
+using pos::BaseClass;
+using ptr_bclass = std::shared_ptr<BaseClass>;
+// using ptr_frame  = std::shared_ptr<Frame>;
 
-enum class FRAME_KANBAB
-{
-    FRAME_INIT = 0,
-    FRAME_BACKLOG,
-    FRAME_IN_PROGRESS,
-    FRAME_DONE,
-};
-    
-    
-/** черновик структуры для передачи всей информации о кадре
- * Кадр состоит из окон. Данная структура содержит описание
- * всех окон текущего кадра.
- */
+// enum class FRAME_KANBAB
+// {
 
-class Window 
+// };
+
+// class Frame 
+// {
+// private:
+//     FRAME_KANBAB frame_;
+
+//     std::vector<ptr_bclass> base_classes;
+// public:
+//     Frame(FRAME_KANBAB frame);
+//     Frame(const Frame&) = delete;
+//     Frame& operator=(const Frame&) = delete;
+
+//     ~Frame() = default;
+
+//     void add_bclass(ptr_bclass bclass);
+// };
+
+class Kanban
 {
-    
 private:
-    FRAME_KANBAB frame_;
+    std::vector<ptr_bclass> base_classes;
 
-    std::vector<std::shared_ptr<Widget>> window_;
-
+    STATUS init( void );
 public:
-    Window(FRAME_KANBAB frame);
-    Window(const Window&) = delete;
+    Kanban();
+    ~Kanban() = default;
 
-    Window& operator=(const Window&) = delete;
-
-    ~Window() = default;
-
-    void add_widget(std::shared_ptr<Widget> wdgt);
-
-    void update ( void ) noexcept;
-
-    const std::vector<std::shared_ptr<Widget>>& get_widgets( void ) const noexcept;
-
-    const std::vector<std::shared_ptr<Widget>>& get_widgets( void ) noexcept;
+    Kanban (const Kanban&) = delete;
+    Kanban& operator= (Kanban& ) = delete;
 };
-
 
 
 }
