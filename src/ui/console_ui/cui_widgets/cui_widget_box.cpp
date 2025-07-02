@@ -125,7 +125,6 @@ void WidgetBox::activate(unsigned int*)
 
     this->screen_->refresh();
 
-    // (*activ_widget_)->draw();
     this->draw();
 
     int tmp_key = 0;    

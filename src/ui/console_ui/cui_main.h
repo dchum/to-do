@@ -8,7 +8,6 @@
 namespace cui
 {
 
-
 class CUI_Imp final: public ui::Ui_Imp
 {
 private:
