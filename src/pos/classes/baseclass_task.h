@@ -52,8 +52,11 @@ public:
     Task() = delete;
     Task(const Task&) = delete;
 
-    Task(const std::string &name, const std::string& description = "", STATUS is_done = STATUS::FAIL,
-         const data_t &ending_date = {0, 0, 0, 0, 0});
+    Task(const std::string& name, 
+        const std::string& description = "", 
+        STATUS is_done = STATUS::FAIL,
+        const data_t &ending_date = {0, 0, 0, 0, 0});
+
 /*******************Геттеры********************************** */
     /*! @brief  Возвращает название задачи */
     std::string name(void) const noexcept override { return _name; }
@@ -97,12 +100,15 @@ public:
     { 
         memset(&_ending_date, 0, sizeof(data_t)); 
     }
+
+    ~Task() = default;
 };
 
 
-inline bool operator<(const Task &lhs, const Task &rhs)
-{
-    return std::lexicographical_compare(lhs.name().begin(), lhs.name().end(), rhs.name().begin(), rhs.name().end());
 }
 
+
+inline bool operator<(const pos::Task &lhs, const pos::Task &rhs)
+{
+    return std::lexicographical_compare(lhs.name().begin(), lhs.name().end(), rhs.name().begin(), rhs.name().end());
 }

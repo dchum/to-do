@@ -41,57 +41,61 @@
 //     2) Работа с тегами
 //     3) Поиск
 // ****************************************************************************************************************************** */
-// #pragma once
+#pragma once
 
-// #include <iostream>
-// #include <string>
-// #include <vector>
-
-// #include "baseclass_task.h"
-
-// #include "lib.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
 
+#include "lib.h"
+#include "lib/classes/service_class.h"
 
+#include "baseclass_task.h"
 
-// #define COUNT_TASKS_IN_SERVICE_CLASS 3
-// #define COUNT_SERVICE_CLASS_IN_BOARD 3
+#define COUNT_TASKS_IN_SERVICE_CLASS 3
+#define COUNT_SERVICE_CLASS_IN_BOARD 3
 
+namespace pos
+{
+class Service_Class: public lib::Service_Class
+{
+private:
+    int _count_done_task = 0,
+        _count_all_task = 0;
+    std::string _name_level = "";
+    std::vector<pos::Task> _tasks;
+    SERVISE_CLASS _id;
 
-// class Service_Class
-// {
-// private:
-//     int _count_done_task = 0,
-//         _count_all_task = 0;
-//     std::string _name_level = "";
-//     std::vector<Task> _tasks;
-//     SERVISE_CLASS _id;
+public:
+    Service_Class( std::string name, SERVISE_CLASS id );
 
-// public:
-//     Service_Class( std::string name, SERVISE_CLASS id );
+    /*! @brief Кол-во задач в классе обслуживания */
+    int count_all_task(void) const noexcept  override { return _count_all_task; };
+    int count_all_task(void) noexcept        override { return _count_all_task; };
 
-//     /*! @brief Кол-во задач в классе обслуживания */
-//     int count_all_task(void) const noexcept { return _count_all_task; };
-//     int count_all_task(void) noexcept       { return _count_all_task; };
+    /*! @brief Кол-во решенных задач в классе обслуживания  */
+    int count_done_task(void) const noexcept  override { return _count_done_task; };
+    int count_done_task(void) noexcept        override { return _count_done_task; };
 
-//     /*! @brief Кол-во решенных задач в классе обслуживания  */
-//     int count_done_task(void) const noexcept { return _count_done_task; };
-//     int count_done_task(void) noexcept       { return _count_done_task; };
+    /*! @brief Наименование класса обслуживания */
+    std::string name_level(void) const noexcept  override { return _name_level; }
+    std::string name_level(void) noexcept        override { return _name_level; }
 
-//     /*! @brief Наименование класса обслуживания */
-//     std::string name_level(void) const noexcept { return _name_level; }
-//     std::string name_level(void) noexcept       { return _name_level; }
+    /*! @brief Добавить новую задачу */
+    STATUS add_task(const std::string &name_task) override ;
 
-//     /*! @brief Добавить новую задачу */
-//     STATUS add_task(const std::string &name_task);
+    /*! @brief Убрать задачу */
+    STATUS remove_task(const std::string &name_task) override ;
 
-//     /*! @brief Убрать задачу */
-//     STATUS remove_task(const std::string &name_task);
+    //добавить метод - получить задачи
 
-// private:
-//     /*! @brief Обновление состояния */
-//     void update(void);
-// };
+private:
+    /*! @brief Обновление состояния */
+    void update(void);
+};
+
+}
 
 
 // class Board

@@ -1,55 +1,59 @@
-// #include "baseclass_board.h"
+#include "baseclass_board.h"
 
-// #include <algorithm>
-// #include <numeric>
-
-
+#include <algorithm>
+#include <numeric>
 
 
-// Service_Class::Service_Class(std::string name, SERVISE_CLASS id)
-//     : _count_done_task(0), _count_all_task(0),
-//       _name_level(name), _id(id)
-// {
-//     _tasks.reserve(COUNT_TASKS_IN_SERVICE_CLASS);
-//     _tasks.shrink_to_fit();
-// }
+namespace pos
+{
 
-// STATUS Service_Class::remove_task(const std::string &name_task)
-// {
-//     std::vector<Task>::iterator it = std::find_if(_tasks.begin(), _tasks.end(),
-//                                                  [&name_task](const Task &task)
-//                                                  { return task.name() == name_task; });
-//     if (it != _tasks.end())
-//     {
-//         _tasks.erase(it);
-//         return STATUS::SUCCES;
-//     }
-//     return STATUS::FAIL;
-// }
+Service_Class::Service_Class(std::string name, SERVISE_CLASS id)
+    : lib::Service_Class(),
+    _count_done_task(0), _count_all_task(0),
+    _name_level(name), _id(id)
+{
+    // _tasks.reserve(COUNT_TASKS_IN_SERVICE_CLASS);
+    // _tasks.shrink_to_fit();
+}
 
-// STATUS Service_Class::add_task(const std::string &name_task)
-// {
-//     std::vector<Task>::iterator it = std::find_if(_tasks.begin(), _tasks.end(),
-//                                                  [&name_task](const Task &task)
-//                                                  { return task.name() == name_task; });
+STATUS Service_Class::remove_task(const std::string &name_task)
+{
+    // std::vector<Task>::iterator it = std::find_if(_tasks.begin(), _tasks.end(),
+    //                                                 [&name_task](const Task &task)
+    //                                                 { return task.name() == name_task; });
+    // if (it != _tasks.end())
+    // {
+    //     _tasks.erase(it);
+    //     return STATUS::SUCCES;
+    // }
+    // return STATUS::FAIL;
+}
 
-//     if (it == _tasks.end())
-//     {
-//         _tasks.push_back(Task{name_task}); // NOTE - проверить кол-во вызываемых констукторов
-//         return STATUS::SUCCES;
-//     }
+STATUS Service_Class::add_task(const std::string &name_task)
+{
+    // std::vector<Task>::iterator it = std::find_if(_tasks.begin(), _tasks.end(),
+    //                                                 [&name_task](const Task &task)
+    //                                                 { return task.name() == name_task; });
 
-//     return STATUS::FAIL;
-// }
+    // if (it == _tasks.end())
+    // {
+    //     _tasks.push_back(Task{name_task}); // NOTE - проверить кол-во вызываемых констукторов
+    //     return STATUS::SUCCES;
+    // }
 
-// void Service_Class::update(void)
-// {
-//     _count_all_task = _tasks.size();
+    // return STATUS::FAIL;
+}
 
-//     _count_done_task = std::count_if(_tasks.begin(), _tasks.end(), 
-//                        [](const Task &task)
-//                        { return task.status() == STATUS::SUCCES; });
-// }
+void Service_Class::update(void)
+{
+    _count_all_task = _tasks.size();
+
+    _count_done_task = std::count_if(_tasks.begin(), _tasks.end(), 
+                        [](const Task &task)
+                        { return task.status() == STATUS::SUCCES; });
+}
+
+}
 
 
 

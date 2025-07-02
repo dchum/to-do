@@ -18,7 +18,7 @@ file(GLOB LIB_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
 )
 
-add_subdirectory(base_class)
+add_subdirectory(classes)
 
 add_library(pos ${LIB_SOURCES} ${LIB_INCLUDES})
 
