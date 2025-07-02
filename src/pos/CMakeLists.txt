@@ -4,6 +4,7 @@ project(pos)
 
 include_directories(
     ../lib
+    base_class
 )
 
 file(GLOB LIB_INCLUDES
@@ -17,9 +18,11 @@ file(GLOB LIB_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
 )
 
+add_subdirectory(base_class)
 
 add_library(pos ${LIB_SOURCES} ${LIB_INCLUDES})
 
-target_link_libraries(pos PRIVATE global_lib)
+target_link_libraries(pos PUBLIC global_lib)
+target_link_libraries(pos PUBLIC base_class)
 
 target_include_directories(pos PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

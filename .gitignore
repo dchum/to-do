@@ -12,4 +12,6 @@ Makefile*
 *cache
 *.ts
 *.internal
-
+*.yaml
+CMake*
+/build
