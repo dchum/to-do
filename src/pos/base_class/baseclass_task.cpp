@@ -9,7 +9,8 @@ namespace pos
 {
     
 Task::Task(const std::string &name, const std::string &description, STATUS is_done, const data_t &ending_date)
-        :_name(name),      _description(description), 
+        :lib::Task(), 
+         _name(name), _description(description), 
          _status(is_done), _ending_date(ending_date)
 {
     auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());

@@ -8,7 +8,7 @@ int main()
 {
     // pos_main(); //< инициализация кадров из pos_main.h
 
-    ui_main();  //< инициализация UI из ui_main.h, отдельный поток
+    ui::ui_main();  //< инициализация UI из ui_main.h, отдельный поток
 
     return 0;
 }

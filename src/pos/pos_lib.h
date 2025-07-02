@@ -8,13 +8,10 @@ POS - пользовательская операционная система. 
 #include <vector>
 #include <memory>
 
-#include "global_lib.h"
-#include "baseclass.h"
+#include "lib.h"
 
 namespace pos
 {
-using pos::BaseClass;
-using ptr_bclass = std::shared_ptr<BaseClass>;
 // using ptr_frame  = std::shared_ptr<Frame>;
 
 // enum class FRAME_KANBAB
@@ -38,19 +35,19 @@ using ptr_bclass = std::shared_ptr<BaseClass>;
 //     void add_bclass(ptr_bclass bclass);
 // };
 
-class Kanban
-{
-private:
-    std::vector<ptr_bclass> base_classes;
+// class Kanban
+// {
+// private:
+//     std::vector<ptr_bclass> base_classes;
 
-    STATUS init( void );
-public:
-    Kanban();
-    ~Kanban() = default;
+//     STATUS init( void );
+// public:
+//     Kanban();
+//     ~Kanban() = default;
 
-    Kanban (const Kanban&) = delete;
-    Kanban& operator= (Kanban& ) = delete;
-};
+//     Kanban (const Kanban&) = delete;
+//     Kanban& operator= (Kanban& ) = delete;
+// };
 
 
 }

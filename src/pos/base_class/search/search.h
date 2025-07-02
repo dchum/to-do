@@ -14,7 +14,7 @@ z    //NOTE -  v 1.0
 #include <string>
 #include <iterator>
 
-#include "../global_lib.h"
+#include "../lib.h"
 #include "string_processing.h"
 
 using namespace std;

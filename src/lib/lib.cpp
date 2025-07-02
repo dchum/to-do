@@ -1,4 +1,4 @@
-#include "global_lib.h"
+#include "lib.h"
 
 std::ostream &operator<<(std::ostream &os, const std::vector<std::string>& vector_to_string)
 {
