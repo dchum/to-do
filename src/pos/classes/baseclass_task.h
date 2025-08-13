@@ -49,59 +49,7 @@ private:
            _ending_date  {};
 
 public:
-    Task() = delete;
-    Task(const Task&) = delete;
 
-    Task(const std::string& name, 
-        const std::string& description = "", 
-        STATUS is_done = STATUS::FAIL,
-        const data_t &ending_date = {0, 0, 0, 0, 0});
-
-/*******************Геттеры********************************** */
-    /*! @brief  Возвращает название задачи */
-    std::string name(void) const noexcept override { return _name; }
-    std::string name(void)       noexcept override { return _name; }
-
-    /*! @brief  Возвращает описание задачи */
-    std::string description(void) const noexcept override { return _description; }
-    std::string description(void)       noexcept override { return _description; }
-
-    /*! @brief  Возвращает текущий статус задачи */
-    STATUS status( void) const noexcept override { return _status; }
-    STATUS status( void) noexcept       override { return _status; }
-/************************************************************ */
-
-/*******************Сеттеры********************************** */
-    /*! @brief Изменить название задачи */
-    STATUS set_name ( const std::string& name_task ) noexcept override
-    { 
-        _name = name_task; 
-        return STATUS::SUCCES; 
-    };
-
-    /*! @brief Изменить описание задачи */
-    STATUS set_description(const std::string& description_task) noexcept override
-    { 
-        _description = description_task; 
-        return STATUS::SUCCES; 
-    }
-    
-    /*! @brief Возвращает признак готовности задачи
-        @param attribute  (см task_lib.h) DONE      - пометить как готовую
-                                          NO_READY  -           не готовую
-                                          INVARIABLY- не изменять текущее состояние признака */
-    STATUS set_status(STATUS attribute) noexcept override;
-/************************************************************ */
-    /*! @brief Добавить дату окончания */
-    void add_ending_date(data_t date) noexcept override;
-
-    /*! @brief Удалить дату окончания */
-    void delete_ending_date( void ) noexcept override
-    { 
-        memset(&_ending_date, 0, sizeof(data_t)); 
-    }
-
-    ~Task() = default;
 };
 
 
