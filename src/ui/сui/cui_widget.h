@@ -53,8 +53,6 @@ namespace cui
         virtual void hide  ( void ) = 0;
     };
 
-    // using PtrWidget = std::unique_ptr<Widget>;
-
     template <typename Iter, typename... Args>
     inline Iter* Widget::create_iterator(Args&&... args)
     {

@@ -3,7 +3,6 @@
 *.a
 *.o
 *.out
-*.txt
 *.make
 *.o.d
 *.marks
@@ -13,5 +12,4 @@ Makefile*
 *.ts
 *.internal
 *.yaml
-CMake*
 /build

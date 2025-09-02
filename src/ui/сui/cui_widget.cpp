@@ -7,7 +7,7 @@ namespace cui
     : parent_(parent), iter_(nullptr)
     {
         if ( parent )
-            parent->AddChild(this);
+            parent->AddChild(this);//FIXME - необходимо установить единый механизм добавления потомков
     }
 
     void Widget::AddChild( Widget * )
