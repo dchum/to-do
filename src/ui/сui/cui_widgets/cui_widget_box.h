@@ -14,14 +14,14 @@
 
 namespace cui
 {
-    class VectorIterator : public IterWidgets
+    class VectorIterator : public Iterator<Widget>
     {
         std::vector<Widget*>& vector_;
         std::vector<Widget*>::iterator current_;
         
     public:
         VectorIterator( std::vector<Widget*>& v ) 
-        :IterWidgets(),
+        :Iterator(),
          vector_(v), current_(v.begin())
         {
 
@@ -53,9 +53,9 @@ namespace cui
         int  height( void ) override;
         void draw  ( void ) override;
         void hide  ( void ) override;
-
-        IterWidgets* CreateIterator( void ) override;
-        void AddChild( Widget* other ) override;
+        
+        IterWdgt CreateIterator( void ) override;
+        void AddChild    ( Widget* other ) override;
     };
     //     private:
     //         list_wdgt children_;

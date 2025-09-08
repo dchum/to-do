@@ -20,21 +20,15 @@ namespace cui
         return ( parent_ ? parent_->screen() : nullptr );
     }
 
-    IterWidgets* Widget::CreateIterator( )
-    {   
-        // if ( !iter_ )
-        //     iter_ = new NullIterWidgets();
 
-        // return *(iter_);
-        return create_iterator<NullIterWidgets>();
+    IterWdgt Widget::CreateIterator( )
+    {   
+        return create_iterator<NULLIterWdgt>();
     }
 
     Widget::~Widget()
     {
-        delete parent_;
-        
-        if ( iter_ )
-            delete iter_;
+
     }
 
 }//namespace cui

@@ -11,8 +11,6 @@ namespace cui
         Window ( Widget* parent = nullptr );
         virtual ~Window()=default;
 
-        int  width ( void ) { return 0; };
-        int  height( void ) { return 0; };
         void draw  ( void );
         void hide  ( void );
 

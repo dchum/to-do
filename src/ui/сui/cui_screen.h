@@ -13,14 +13,14 @@ extern "C"
 
 namespace cui
 {
-    class ScreenIter: public IterWidgets
+    class ScreenIter: public Iterator<Widget>
     {
         std::vector<Widget*>& vector_;
         std::vector<Widget*>::iterator current;
 
     public:
         ScreenIter(std::vector<Widget*>& v)
-            :IterWidgets(),
+            :Iterator(),
             vector_(v), current(v.begin())
         {}
 
@@ -65,7 +65,7 @@ namespace cui
         CDKSCREEN* get(void){   return screen_;  }
 
     public:
-        IterWidgets* CreateIterator( void ) override;
+        IterWdgt CreateIterator( void ) override;
         void AddChild( Widget* other )      override;
         CDKSCREEN * screen()                override;
 

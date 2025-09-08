@@ -42,22 +42,21 @@ namespace cui
         virtual ~Widget();
 
     public:
-        virtual IterWidgets* CreateIterator( void );
-        virtual void AddChild( Widget* other );
+        virtual IterWdgt CreateIterator( void );
         virtual CDKSCREEN * screen();
 
     public:
-        virtual int  width ( void ) = 0;
-        virtual int  height( void ) = 0;
+        virtual int  width ( void ) { return 0; };
+        virtual int  height( void ) { return 0; };
         virtual void draw  ( void ) = 0;
         virtual void hide  ( void ) = 0;
     };
 
     template <typename Iter, typename... Args>
-    inline Iter* Widget::create_iterator(Args&&... args)
+    inline IterWdgt Widget::create_iterator(Args&&... args)
     {
-        if ( iter_ != nullptr )
-            delete iter_;
+        return std::make_unique<Iter>( std::forward<Args>(args)... );
+    }
 
         iter_ = new Iter(std::forward<Args>(args)...);
 

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <iterator>
 #include <stdexcept>
+#include <memory>
 
 
 namespace cui 
 {   
+    class Widget;
 
     template <typename T>
     class Iterator
@@ -38,10 +39,10 @@ namespace cui
         };
     };
 
-    class Widget;
-    using NullIterWidgets = NullIterator<Widget>;
-    using IterWidgets = Iterator<Widget>;
+    using NULLIterWdgt = NullIterator<Widget>;
+    using IterWdgt     = std::unique_ptr<Iterator<Widget>>;
+    using PtrIterWdgt  = Iterator<Widget>;
 
-    inline const NullIterWidgets NullIterOBJ{};
+    inline const NULLIterWdgt NullIterOBJ{};
 
 } // namespace cui

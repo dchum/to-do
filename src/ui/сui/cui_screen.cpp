@@ -37,7 +37,7 @@ void CUIScreen::hide(void)
     eraseCDKScreen(screen_);
 }
 
-IterWidgets* CUIScreen::CreateIterator(void)
+IterWdgt CUIScreen::CreateIterator(void)
 {
     return Widget::create_iterator<ScreenIter>(children_);
 }
