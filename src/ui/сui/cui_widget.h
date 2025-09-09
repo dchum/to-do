@@ -53,6 +53,8 @@ namespace cui
     public:
         virtual IterWdgt CreateIterator( void );
 
+        template<typename T, typename... Args>
+        void AddChild     ( Args&&... args     );
         void AddChild     ( Widget* child      );
         void RemoveChild  ( Widget* child      );
         void SetParent    ( Widget* new_parent );
@@ -76,6 +78,13 @@ namespace cui
     inline IterWdgt Widget::create_iterator(Args&&... args)
     {
         return std::make_unique<Iter>( std::forward<Args>(args)... );
+    }
+
+    template <typename T, typename... Args>
+    inline void Widget::AddChild(Args &&...args)
+    {
+        Widget* wdgt = new T(this, std::forward<Args>(args)...);
+        this->AddChild(wdgt);
     }
 
     inline bool operator == (const Widget& lhs, const Widget& rhs)

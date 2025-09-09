@@ -26,8 +26,8 @@ Press Q to quit)"
 cui::WindowHello::WindowHello(Widget *parent)
     :Window(parent)
 {
-    wdgt_box.AddChild( new CUILabel(&wdgt_box, msgHello, 50, 15, false, false) ) ;
-    wdgt_box.AddChild( new CUILabel(&wdgt_box, msgText,  70, 30, false, false) ) ;  
+    wdgt_box.AddChild<CUILabel>( msgHello, 50, 15, false, false ) ;
+    wdgt_box.AddChild<CUILabel>( msgText,  70, 30, false, false ) ;
 }
 
 void cui::WindowHello::OnAddChild(Widget *child)
