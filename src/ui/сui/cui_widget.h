@@ -1,5 +1,5 @@
 /******************************************************************************************************************************************
-    Класс Окна - Widget. Абстрактный класс. Описывает общие моменты касательно понятия "Виджет"
+Класс Окна - Widget. Абстрактный класс. Описывает общие моменты касательно понятия "Виджет"
 
     Поля класса:
     //NOTE -  v 1.0
@@ -26,15 +26,24 @@ namespace cui
 
     class Widget
     {
-        Widget*      parent_;
-        IterWidgets* iter_;
+        Widget*  parent_;
+
+        static inline ssize_t new_id;
+        const ssize_t id_;
+
+    private:
+        void SetParentInternal( Widget* new_parent);
+
+    protected:
+        virtual void OnAddChild   (Widget* child);
+        virtual void OnRemoveChild(Widget* child);
 
     protected:
         template <typename Iter, typename... Args>
-        Iter* create_iterator(Args&&... args);
+        IterWdgt create_iterator(Args&&... args);
+        explicit Widget(Widget* parent);
 
     public:
-        explicit Widget(Widget* parent);
         Widget(const Widget& ) = delete;
         Widget(const Widget&&) = delete;
         Widget& operator=(const Widget& ) = delete;
@@ -43,6 +52,13 @@ namespace cui
 
     public:
         virtual IterWdgt CreateIterator( void );
+
+        void AddChild     ( Widget* child      );
+        void RemoveChild  ( Widget* child      );
+        void SetParent    ( Widget* new_parent );
+        void RemoveParent ( void );
+        Widget* getParent ( void );
+    
         virtual CDKSCREEN * screen();
 
     public:
@@ -50,6 +66,10 @@ namespace cui
         virtual int  height( void ) { return 0; };
         virtual void draw  ( void ) = 0;
         virtual void hide  ( void ) = 0;
+        // virtual void update( void ) = 0;
+
+    public:
+        ssize_t get_id( void ) const noexcept;
     };
 
     template <typename Iter, typename... Args>
@@ -58,9 +78,14 @@ namespace cui
         return std::make_unique<Iter>( std::forward<Args>(args)... );
     }
 
-        iter_ = new Iter(std::forward<Args>(args)...);
+    inline bool operator == (const Widget& lhs, const Widget& rhs)
+    {
+        return lhs.get_id() == rhs.get_id();
+    }
 
-        return static_cast<Iter*>(iter_);
+    inline bool operator < (const Widget& lhs, const Widget& rhs)
+    {
+        return lhs.get_id() < rhs.get_id();
     }
 
 } // namespace cui

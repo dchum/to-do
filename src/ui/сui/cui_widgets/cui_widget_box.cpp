@@ -1,7 +1,6 @@
 #include "cui_widget_box.h"
 
-#include <iostream>
-#include <fstream>
+#include <algorithm>
 
 // #include "cui_lib.h"
 // #include "cui_label.h"
@@ -21,8 +20,20 @@ namespace cui
 
 // // constexpr char KEY_ESC = 27; //используется для выхода из работы виджета
 
-cui::WidgetBox::WidgetBox( Widget* parent )
-    :Widget(parent)
+void WidgetBox::OnAddChild(Widget *child)
+{
+    childrens_.emplace_back(child);
+}
+
+void WidgetBox::OnRemoveChild(Widget *child)
+{
+    auto it = std::find(childrens_.begin(), childrens_.end(), child);
+    if ( it != childrens_.end() ) 
+        childrens_.erase(it);
+}
+
+cui::WidgetBox::WidgetBox(Widget *parent)
+    : Widget(parent)
 {
 }
 
@@ -49,20 +60,16 @@ void WidgetBox::hide(void)
         wdgt->hide();
 }
 
-IterWidgets* WidgetBox::CreateIterator(void)
+IterWdgt WidgetBox::CreateIterator(void)
 {
     return Widget::create_iterator<VectorIterator>(childrens_);
-}
-
-void WidgetBox::AddChild( Widget* other )
-{
-    childrens_.emplace_back(other);
 }
 
 WidgetBox::~WidgetBox()
 {
     for(auto wdgt : childrens_)
     {
+        this->RemoveChild( wdgt );
         delete wdgt;
     }
 }

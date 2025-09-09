@@ -42,11 +42,6 @@ IterWdgt CUIScreen::CreateIterator(void)
     return Widget::create_iterator<ScreenIter>(children_);
 }
 
-void CUIScreen::AddChild(Widget *other)
-{
-    children_.emplace_back(other);
-}
-
 CDKSCREEN *CUIScreen::screen()
 {
     return screen_;
@@ -60,6 +55,18 @@ int CUIScreen::width()
 int CUIScreen::height()
 {
     return height_;
+}
+
+void CUIScreen::OnAddChild(Widget *child)
+{
+    children_.emplace_back(child);
+}
+
+void CUIScreen::OnRemoveChild(Widget *child)
+{
+    auto it = std::find(children_.begin(), children_.end(), child);
+    if ( it != children_.end() ) 
+        children_.erase(it);
 }
 
 

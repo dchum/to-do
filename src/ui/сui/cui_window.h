@@ -7,13 +7,14 @@ namespace cui
 {
     class Window: public Widget
     {
-    public:
+    protected:
         Window ( Widget* parent = nullptr );
+    public:
         virtual ~Window()=default;
 
         void draw  ( void );
         void hide  ( void );
 
-        WidgetBox wdgtbox;
+        WidgetBox wdgt_box;
     };
 }

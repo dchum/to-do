@@ -66,8 +66,10 @@ namespace cui
 
     public:
         IterWdgt CreateIterator( void ) override;
-        void AddChild( Widget* other )      override;
-        CDKSCREEN * screen()                override;
+        CDKSCREEN * screen()            override;
+
+        void OnAddChild   (Widget* child) override;
+        void OnRemoveChild(Widget* child) override;
 
     public:
         void draw   ( void ) override;

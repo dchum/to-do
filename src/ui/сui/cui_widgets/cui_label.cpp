@@ -10,8 +10,8 @@ cui::CUILabel::CUILabel(Widget* parent, Message &mes, int x, int y, bool box, bo
 	  label_(nullptr)
 {
     label_ = newCDKLabel( parent->screen(), x, y, 
-                        (CDK_CSTRING2) mes.get_msg(), mes.count(), 
-                        box, shadow );
+                          (CDK_CSTRING2) mes.get_msg(), mes.count(), 
+                          box, shadow );
 
     if ( label_ == nullptr)
         throw std::runtime_error("CUILabel: Error new label_");

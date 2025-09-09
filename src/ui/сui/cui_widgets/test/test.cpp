@@ -1,5 +1,7 @@
 #include <iostream>
 #include <memory>
+#include <signal.h>
+#include <assert.h>
 
 #include "cui_widget_box.h"
 #include "cui_screen.h"
@@ -14,20 +16,71 @@
 using namespace std;
 using namespace cui;
 
+void handle_resize(int sig) {
+    endwin();
+    refresh();
+    resize_term(0, 0);  // перечитать размеры
+    clear();
+    refresh();
+}
+
 int main( )
 {
     CUIScreen screen;
     WindowHello wndHello{&screen};
 
+    // initscr();
+    // cbreak();
+    // noecho();
+    // keypad(stdscr, TRUE);
+
+
+    // signal(SIGWINCH, handle_resize);
+
+
+    // while ( 1 )
+    // {
+    //     // cerr << LINES <<" "<< COLS;
+    //     // mvprintw(LINES / 2, (COLS - 25) / 2, "Размер: %d x %d", LINES, COLS);
+    //     // mvprintw(LINES - 1, 0, "Нажмите 'q' для выхода");
+    //     // int ch = getch();
+    //     // if (ch == 'q') break;
+    // }
+    // endwin();
+    // mvprintw(LINES / 2, (COLS - 25) / 2, "Размер: %d x %d", LINES, COLS);
+    // mvprintw(LINES - 1, 0, "Нажмите 'q' для выхода");
+
     wndHello.draw();
+    // Message msg_label("<C></U>Dialog Widget Demo| | | | | | | | | | | | | | | | |<C>The dialog widget allows the programmer to create|<C>a popup dialog box with buttons." 
+    //                 "The dialog box|<C>can contain </B/32>colours<!B!32>, </R>character attributes<!R>|<R>and even be right justified.|"
+    //                 "<L>and left.|gfgdfgdfgdfg");
+
+    // WidgetBox wdgt_box1(&screen);
+    // const int id_parent1 = wdgt_box1.get_id();
+
+    // auto lb1 = new CUILabel (&wdgt_box1, msg_label,240, 20, true, true);
+
+    // assert( id_parent1 == lb1->getParent()->get_id() );
+
+    // WidgetBox wdgt_box2(&screen);
+    // const int id_parent2 = wdgt_box2.get_id();
+
+    // lb1->SetParent(&wdgt_box2);
+    // assert( id_parent2 == lb1->getParent()->get_id() );
+
+    // std:: cout << wdgt_box.get_id() << endl;
+
+    // wdgt_box.draw();
+    // auto it = wdgt_box.CreateIterator();
+    // for ( it->Begin(); !it->IsDone(); it->Next())
+    // {
+    //     it->CurrentValue().draw();
+    // }
 
 
 //     std::cout << screen.width() << " " << screen.height();
 //     WidgetBox* wdgt_box = new WidgetBox(&screen);
 
-//     Message msg_label("<C></U>Dialog Widget Demo| | | | | | | | | | | | | | | | |<C>The dialog widget allows the programmer to create|<C>a popup dialog box with buttons." 
-//                     "The dialog box|<C>can contain </B/32>colours<!B!32>, </R>character attributes<!R>|<R>and even be right justified.|"
-//                     "<L>and left.|gfgdfgdfgdfg");
 //     Message msg_button("The dialog widget allows the programmer to create|<C>a popup dialog box with buttons." 
 //                     "The dialog box|<C>can contain </B/32>colours<!B!32>, </R>character attributes<!R>|<R>and even be right justified.|"
 //                     "<L>and left.|gfgdfgdfgdfg");

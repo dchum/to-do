@@ -8,5 +8,8 @@ namespace cui
     {
     public:
         WindowHello( Widget * parent = nullptr );
+
+        void OnAddChild   (Widget* child) override;
+        void OnRemoveChild(Widget* child) override;
     };
 }

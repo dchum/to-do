@@ -45,6 +45,9 @@ namespace cui
         int width_, height_;
         std::vector<Widget*> childrens_;
 
+        void OnAddChild   (Widget* child) override;
+        void OnRemoveChild(Widget* child) override;
+
     public:
         WidgetBox(Widget* parent);
         ~WidgetBox();
@@ -55,7 +58,6 @@ namespace cui
         void hide  ( void ) override;
         
         IterWdgt CreateIterator( void ) override;
-        void AddChild    ( Widget* other ) override;
     };
     //     private:
     //         list_wdgt children_;
