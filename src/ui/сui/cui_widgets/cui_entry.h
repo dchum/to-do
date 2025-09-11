@@ -15,8 +15,6 @@ namespace cui
     private:
         CDKENTRY *entry_;
 
-        int width_,
-            height_;
     public:
         CUIEntry() = delete;
         CUIEntry(Widget* parent, Message& title, Message& label, int x, int y, int fieldWidth,
@@ -28,8 +26,6 @@ namespace cui
         ~CUIEntry();
 
     public:
-        int  width ( void ) override;
-        int  height( void ) override;
         void draw  ( void ) override;
         void hide  ( void ) override;
         // void activate( unsigned int* ) override;

@@ -12,6 +12,7 @@
 #pragma once
 
 #include <memory>
+#include <tuple>
 
 extern "C"
 {
@@ -31,7 +32,16 @@ namespace cui
         static inline ssize_t new_id;
         const ssize_t id_;
 
-    private:
+        struct size_widget_t
+        {
+            int width_, height_; //Размеры предоставленного места на терминале,
+                                 //лишь у CDKSCREEN будет равно размеру всего терминала
+            int percent_of_width_, 
+                percent_of_height_;
+
+                size_widget_t()=default;
+        }size;
+
         void SetParentInternal( Widget* new_parent);
 
     protected:
@@ -64,8 +74,11 @@ namespace cui
         virtual CDKSCREEN * screen();
 
     public:
-        virtual int  width ( void ) { return 0; };
-        virtual int  height( void ) { return 0; };
+        int  width ( void ) const noexcept;
+        int  height( void ) const noexcept;
+        void set_size( int w_percent,  int h_percent ) noexcept;
+        void set_internal_size( int w, int h ) noexcept;
+        std::tuple<int, int> get_size( void ) const noexcept;
         virtual void draw  ( void ) = 0;
         virtual void hide  ( void ) = 0;
         // virtual void update( void ) = 0;

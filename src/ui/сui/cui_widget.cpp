@@ -1,13 +1,23 @@
 #include "cui_widget.h"
 
+#include <iostream>
+
 namespace cui
 {
-    Widget::Widget(Widget *parent)
+    Widget::Widget(Widget* parent)
     : parent_(parent),
       id_(new_id++)
     {
         if ( parent_ )
+        {
             parent->AddChild(this);
+            set_size(100, 100);
+        }
+        else
+        {
+            size.percent_of_height_ = 100;
+            size.percent_of_width_  = 100;
+        }
     }
 
     void Widget::SetParentInternal(Widget *new_parent)
@@ -81,6 +91,38 @@ namespace cui
     IterWdgt Widget::CreateIterator( )
     {   
         return create_iterator<NULLIterWdgt>();
+    }
+
+    int  Widget::width ( void ) const noexcept
+    {
+        return size.width_;
+    }
+
+    int  Widget::height ( void ) const noexcept
+    {
+        return size.height_;
+    }
+
+    void Widget::set_size(int w_percent, int h_percent) noexcept
+    {
+        size.percent_of_height_ = h_percent;
+        size.percent_of_width_  = w_percent;
+
+        size.width_ =parent_->width()*w_percent/100;
+        size.height_=parent_->height()*h_percent/100;
+    }
+
+    void Widget::set_internal_size(int w, int h) noexcept
+    {
+        size.height_ = h;
+        size.width_ = w;
+    }
+
+    std::tuple<int, int> Widget::get_size( void ) const noexcept
+    {
+        int w_real = size.width_*size.percent_of_width_/100;
+        int h_real = size.height_*size.percent_of_height_/100;
+        return {w_real, h_real};
     }
 
     Widget::~Widget()

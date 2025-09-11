@@ -27,16 +27,6 @@ cui::CUIEntry::~CUIEntry()
     destroyCDKEntry (entry_);
 }
 
-int cui::CUIEntry::width(void)
-{
-    return width_;
-}
-
-int cui::CUIEntry::height(void)
-{
-    return height_;
-}
-
 void cui::CUIEntry::draw(void)
 {
     drawCDKEntry (entry_, ObjOf (entry_)->box);

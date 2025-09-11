@@ -37,16 +37,6 @@ cui::WidgetBox::WidgetBox(Widget *parent)
 {
 }
 
-int WidgetBox::width(void)
-{
-    return width_;
-}
-
-int WidgetBox::height(void)
-{
-    return height_;
-}
-
 void cui::WidgetBox::draw(void)
 {
     for(const auto wdgt : childrens_)

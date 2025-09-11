@@ -17,9 +17,6 @@ namespace cui
     private:
         CDKDIALOG* dialog_;
 
-        int width_, 
-            height_;
-
     public:
         CUIDialog() = delete;
         CUIDialog( Widget* parent, 
@@ -34,8 +31,6 @@ namespace cui
         ~CUIDialog();
         
     public:
-        int  width ( void ) override;
-        int  height( void ) override;
         void draw  ( void ) override;
         void hide  ( void ) override;
         // void activate( unsigned int* ) override;

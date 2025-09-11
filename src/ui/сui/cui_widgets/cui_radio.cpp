@@ -1,6 +1,7 @@
 #include "cui_radio.h"
 
 #include <stdexcept>
+#include <iostream>
 
 #include "cui_screen.h"
 
@@ -8,9 +9,11 @@ cui::CUIRadio::CUIRadio(Widget *parent, int x, int y, int width, int height, Mes
 int count_list, int choiceCharacter, int spos, int highlight, int defaultItem, bool box, bool shadow)
     :Widget(parent),
     radio_(nullptr)
-{
+{   
+    Widget::set_size(width, height);
     radio_ = newCDKRadio(parent->screen(),
-                        x, y, spos, height, width, (*title.get_msg()), list.get_msg(), count_list, 
+                        x, y, spos, Widget::height(), Widget::width(), 
+                        (*title.get_msg()), list.get_msg(), count_list, 
                         choiceCharacter, defaultItem, highlight, box, shadow);
 
     if ( radio_ == nullptr ) 
@@ -20,16 +23,6 @@ int count_list, int choiceCharacter, int spos, int highlight, int defaultItem, b
 cui::CUIRadio::~CUIRadio()
 {
     destroyCDKRadio(radio_);
-}
-
-int cui::CUIRadio::width(void)
-{
-    return width_;
-}
-
-int cui::CUIRadio::height(void)
-{
-    return height_;
 }
 
 void cui::CUIRadio::draw(void)

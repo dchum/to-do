@@ -51,7 +51,6 @@ namespace cui
     class CUIScreen final : public Widget
     {
     private:
-        int width_, height_;
         CDKSCREEN * screen_;
         std::vector<Widget*> children_;
         
@@ -74,8 +73,6 @@ namespace cui
     public:
         void draw   ( void ) override;
         void hide   ( void ) override;
-        int  width  ( void ) override;
-        int  height ( void ) override;
         void refresh( void );
 
         // void activate ( unsigned int* ) override {}

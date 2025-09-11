@@ -42,7 +42,6 @@ namespace cui
     
     class WidgetBox : public Widget
     {
-        int width_, height_;
         std::vector<Widget*> childrens_;
 
         void OnAddChild   (Widget* child) override;
@@ -52,8 +51,6 @@ namespace cui
         WidgetBox(Widget* parent);
         ~WidgetBox();
 
-        int  width ( void ) override;
-        int  height( void ) override;
         void draw  ( void ) override;
         void hide  ( void ) override;
         

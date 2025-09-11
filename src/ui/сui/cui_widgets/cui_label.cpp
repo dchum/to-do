@@ -22,16 +22,6 @@ cui::CUILabel::~CUILabel()
     destroyCDKLabel (label_);
 }
 
-int cui::CUILabel::width(void)
-{
-    return width_;
-}
-
-int cui::CUILabel::height(void)
-{
-    return height_;
-}
-
 void cui::CUILabel::draw(void)
 {
     drawCDKLabel (label_, ObjOf (label_)->box);

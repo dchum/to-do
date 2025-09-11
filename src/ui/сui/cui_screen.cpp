@@ -1,4 +1,5 @@
 #include "cui_screen.h"
+#include <iostream>
 
 namespace cui
 {
@@ -7,10 +8,9 @@ cui::CUIScreen::CUIScreen( void )
     :Widget(nullptr),
     screen_( initCDKScreen (nullptr) )
 {   
-    initCDKColor ();
+    Widget::set_internal_size(COLS, LINES);
+    // initCDKColor ();
     
-    getmaxyx(screen_->window, height_, width_);
-
     keypad (stdscr, TRUE);
 }
 
@@ -45,16 +45,6 @@ IterWdgt CUIScreen::CreateIterator(void)
 CDKSCREEN *CUIScreen::screen()
 {
     return screen_;
-}
-
-int CUIScreen::width()
-{
-    return width_;
-}
-
-int CUIScreen::height()
-{
-    return height_;
 }
 
 void CUIScreen::OnAddChild(Widget *child)

@@ -30,16 +30,6 @@ cui::CUIDialog::~CUIDialog()
     destroyCDKDialog(dialog_);
 }
 
-int cui::CUIDialog::width(void)
-{
-    return width_;
-}
-
-int cui::CUIDialog::height(void)
-{
-    return height_;
-}
-
 void cui::CUIDialog::draw(void)
 {
 	drawCDKDialog (dialog_, ObjOf (dialog_)->box);

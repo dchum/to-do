@@ -18,9 +18,6 @@ namespace cui
     private:
         CDKLABEL *label_;
 
-        int width_, 
-            height_;
-
     public:
         CUILabel() = delete;
         CUILabel(Widget* parent, Message& mes, int x, int y, 
@@ -32,8 +29,6 @@ namespace cui
         ~CUILabel();
 
     public:
-        int  width ( void ) override;
-        int  height( void ) override;
         void draw  ( void ) override;
         void hide  ( void ) override;
         // void activate( unsigned int* ) override;

@@ -27,14 +27,6 @@ cui::CUISlider::~CUISlider()
     destroyCDKSlider(slider_);
 }
 
-int CUISlider::width(void)
-{
-    return width_;
-}
-int CUISlider::height(void)
-{
-    return height_;
-}
 void CUISlider::draw(void)
 {
     drawCDKSlider(slider_, ObjOf(slider_)->box);

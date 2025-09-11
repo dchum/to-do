@@ -16,9 +16,6 @@ namespace cui
     private :
         CDKRADIO *radio_;
 
-        int width_,
-            height_;
-
     public:
         CUIRadio() = delete;
         CUIRadio( Widget* parent, int x, int y,
@@ -32,11 +29,9 @@ namespace cui
         CUIRadio ( const CUIRadio& ) = delete;
         CUIRadio& operator=(const CUIRadio&) = delete;
 
-    public:
         ~CUIRadio();
-
-        int  width  ( void ) override;
-        int  height ( void ) override;
+    
+    public:
         void draw   ( void ) override;
         void hide   ( void ) override;
         // void activate( unsigned int* ) override;

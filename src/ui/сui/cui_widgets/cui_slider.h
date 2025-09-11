@@ -16,9 +16,6 @@ namespace cui
     private:
         CDKSLIDER *slider_;
 
-        int width_,
-            height_;
-
     public:
         CUISlider() = delete;
 
@@ -39,8 +36,6 @@ namespace cui
         ~CUISlider();
 
     public:
-        int  width ( void ) override;
-        int  height( void ) override;
         void draw  ( void ) override;
         void hide  ( void ) override;
         // void activate( unsigned int* ) override;
