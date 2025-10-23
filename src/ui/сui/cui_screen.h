@@ -71,6 +71,8 @@ namespace cui
         void OnRemoveChild(Widget* child) override;
 
     public:
+        int  width  ( void ) const noexcept;
+        int  height ( void ) const noexcept;
         void draw   ( void ) override;
         void hide   ( void ) override;
         void refresh( void );

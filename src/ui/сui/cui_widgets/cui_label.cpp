@@ -1,15 +1,17 @@
 #include "cui_label.h"
 
 #include <stdexcept>
+#include <memory>
 
 #include "cui_screen.h"
 
 
 cui::CUILabel::CUILabel(Widget* parent, Message &mes, int x, int y, bool box, bool shadow)
-	: Widget(parent),
+	: Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
 	  label_(nullptr)
 {
-    label_ = newCDKLabel( parent->screen(), x, y, 
+    auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
+    label_ = newCDKLabel( parent->screen(), size.x, size.y, 
                           (CDK_CSTRING2) mes.get_msg(), mes.count(), 
                           box, shadow );
 

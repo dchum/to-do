@@ -10,10 +10,11 @@ extern "C"
 
 
 cui::CUIDialog::CUIDialog(Widget* parent, Message& message, Message& buttons, int x, int y, bool box, bool separator, bool shadow)
-	: Widget(parent),
+	: Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
 	  dialog_(nullptr)
 {
-	dialog_ = newCDKDialog (parent->screen(), x,y,
+	auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
+	dialog_ = newCDKDialog (parent->screen(), size.x,size.y,
 				(CDK_CSTRING2) message.get_msg(), message.count(),
 				(CDK_CSTRING2) buttons.get_msg(), buttons.count(),
 				COLOR_PAIR (buttons.count()) | A_REVERSE,

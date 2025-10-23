@@ -21,6 +21,7 @@ extern "C"
 }
 
 #include "cui_iterator.h"
+#include "cui_surface.h"
 
 namespace cui
 {   
@@ -32,17 +33,9 @@ namespace cui
         static inline ssize_t new_id;
         const ssize_t id_;
 
-        struct size_widget_t
-        {
-            int width_, height_; //Размеры предоставленного места на терминале,
-                                 //лишь у CDKSCREEN будет равно размеру всего терминала
-            int percent_of_width_, 
-                percent_of_height_;
+        std::unique_ptr<Surface> surface_imp_;
 
-                size_widget_t()=default;
-        }size;
-
-        void SetParentInternal( Widget* new_parent);
+        void SetParentInternal( Widget* new_parent );
 
     protected:
         virtual void OnAddChild   (Widget* child);
@@ -51,7 +44,7 @@ namespace cui
     protected:
         template <typename Iter, typename... Args>
         IterWdgt create_iterator(Args&&... args);
-        explicit Widget(Widget* parent);
+        explicit Widget(Widget* parent, std::unique_ptr<Surface> surface_imp);
 
     public:
         Widget(const Widget& ) = delete;
@@ -63,6 +56,7 @@ namespace cui
     public:
         virtual IterWdgt CreateIterator( void );
 
+    public:
         template<typename T, typename... Args>
         void AddChild     ( Args&&... args     );
         void AddChild     ( Widget* child      );
@@ -70,15 +64,17 @@ namespace cui
         void SetParent    ( Widget* new_parent );
         void RemoveParent ( void );
         Widget* getParent ( void );
-    
+
+    public:    
         virtual CDKSCREEN * screen();
 
     public:
-        int  width ( void ) const noexcept;
-        int  height( void ) const noexcept;
-        void set_size( int w_percent,  int h_percent ) noexcept;
-        void set_internal_size( int w, int h ) noexcept;
-        std::tuple<int, int> get_size( void ) const noexcept;
+        Surface* GetSurface( void );
+        void SetSurface( std::unique_ptr<Surface> surface_imp );
+
+    public:
+        virtual int  width ( void ) const noexcept;
+        virtual int  height( void ) const noexcept;
         virtual void draw  ( void ) = 0;
         virtual void hide  ( void ) = 0;
         // virtual void update( void ) = 0;

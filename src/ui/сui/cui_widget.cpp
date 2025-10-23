@@ -4,19 +4,14 @@
 
 namespace cui
 {
-    Widget::Widget(Widget* parent)
+    Widget::Widget(Widget* parent, std::unique_ptr<Surface> surface_imp)
     : parent_(parent),
-      id_(new_id++)
+      id_(new_id++), 
+      surface_imp_(std::move(surface_imp))
     {
         if ( parent_ )
         {
             parent->AddChild(this);
-            set_size(100, 100);
-        }
-        else
-        {
-            size.percent_of_height_ = 100;
-            size.percent_of_width_  = 100;
         }
     }
 
@@ -83,6 +78,16 @@ namespace cui
         return ( parent_ ? parent_->screen() : nullptr );
     }
 
+    Surface *Widget::GetSurface(void)
+    {
+        return surface_imp_.get();
+    }
+
+    void Widget::SetSurface(std::unique_ptr<Surface> surface_imp)
+    {
+        surface_imp_ = std::move(surface_imp);
+    }
+
     ssize_t Widget::get_id(void) const noexcept
     {
         return id_;
@@ -95,40 +100,17 @@ namespace cui
 
     int  Widget::width ( void ) const noexcept
     {
-        return size.width_;
+        return parent_->width();
     }
 
     int  Widget::height ( void ) const noexcept
     {
-        return size.height_;
-    }
-
-    void Widget::set_size(int w_percent, int h_percent) noexcept
-    {
-        size.percent_of_height_ = h_percent;
-        size.percent_of_width_  = w_percent;
-
-        size.width_ =parent_->width()*w_percent/100;
-        size.height_=parent_->height()*h_percent/100;
-    }
-
-    void Widget::set_internal_size(int w, int h) noexcept
-    {
-        size.height_ = h;
-        size.width_ = w;
-    }
-
-    std::tuple<int, int> Widget::get_size( void ) const noexcept
-    {
-        int w_real = size.width_*size.percent_of_width_/100;
-        int h_real = size.height_*size.percent_of_height_/100;
-        return {w_real, h_real};
+        return parent_->height();
     }
 
     Widget::~Widget()
     {
         RemoveParent();
-        
     }
 
 }//namespace cui

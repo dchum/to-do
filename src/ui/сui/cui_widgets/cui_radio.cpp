@@ -1,18 +1,17 @@
 #include "cui_radio.h"
 
 #include <stdexcept>
-#include <iostream>
 
 #include "cui_screen.h"
 
 cui::CUIRadio::CUIRadio(Widget *parent, int x, int y, int width, int height, Message &title, Message &list, 
 int count_list, int choiceCharacter, int spos, int highlight, int defaultItem, bool box, bool shadow)
-    :Widget(parent),
+    : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
     radio_(nullptr)
 {   
-    Widget::set_size(width, height);
+    auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
     radio_ = newCDKRadio(parent->screen(),
-                        x, y, spos, Widget::height(), Widget::width(), 
+                        size.x, size.y, spos, size.height, size.width, 
                         (*title.get_msg()), list.get_msg(), count_list, 
                         choiceCharacter, defaultItem, highlight, box, shadow);
 

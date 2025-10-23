@@ -33,14 +33,13 @@ void WidgetBox::OnRemoveChild(Widget *child)
 }
 
 cui::WidgetBox::WidgetBox(Widget *parent)
-    : Widget(parent)
+    : Widget(parent, std::make_unique<RelativeSurface>(0, 0, parent->width(), parent->height()))
 {
 }
 
 void cui::WidgetBox::draw(void)
 {
     for(const auto wdgt : childrens_)
-
         wdgt->draw();
 }
 

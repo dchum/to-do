@@ -5,10 +5,11 @@
 #include "cui_screen.h"
 
 cui::CUIEntry::CUIEntry(Widget *parent, Message &title, Message &label, int x, int y, int fieldWidth, bool box, bool shadow)
-    :Widget(parent),
+    :Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
     entry_(nullptr)
 {
-    entry_ = newCDKEntry (parent->screen(), x, y,
+    auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
+    entry_ = newCDKEntry (parent->screen(), size.x, size.y,
             *(title.get_msg()), *(label.get_msg()),
             A_NORMAL,   // сообщает, как будет выглядеть введенный символ 
             '.',        // разделитель

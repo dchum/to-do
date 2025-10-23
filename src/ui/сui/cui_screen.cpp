@@ -5,11 +5,10 @@ namespace cui
 {
 
 cui::CUIScreen::CUIScreen( void )
-    :Widget(nullptr),
+    :Widget(nullptr, nullptr),
     screen_( initCDKScreen (nullptr) )
 {   
-    Widget::set_internal_size(COLS, LINES);
-    // initCDKColor ();
+    initCDKColor ();
     
     keypad (stdscr, TRUE);
 }
@@ -24,6 +23,20 @@ cui::CUIScreen::~CUIScreen()
 void cui::CUIScreen::refresh(void)
 {
     refreshCDKScreen(screen_);
+}
+
+int CUIScreen::width(void) const noexcept
+{
+    int w, h;
+    getmaxyx(stdscr, h, w);
+    return w;
+}
+
+int CUIScreen::height(void) const noexcept
+{
+    int w, h;
+    getmaxyx(stdscr, h, w);
+    return h;
 }
 
 void CUIScreen::draw(void)
