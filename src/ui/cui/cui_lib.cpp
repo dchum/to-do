@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-constexpr char CHAR_SEPARATOR = '^';
+constexpr char CHAR_SEPARATOR = '~';
 
 cui::Message::Message(const std::string &str)//FIXME - почему в конце пишется нижнее подчеркивание
     :ptr_str_(nullptr), count_(0)

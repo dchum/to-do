@@ -20,11 +20,11 @@ namespace cui
         CUIRadio() = delete;
         CUIRadio( Widget* parent, int x, int y,
                 int width, int height, 
-                Message& title, Message& list, int count_list,
+                Message& title, Message& list, int count_list,//FIXME - избавиться от параметра count_list
                 int choiceCharacter = '#', 
-                int spos = RIGHT,
+                int spos = NONE,
                 int highlight = A_REVERSE, int defaultItem = 1,
-                bool box = true, bool shadow = true);
+                bool box = false, bool shadow = false);
 
         CUIRadio ( const CUIRadio& ) = delete;
         CUIRadio& operator=(const CUIRadio&) = delete;

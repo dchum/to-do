@@ -28,7 +28,7 @@ namespace cui
                 int highValue    = 100,
                 int increment    = 1,
                 int fastIncrement= 10,
-                bool box = false, bool shadow = false);
+                bool box = true, bool shadow = false);
 
         CUISlider ( const CUISlider& ) = delete;
         CUISlider& operator=(const CUISlider&) = delete;
