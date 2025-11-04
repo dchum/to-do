@@ -19,3 +19,13 @@ void cui::Window::draw(void)
 void cui::Window::hide(void)
 {
 }
+
+void cui::Window::OnAddChild(Widget *child)
+{
+    wdgt_box.AddChild(child);
+}
+
+void cui::Window::OnRemoveChild(Widget *child)
+{
+    wdgt_box.RemoveChild(child);
+}

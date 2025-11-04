@@ -1,5 +1,5 @@
 #include "cui_screen.h"
-#include <iostream>
+#include <algorithm>
 
 namespace cui
 {

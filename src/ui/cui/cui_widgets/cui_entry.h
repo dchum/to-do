@@ -5,6 +5,8 @@ extern "C"
 #include "cdk/entry.h" 
 }
 
+//FIXME - возможно стоит заменить на mentry
+
 #include "cui_widget.h"
 #include "cui_lib.h"
 
