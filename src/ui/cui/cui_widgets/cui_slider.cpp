@@ -8,13 +8,13 @@ namespace cui
 {
 
 cui::CUISlider::CUISlider(Widget *parent, int x, int y, Message &title, Message &label, int fieldWidth, unsigned int fillerCharacter, int currentValue, int lowValue, int highValue, int increment, int fastIncrement, bool box, bool shadow)
-    : Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
+    : Widget(parent, std::make_unique<RelativeSurface>(x, y, fieldWidth, parent->height())),
     slider_(nullptr)
 {
     auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
     slider_ = newCDKSlider(parent->screen(), size.x, size.y, 
                             *title.get_msg(), *label.get_msg(), 
-                            fillerCharacter, fieldWidth, 
+                            fillerCharacter, size.width, 
                             currentValue, lowValue, highValue, 
                             increment, fastIncrement, box, shadow);
 

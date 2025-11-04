@@ -7,7 +7,7 @@ extern "C"
 
 #include "cui_lib.h"
 #include "cui_widget.h"
-
+//FIXME - расширить до возможности указывать в качестве шаблона, какой тип выводить
 namespace cui
 {
 

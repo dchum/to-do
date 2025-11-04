@@ -1,4 +1,4 @@
-#include "cui_window_hello.h"
+#include "cui_window_start.h"
 
 #include "cui_label.h"
 #include "cui_lib.h"
@@ -12,7 +12,7 @@ R"(                                                           ^
 </B>      \ \  \ \ \  \\\  \|_________|\ \  \_\\ \ \  \\\  \  ^
 </B>       \ \__\ \ \_______\           \ \_______\ \_______\ ^
 </B>        \|__|  \|_______|            \|_______|\|_______| ^
-                                        To-Do CLI v0.1.0 | Created by: @dchum )"
+                                        To-Do CLI v0.1.0 | Created by: @dchum )"//FIXME - вынести номер версии в отдельный макрос
 );
 
 
@@ -23,19 +23,9 @@ Press S for Settings ^
 Press Q to quit)"
 );
 
-cui::WindowHello::WindowHello(Widget *parent)
+cui::WindowStart::WindowStart(Widget *parent)
     :Window(parent)
 {
-    wdgt_box.AddChild<CUILabel>( msgHello, 50, 15, false, false ) ;
-    wdgt_box.AddChild<CUILabel>( msgText,  70, 30, false, false ) ;
-}
-
-void cui::WindowHello::OnAddChild(Widget *child)
-{
-    wdgt_box.AddChild(child);
-}
-
-void cui::WindowHello::OnRemoveChild(Widget *child)
-{
-    wdgt_box.RemoveChild(child);
+    AddChild<CUILabel>( msgHello, 35, 30, false, false ) ;
+    AddChild<CUILabel>( msgText,  45, 60, false, false ) ;
 }

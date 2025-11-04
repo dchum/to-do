@@ -23,6 +23,7 @@ extern "C"
 #include "cui_iterator.h"
 #include "cui_surface.h"
 
+//FIXME - упорядочить функции: какие просто наследуем, какие обязательно переопределяем
 namespace cui
 {   
 

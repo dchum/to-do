@@ -7,6 +7,8 @@ namespace cui
 {
     class Window: public Widget
     {
+        WidgetBox wdgt_box;
+    
     protected:
         Window ( Widget* parent = nullptr );
     public:
@@ -15,6 +17,7 @@ namespace cui
         void draw  ( void );
         void hide  ( void );
 
-        WidgetBox wdgt_box;
+        void OnAddChild   (Widget* child) override;
+        void OnRemoveChild(Widget* child) override;
     };
 }
