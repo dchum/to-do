@@ -8,8 +8,7 @@ cui::CUIEntry::CUIEntry(Widget *parent, Message &title, Message &label, int x, i
     :Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
     entry_(nullptr)
 {
-    auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
-    entry_ = newCDKEntry (parent->screen(), size.x, size.y,
+    entry_ = newCDKEntry (parent->screen(), Widget::x0(), Widget::y0(),
             *(title.get_msg()), *(label.get_msg()),
             A_NORMAL,   // сообщает, как будет выглядеть введенный символ 
             '.',        // разделитель

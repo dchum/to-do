@@ -9,9 +9,8 @@ int count_list, int choiceCharacter, int spos, int highlight, int defaultItem, b
     : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
     radio_(nullptr)
 {   
-    auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
     radio_ = newCDKRadio(parent->screen(),
-                        size.x, size.y, spos, size.height, size.width, 
+                        Widget::x0(), Widget::y0(), spos,  Widget::height(),  Widget::width(), 
                         (*title.get_msg()), list.get_msg(), count_list, 
                         choiceCharacter, defaultItem, highlight, box, shadow);
 

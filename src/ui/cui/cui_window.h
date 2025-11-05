@@ -7,7 +7,7 @@ namespace cui
 {
     class Window: public Widget
     {
-        WidgetBox wdgt_box;
+        WidgetBox wdgt_box_;
     
     protected:
         Window ( Widget* parent = nullptr );

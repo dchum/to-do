@@ -12,6 +12,7 @@ namespace cui
         if ( parent_ )
         {
             parent->AddChild(this);
+            size_ = surface_imp_->ComputeSize(parent->size_.width, parent->size_.height);
         }
     }
 
@@ -78,16 +79,6 @@ namespace cui
         return ( parent_ ? parent_->screen() : nullptr );
     }
 
-    Surface *Widget::GetSurface(void)
-    {
-        return surface_imp_.get();
-    }
-
-    void Widget::SetSurface(std::unique_ptr<Surface> surface_imp)
-    {
-        surface_imp_ = std::move(surface_imp);
-    }
-
     ssize_t Widget::get_id(void) const noexcept
     {
         return id_;
@@ -98,14 +89,24 @@ namespace cui
         return create_iterator<NULLIterWdgt>();
     }
 
-    int  Widget::width ( void ) const noexcept
+    int Widget::x0(void)
     {
-        return parent_->width();
+        return size_.x;
+    }
+
+    int Widget::y0(void)
+    {
+        return size_.y;
+    }
+
+    int Widget::width(void) const noexcept
+    {
+        return size_.width;
     }
 
     int  Widget::height ( void ) const noexcept
     {
-        return parent_->height();
+        return size_.height;
     }
 
     Widget::~Widget()

@@ -11,10 +11,9 @@ cui::CUISlider::CUISlider(Widget *parent, int x, int y, Message &title, Message 
     : Widget(parent, std::make_unique<RelativeSurface>(x, y, fieldWidth, parent->height())),
     slider_(nullptr)
 {
-    auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
-    slider_ = newCDKSlider(parent->screen(), size.x, size.y, 
+    slider_ = newCDKSlider(parent->screen(), Widget::x0(), Widget::y0(), 
                             *title.get_msg(), *label.get_msg(), 
-                            fillerCharacter, size.width, 
+                            fillerCharacter,  Widget::width(), 
                             currentValue, lowValue, highValue, 
                             increment, fastIncrement, box, shadow);
 

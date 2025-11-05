@@ -13,7 +13,7 @@ namespace cui
     class Surface
     {
         protected:
-            Surface( );
+            Surface( void );
 
         public:
             virtual Size ComputeSize( int parent_width, int parent_height ) = 0;

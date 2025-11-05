@@ -2,7 +2,7 @@
 
 extern "C" 
 { 
-#include "cdk/cdkscreen.h"
+#include "cdk/cdkscreen.h"//FIXME - все ли эти заголовочные файлы нужны
 #include "cdk/binding.h"
 #include "cdk/cdk_objs.h"
 #include "cdk/label.h" 

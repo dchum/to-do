@@ -44,7 +44,7 @@ cui::WindowMain::WindowMain(Widget *parent)
     AddChild<CUILabel> (msgLabelDescription, 0,  50, false, false);
     AddChild<CUILabel> (msgLabelSupport,     0, 100, false, false);
 
-    AddChild<CUIRadio> ( 0, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG, 5);
+    AddChild<CUIRadio> ( 2, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG, 5);
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS, 5);
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE, 5);
 

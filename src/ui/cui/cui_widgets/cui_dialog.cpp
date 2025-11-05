@@ -13,8 +13,7 @@ cui::CUIDialog::CUIDialog(Widget* parent, Message& message, Message& buttons, in
 	: Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
 	  dialog_(nullptr)
 {
-	auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
-	dialog_ = newCDKDialog (parent->screen(), size.x,size.y,
+	dialog_ = newCDKDialog (parent->screen(), Widget::x0(), Widget::y0(),
 				(CDK_CSTRING2) message.get_msg(), message.count(),
 				(CDK_CSTRING2) buttons.get_msg(), buttons.count(),
 				COLOR_PAIR (buttons.count()) | A_REVERSE,

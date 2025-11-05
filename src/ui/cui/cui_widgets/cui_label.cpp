@@ -10,8 +10,7 @@ cui::CUILabel::CUILabel(Widget* parent, Message &mes, int x, int y, bool box, bo
 	: Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
 	  label_(nullptr)
 {
-    auto size = GetSurface()->ComputeSize(parent->width(), parent->height());
-    label_ = newCDKLabel( parent->screen(), size.x, size.y, 
+    label_ = newCDKLabel( parent->screen(), Widget::x0(), Widget::y0(), 
                           (CDK_CSTRING2) mes.get_msg(), mes.count(), 
                           box, shadow );
 

@@ -39,6 +39,9 @@ namespace cui
         void SetParentInternal( Widget* new_parent );
 
     protected:
+        Size size_; //< размеры пространства доступные для отрисовки, физически реальные размеры
+
+    protected:
         virtual void OnAddChild   (Widget* child);
         virtual void OnRemoveChild(Widget* child);
 
@@ -70,10 +73,8 @@ namespace cui
         virtual CDKSCREEN * screen();
 
     public:
-        Surface* GetSurface( void );
-        void SetSurface( std::unique_ptr<Surface> surface_imp );
-
-    public:
+        int x0( void );
+        int y0( void );
         virtual int  width ( void ) const noexcept;
         virtual int  height( void ) const noexcept;
         virtual void draw  ( void ) = 0;
@@ -82,7 +83,7 @@ namespace cui
 
     public:
         ssize_t get_id( void ) const noexcept;
-    };
+    };//class Widget
 
     template <typename Iter, typename... Args>
     inline IterWdgt Widget::create_iterator(Args&&... args)
