@@ -24,7 +24,17 @@ int main( )
 {
     CUIScreen screen;
     auto * wndMain = new WindowMain(&screen);
-    wndMain->draw();
+    // wndMain->draw();
+    // screen.draw();
+
+    int i = 0;
+    auto it = screen.CreateIterator();
+    for ( it.get()->Begin(); !it.get()->IsDone(); it.get()->Next())
+    {
+        // std::cout << i++ << std::endl;
+        it->CurrentValue().draw();
+    }
+
     // std::cout << screen.width() << " " << screen.height();
     // WidgetBox* wdgt_box = new WidgetBox(&screen);
 
