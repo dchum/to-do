@@ -41,7 +41,7 @@ cui::WidgetBox::WidgetBox(Widget *parent)
 
 WidgetBox::WidgetBox(Widget *parent, int x, int y, int width, int height)
     : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
-    bord_(new CUIBorder( parent, parent->x0(), parent->y0(), 20, 20))
+    bord_(new CUIBorder( parent, parent->x0(), parent->y0(), 100, 100))
 {
     this->ShowBorder(false);
 }
