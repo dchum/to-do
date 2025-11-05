@@ -13,6 +13,8 @@ extern "C"
 #include "cdk_objs.h"
 }
 
+#include "cui_border.h"
+
 namespace cui
 {
 
@@ -33,18 +35,37 @@ void WidgetBox::OnRemoveChild(Widget *child)
 }
 
 cui::WidgetBox::WidgetBox(Widget *parent)
-    : Widget(parent, std::make_unique<RelativeSurface>(0, 0, parent->width(), parent->height()))
+    :WidgetBox(parent, 0, 0, parent->width(), parent->height())
 {
+}
+
+WidgetBox::WidgetBox(Widget *parent, int x, int y, int width, int height)
+    : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
+    bord_(new CUIBorder( parent, parent->x0(), parent->y0(), 20, 20))
+{
+    this->ShowBorder(false);
+}
+
+void WidgetBox::ShowBorder(bool is_show)
+{
+    bord_->ShowBorder(is_show);
+}
+
+void WidgetBox::ShowBorder(bool top, bool left, bool right, bool bottom)
+{
+    bord_->ShowBorder(top, left, right, bottom);
 }
 
 void cui::WidgetBox::draw(void)
 {
+    bord_->draw();
     for(const auto wdgt : childrens_)
         wdgt->draw();
 }
 
 void WidgetBox::hide(void)
 {
+    bord_->hide();
     for(const auto wdgt : childrens_)
         wdgt->hide();
 }
@@ -56,6 +77,8 @@ IterWdgt WidgetBox::CreateIterator(void)
 
 WidgetBox::~WidgetBox()
 {
+    delete bord_;
+
     for(auto wdgt : childrens_)
     {
         this->RemoveChild( wdgt );

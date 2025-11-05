@@ -14,6 +14,8 @@
 
 namespace cui
 {
+    class CUIBorder;
+
     class VectorIterator : public Iterator<Widget>
     {
         std::vector<Widget*>& vector_;
@@ -43,13 +45,18 @@ namespace cui
     class WidgetBox : public Widget
     {
         std::vector<Widget*> childrens_;
+        CUIBorder* bord_;//FIXME - использовать умный указатель
 
         void OnAddChild   (Widget* child) override;
         void OnRemoveChild(Widget* child) override;
 
     public:
         WidgetBox(Widget* parent);
+        WidgetBox(Widget* parent, int x, int y, int width, int height);
         ~WidgetBox();
+
+        void ShowBorder( bool is_show );
+        void ShowBorder( bool top, bool left, bool right, bool bottom );
 
         void draw  ( void ) override;
         void hide  ( void ) override;
