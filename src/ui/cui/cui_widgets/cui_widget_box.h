@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <vector>
+#include <list>
 
 #include "cui_widget.h"
 #include "cui_screen.h"
@@ -16,26 +16,26 @@ namespace cui
 {
     class CUIBorder;
 
-    class VectorIterator : public Iterator<Widget>
+    class ListIterator : public Iterator<Widget>
     {
-        std::vector<Widget*>& vector_;
-        std::vector<Widget*>::iterator current_;
+        std::list<Widget*>& list_;
+        std::list<Widget*>::iterator current_;
         
     public:
-        VectorIterator( std::vector<Widget*>& v ) 
+        ListIterator( std::list<Widget*>& l ) 
         :Iterator(),
-         vector_(v), current_(v.begin())
+         list_(l), current_(l.begin())
         {
 
         }
         void Begin() override {
-            current_ = vector_.begin();
+            current_ = list_.begin();
         }
         void Next()  override {
             ++current_;
         }
         bool IsDone() const override {
-            return current_==vector_.end();
+            return current_==list_.end();
         }
         Widget& CurrentValue() const override {
             return *(*current_);
@@ -44,7 +44,7 @@ namespace cui
     
     class WidgetBox : public Widget
     {
-        std::vector<Widget*> childrens_;
+        std::list<Widget*> childrens_;
         CUIBorder* bord_;//FIXME - использовать умный указатель
 
         void OnAddChild   (Widget* child) override;

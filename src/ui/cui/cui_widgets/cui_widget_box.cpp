@@ -24,6 +24,7 @@ namespace cui
 
 void WidgetBox::OnAddChild(Widget *child)
 {
+    childrens_.remove(nullptr);
     childrens_.emplace_back(child);
 }
 
@@ -31,7 +32,7 @@ void WidgetBox::OnRemoveChild(Widget *child)
 {
     auto it = std::find(childrens_.begin(), childrens_.end(), child);
     if ( it != childrens_.end() ) 
-        childrens_.erase(it);
+        (*it) = nullptr;
 }
 
 cui::WidgetBox::WidgetBox(Widget *parent)
@@ -72,17 +73,16 @@ void WidgetBox::hide(void)
 
 IterWdgt WidgetBox::CreateIterator(void)
 {
-    return Widget::create_iterator<VectorIterator>(childrens_);
+    return Widget::create_iterator<ListIterator>(childrens_);
 }
 
 WidgetBox::~WidgetBox()
 {
     delete bord_;
 
-    for(auto wdgt : childrens_)
+    for ( auto it = childrens_.begin(); it != childrens_.end(); ++it ) 
     {
-        this->RemoveChild( wdgt );
-        delete wdgt;
+        delete (*it);
     }
 }
 

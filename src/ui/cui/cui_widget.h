@@ -95,7 +95,6 @@ namespace cui
     inline void Widget::AddChild(Args &&...args)
     {
         Widget* wdgt = new T(this, std::forward<Args>(args)...);
-        this->AddChild(wdgt);
     }
 
     inline bool operator == (const Widget& lhs, const Widget& rhs)
