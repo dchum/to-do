@@ -23,17 +23,24 @@ using namespace cui;
 int main( )
 {
     CUIScreen screen;
-    auto * wndMain = new WindowMain(&screen);
-    // wndMain->draw();
+    auto wndMain = new WindowMain(&screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
+    // auto wdgtBox = BuilderWidgetsCollection<WidgetBox>::Create(&screen);
+    // wdgtBox->ShowBorder(true);
+    // wdgtBox->draw();
+    wndMain->draw();
+    delete wndMain;
     // screen.draw();
 
-    int i = 0;
-    auto it = screen.CreateIterator();
-    for ( it.get()->Begin(); !it.get()->IsDone(); it.get()->Next())
-    {
-        // std::cout << i++ << std::endl;
-        it->CurrentValue().draw();
-    }
+    // int i = 0;
+    // auto it = wndMain->CreateIterator();
+    // for ( it.get()->Begin(); !it.get()->IsDone(); it.get()->Next())
+    // {
+    //     // std::cerr << i++ << " " << it->CurrentValue().get_id() << std::endl;
+    //     // it->CurrentValue().draw();
+    //     // struct timespec t{3, 0};
+    //     // nanosleep(&t, NULL);
+    //     // cin >> i;
+    // }
 
     // std::cout << screen.width() << " " << screen.height();
     // WidgetBox* wdgt_box = new WidgetBox(&screen);
@@ -80,7 +87,7 @@ int main( )
     // auto wndStart = new WindowStart(&screen);
     // wndStart->draw();
 
-    std::cin>>x;
+    // std::cin>>x;
 
     // delete wdgt_box;
 
@@ -92,19 +99,6 @@ int main( )
      * 
      * 2)
      * CUILabel* lb = new CUILabel(wdgt_box, msg_label, 10, 30, true, true);
-     * 
-     * ----------------------------------------------------------------------------------
-     * 
-     * for ( auto& wdgt : wdgt_box.children() )
-     * {
-     *      wdgt->draw(); //OK
-     * }
-     * 
-     * for ( auto& wdgt : lb )
-     * {
-     *      wdgt->draw(); //WRONG!!!
-     * }
-     * 
      * 
      */
     

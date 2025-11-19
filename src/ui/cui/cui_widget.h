@@ -48,13 +48,14 @@ namespace cui
     protected:
         template <typename Iter, typename... Args>
         IterWdgt create_iterator(Args&&... args);
-        explicit Widget(Widget* parent, std::unique_ptr<Surface> surface_imp);
+        Widget(Widget* parent, std::unique_ptr<Surface> surface_imp);
 
     public:
         Widget(const Widget& ) = delete;
         Widget(const Widget&&) = delete;
         Widget& operator=(const Widget& ) = delete;
         Widget& operator=(const Widget&&) = delete;
+
         virtual ~Widget();
 
     public:
@@ -62,11 +63,12 @@ namespace cui
 
     public:
         template<typename T, typename... Args>
-        void AddChild     ( Args&&... args     );
+        Widget* AddChild     ( Args&&... args     );
         void AddChild     ( Widget* child      );
         void RemoveChild  ( Widget* child      );
-        void SetParent    ( Widget* new_parent );
-        void RemoveParent ( void );
+        
+        // void SetParent    ( Widget* new_parent );
+        // void RemoveParent ( void );
         Widget* getParent ( void );
 
     public:    
@@ -92,9 +94,10 @@ namespace cui
     }
 
     template <typename T, typename... Args>
-    inline void Widget::AddChild(Args &&...args)
+    inline Widget* Widget::AddChild(Args &&...args)
     {
         Widget* wdgt = new T(this, std::forward<Args>(args)...);
+        return wdgt;
     }
 
     inline bool operator == (const Widget& lhs, const Widget& rhs)

@@ -14,17 +14,42 @@ extern "C"
 }
 
 #include "cui_border.h"
+#include "iterator/list_iter.h"
 
 namespace cui
 {
+
+class widgetBox_impl_ : public Widget
+{
+public:
+    widgetBox_impl_(Widget* parent)
+    :Widget(nullptr, nullptr)
+    {  
+        size_ = {parent->x0(), parent->y0(), parent->width(), parent->height()};
+    }
+
+    void draw  ( void ) override {}
+    void hide  ( void ) override {}
+};
 
 // constexpr int MAX_Widget_IN_MANAGER = 20;
 
 // // constexpr char KEY_ESC = 27; //используется для выхода из работы виджета
 
+cui::WidgetBox::WidgetBox(Widget *parent)
+    :WidgetBox(parent, 0, 0, 100, 100)
+{
+}
+
+WidgetBox::WidgetBox(Widget *parent, int x, int y, int width, int height)
+    : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
+    impl_( new widgetBox_impl_(parent) ),
+    bord_( new CUIBorder( impl_, this->x0(), this->y0(), 100, 100) )
+{
+}
+
 void WidgetBox::OnAddChild(Widget *child)
 {
-    childrens_.remove(nullptr);
     childrens_.emplace_back(child);
 }
 
@@ -32,19 +57,7 @@ void WidgetBox::OnRemoveChild(Widget *child)
 {
     auto it = std::find(childrens_.begin(), childrens_.end(), child);
     if ( it != childrens_.end() ) 
-        (*it) = nullptr;
-}
-
-cui::WidgetBox::WidgetBox(Widget *parent)
-    :WidgetBox(parent, 0, 0, parent->width(), parent->height())
-{
-}
-
-WidgetBox::WidgetBox(Widget *parent, int x, int y, int width, int height)
-    : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
-    bord_(new CUIBorder( parent, parent->x0(), parent->y0(), 100, 100))
-{
-    this->ShowBorder(false);
+        childrens_.erase(it);
 }
 
 void WidgetBox::ShowBorder(bool is_show)
@@ -79,12 +92,14 @@ IterWdgt WidgetBox::CreateIterator(void)
 WidgetBox::~WidgetBox()
 {
     delete bord_;
+    delete impl_;
 
     for ( auto it = childrens_.begin(); it != childrens_.end(); ++it ) 
     {
         delete (*it);
     }
 }
+
 
 // void cui::WidgetBox::add_child(Widget *child)
 // {

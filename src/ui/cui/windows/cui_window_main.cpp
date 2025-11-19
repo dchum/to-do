@@ -37,16 +37,22 @@ R"(                                                           ~
 );
 
 cui::WindowMain::WindowMain(Widget *parent)
-    :Window(parent)
+    :WidgetBox(parent)
 {
-    AddChild<CUISlider>(40, 0, msgSliderHello_, msgSliderText_, 50);
-    AddChild<CUILabel> (msgLabelName,        0,   0, false, false);
+    AddChild<CUISlider> (40, 0, msgSliderHello_, msgSliderText_, 50);
+    AddChild<CUILabel>  (msgLabelName,        0,   0, false, false );
+    // AddChild( BuilderWidgetsCollection<WidgetBox>::Create(this).release() );
+    
+    // auto w = BuilderWidgetsCollection<WidgetBox>::Create(this);
+    // auto l = new CUILabel(w.get(), msgLabelDescription, 0,  50, false, false);
+    // l->draw();
+    // w->draw();
+    // w->AddChild<CUILabel>(msgLabelDescription, 0,  50, false, false);
     AddChild<CUILabel> (msgLabelDescription, 0,  50, false, false);
+    
     AddChild<CUILabel> (msgLabelSupport,     0, 100, false, false);
-
     AddChild<CUIRadio> ( 2, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG, 5);
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS, 5);
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE, 5);
-
-    AddChild<CUILabel> (msgHello_,     50, 70, false, false);
+    AddChild<CUILabel> (msgHello_,  50, 70, false, false);
 }

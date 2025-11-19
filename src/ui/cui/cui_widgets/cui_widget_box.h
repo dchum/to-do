@@ -14,37 +14,14 @@
 
 namespace cui
 {
+    class widgetBox_impl_;
+
     class CUIBorder;
-
-    class ListIterator : public Iterator<Widget>
-    {
-        std::list<Widget*>& list_;
-        std::list<Widget*>::iterator current_;
-        
-    public:
-        ListIterator( std::list<Widget*>& l ) 
-        :Iterator(),
-         list_(l), current_(l.begin())
-        {
-
-        }
-        void Begin() override {
-            current_ = list_.begin();
-        }
-        void Next()  override {
-            ++current_;
-        }
-        bool IsDone() const override {
-            return current_==list_.end();
-        }
-        Widget& CurrentValue() const override {
-            return *(*current_);
-        }
-    };
-    
     class WidgetBox : public Widget
     {
         std::list<Widget*> childrens_;
+        widgetBox_impl_ * impl_;
+
         CUIBorder* bord_;//FIXME - использовать умный указатель
 
         void OnAddChild   (Widget* child) override;
@@ -53,6 +30,7 @@ namespace cui
     public:
         WidgetBox(Widget* parent);
         WidgetBox(Widget* parent, int x, int y, int width, int height);
+        
         ~WidgetBox();
 
         void ShowBorder( bool is_show );

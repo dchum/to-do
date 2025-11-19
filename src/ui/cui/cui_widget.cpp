@@ -12,8 +12,9 @@ namespace cui
         if ( parent_ )
         {
             parent->AddChild(this);
-            size_ = surface_imp_->ComputeSize(parent->size_.width, parent->size_.height);
         }
+        if ( surface_imp_ )
+            size_ = surface_imp_->ComputeSize(parent->size_.width, parent->size_.height);
     }
 
     void Widget::SetParentInternal(Widget *new_parent)
@@ -47,27 +48,27 @@ namespace cui
         child->SetParentInternal(nullptr);
     }
 
-    void Widget::SetParent( Widget *new_parent )
-    {
-        if ( parent_ == new_parent || !new_parent )
-            return;
+    // void Widget::SetParent( Widget *new_parent )
+    // {
+    //     if ( parent_ == new_parent || !new_parent )
+    //         return;
 
-        if ( parent_ )
-        {
-            parent_->RemoveChild(this);
-        }
+    //     if ( parent_ )
+    //     {
+    //         parent_->RemoveChild(this);
+    //     }
         
-        new_parent->AddChild(this);
-    }
+    //     new_parent->AddChild(this);
+    // }
 
-    void Widget::RemoveParent( )
-    {
-        if ( parent_)
-        {
-            parent_->RemoveChild(this);
-            parent_=nullptr;
-        }
-    }
+    // void Widget::RemoveParent( )
+    // {
+    //     if ( parent_)
+    //     {
+    //         parent_->RemoveChild(this);
+    //         parent_=nullptr;
+    //     }
+    // }
 
     Widget *Widget::getParent(void)
     {
@@ -111,7 +112,7 @@ namespace cui
 
     Widget::~Widget()
     {
-        RemoveParent();
+        // RemoveParent();//FIXME - корректно разрывать связи с родителями
     }
 
 }//namespace cui
