@@ -13,7 +13,6 @@
 #include "cui_radio.h"
 #include "cui_window_main.h"
 #include "cui_window_start.h"
-#include "cui_window.h"
 #include "cui_border.h"
 
 using namespace std;
