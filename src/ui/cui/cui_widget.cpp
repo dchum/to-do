@@ -48,28 +48,6 @@ namespace cui
         child->SetParentInternal(nullptr);
     }
 
-    // void Widget::SetParent( Widget *new_parent )
-    // {
-    //     if ( parent_ == new_parent || !new_parent )
-    //         return;
-
-    //     if ( parent_ )
-    //     {
-    //         parent_->RemoveChild(this);
-    //     }
-        
-    //     new_parent->AddChild(this);
-    // }
-
-    // void Widget::RemoveParent( )
-    // {
-    //     if ( parent_)
-    //     {
-    //         parent_->RemoveChild(this);
-    //         parent_=nullptr;
-    //     }
-    // }
-
     Widget *Widget::getParent(void)
     {
         return parent_;
@@ -112,7 +90,8 @@ namespace cui
 
     Widget::~Widget()
     {
-        // RemoveParent();//FIXME - корректно разрывать связи с родителями
+        if ( parent_ )
+            parent_->RemoveChild(this);
     }
 
 }//namespace cui

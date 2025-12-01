@@ -37,6 +37,7 @@ namespace cui
         std::unique_ptr<Surface> surface_imp_;
 
         void SetParentInternal( Widget* new_parent );
+        void RemoveChild  ( Widget* child      );
 
     protected:
         Size size_; //< размеры пространства доступные для отрисовки, физически реальные размеры
@@ -63,12 +64,9 @@ namespace cui
 
     public:
         template<typename T, typename... Args>
-        Widget* AddChild     ( Args&&... args     );
-        void AddChild     ( Widget* child      );
-        void RemoveChild  ( Widget* child      );
+        Widget* AddChild ( Args&&... args     );
+        void    AddChild ( Widget* child      );
         
-        // void SetParent    ( Widget* new_parent );
-        // void RemoveParent ( void );
         Widget* getParent ( void );
 
     public:    
