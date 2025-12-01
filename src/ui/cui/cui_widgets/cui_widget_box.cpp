@@ -91,7 +91,6 @@ IterWdgt WidgetBox::CreateIterator(void)
 
 WidgetBox::~WidgetBox()
 {
-    delete bord_;
     delete impl_;
 
     for ( auto it = childrens_.begin(); it != childrens_.end(); ++it ) 

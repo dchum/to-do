@@ -18,6 +18,11 @@ cui::CUIScreen::CUIScreen( void )
 
 cui::CUIScreen::~CUIScreen()
 { 
+    for ( auto it = children_.begin(); it != children_.end(); it++ )
+    {
+        delete(*it);
+    }
+
     destroyCDKScreen(screen_);
     endCDK();
     ExitProgram (EXIT_SUCCESS);
