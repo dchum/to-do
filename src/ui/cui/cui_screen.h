@@ -7,52 +7,18 @@ extern "C"
 }
 
 #include <memory>
-#include <vector>
+#include <list>
 
 #include "cui_widget.h"
 
 namespace cui
-{
-    class ScreenIter: public Iterator<Widget>
-    {
-        std::vector<Widget*>& vector_;
-        std::vector<Widget*>::iterator current;
-
-    public:
-        ScreenIter(std::vector<Widget*>& v)
-            :Iterator(),
-            vector_(v), current(v.begin())
-        {}
-
-        void Begin() override 
-        {
-            current = vector_.begin();
-        }
-
-        void Next() override 
-        {
-            ++current;
-        }
-
-        bool IsDone() const override
-        {
-            return current == vector_.end();
-        }
-
-        Widget& CurrentValue() const override
-        {
-            return *(*current);
-        }
-        
-        ~ScreenIter(){}
-    };
-    
+{ 
 
     class CUIScreen final : public Widget
     {
     private:
         CDKSCREEN * screen_;
-        std::vector<Widget*> children_;
+        std::list<Widget*> children_;
         
     public:
         CUIScreen( void );

@@ -1,6 +1,8 @@
 #include "cui_screen.h"
 #include <algorithm>
 
+#include "iterator/list_iter.h"
+
 namespace cui
 {
 
@@ -60,7 +62,7 @@ void CUIScreen::hide(void)
 
 IterWdgt CUIScreen::CreateIterator(void)
 {
-    return Widget::create_iterator<ScreenIter>(children_);
+    return Widget::create_iterator<ListIterator>(children_);
 }
 
 CDKSCREEN *CUIScreen::screen()
