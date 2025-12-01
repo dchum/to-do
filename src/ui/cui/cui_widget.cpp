@@ -90,8 +90,6 @@ namespace cui
 
     Widget::~Widget()
     {
-        if ( parent_ )
-            parent_->RemoveChild(this);
     }
 
 }//namespace cui
