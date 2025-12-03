@@ -1,12 +1,14 @@
 #pragma once
 
-#include "cui_widget_box.h"
+#include "cui_window.h"
 
 namespace cui
 {
-    class WindowStart final: public WidgetBox
+    class WindowStart final: public Window
     {
     public:
         WindowStart( Widget * parent = nullptr );
+
+        void init() override;
     };
 }

@@ -14,6 +14,7 @@
 #include "cui_window_main.h"
 #include "cui_window_start.h"
 #include "cui_border.h"
+#include "cui_window_setting.h"
 
 using namespace std;
 using namespace cui;
@@ -22,12 +23,15 @@ using namespace cui;
 int main( )
 {
     CUIScreen screen;
-    auto wndMain = new WindowMain(&screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
+    auto wndMain = new WindowSetting(&screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
     // auto wdgtBox = BuilderWidgetsCollection<WidgetBox>::Create(&screen);
     // wdgtBox->ShowBorder(true);
     // wdgtBox->draw();
+    wndMain->init();
     wndMain->draw();
-    delete wndMain;
+    int x;
+    std::cin >> x;
+    // delete wndMain;
     // screen.draw();
 
     // int i = 0;
@@ -80,8 +84,6 @@ int main( )
 
     // wdgt_box->draw();
 
-    int x;
-    // std::cin >> x;
 
     // auto wndStart = new WindowStart(&screen);
     // wndStart->draw();

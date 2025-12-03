@@ -24,7 +24,12 @@ Press Q to quit)"
 );
 
 cui::WindowStart::WindowStart(Widget *parent)
-    :WidgetBox(parent)
+    :Window(parent)
+{
+
+}
+
+void cui::WindowStart::init()
 {
     AddChild<CUILabel>( msgHello, 35, 30, false, false ) ;
     AddChild<CUILabel>( msgText,  45, 60, false, false ) ;

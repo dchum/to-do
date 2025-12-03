@@ -37,7 +37,12 @@ R"(                                                           ~
 );
 
 cui::WindowMain::WindowMain(Widget *parent)
-    :WidgetBox(parent)
+    :Window(parent)
+{
+
+}
+
+void cui::WindowMain::init()
 {
     AddChild<CUISlider> (40, 0, msgSliderHello_, msgSliderText_, 50);
     AddChild<CUILabel>  (msgLabelName,        0,   0, false, false );
@@ -55,4 +60,6 @@ cui::WindowMain::WindowMain(Widget *parent)
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS, 5);
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE, 5);
     AddChild<CUILabel> (msgHello_,  50, 70, false, false);
+
+    // auto wdgtBox = AddChild<WidgetBox>(0,0, 10, 10);
 }
