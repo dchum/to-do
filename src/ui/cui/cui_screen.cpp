@@ -12,9 +12,9 @@ cui::CUIScreen::CUIScreen( void )
 {   
     initCDKColor ();
     
-    keypad (stdscr, TRUE);
+    keypad (screen_->window, TRUE);
     int w, h;
-    getmaxyx(stdscr, h, w);
+    getmaxyx(screen_->window, h, w);
     Widget::size_ = {0, 0, w, h};
 }
 

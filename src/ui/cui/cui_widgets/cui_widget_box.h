@@ -5,6 +5,7 @@
 
 #include "cui_widget.h"
 #include "cui_screen.h"
+#include "cui_border.h"
 
 #include "cdk/binding.h"
 #include "cdk/curdefs.h"
@@ -16,7 +17,6 @@ namespace cui
 {
     class widgetBox_impl_;
 
-    class CUIBorder;
     class WidgetBox : public Widget
     {
         std::list<Widget*> childrens_;

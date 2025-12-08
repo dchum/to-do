@@ -14,7 +14,7 @@ namespace cui
             parent->AddChild(this);
         }
         if ( surface_imp_ )
-            size_ = surface_imp_->ComputeSize(parent->size_.width, parent->size_.height);
+            size_ = surface_imp_->ComputeSize( parent_->size_ );
     }
 
     void Widget::SetParentInternal(Widget *new_parent)

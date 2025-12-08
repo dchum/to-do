@@ -1,6 +1,5 @@
 #pragma once
 
-#include "cui_widget.h"
 #include "cui_widget_box.h"
 
 namespace cui

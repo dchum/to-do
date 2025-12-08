@@ -13,7 +13,7 @@ x_(x), y_(y), width_(width), height_(height)
 {
 }
 
-cui::Size cui::FixedSurface::ComputeSize(int , int)
+cui::Size cui::FixedSurface::ComputeSize( Size )
 {
     return {std::max<int>(0, x_), std::max<int>(0, y_), std::max<int>(1, width_), std::max<int>(1, height_)};
 }
@@ -24,13 +24,13 @@ rel_x_(x), rel_y_(y), rel_width_(width), rel_height_(height)
 {
 }
 
-cui::Size cui::RelativeSurface::ComputeSize(int parent_width, int parent_height)
+cui::Size cui::RelativeSurface::ComputeSize( Size real_size)
 {
-    width_ = parent_width  * rel_width_ / 100.f;
-    height_= parent_height * rel_height_/ 100.f;
+    width_ = real_size.width  * rel_width_ / 100.f;
+    height_= real_size.height * rel_height_/ 100.f;
 
-    x_ = parent_width  * rel_x_ / 100.f;
-    y_ = parent_height * rel_y_ / 100.f;
+    x_ = real_size.x +  rel_x_ * real_size.width /100.f;
+    y_ = real_size.y +  rel_y_ * real_size.height/100.f;
 
     return {std::max<int>(0, x_), std::max<int>(0, y_), std::max<int>(1, width_), std::max<int>(1, height_)};
 }

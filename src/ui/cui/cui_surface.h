@@ -16,7 +16,7 @@ namespace cui
             Surface( void );
 
         public:
-            virtual Size ComputeSize( int parent_width, int parent_height ) = 0;
+            virtual Size ComputeSize( Size size ) = 0;
 
             virtual ~Surface(){}
     };
@@ -29,7 +29,7 @@ namespace cui
         public:
             FixedSurface( float x, float y, int width, int height );
 
-            Size ComputeSize( int, int ) override;
+            Size ComputeSize( Size size ) override;
     };
 
     class RelativeSurface: public Surface
@@ -41,7 +41,7 @@ namespace cui
         public:
             RelativeSurface( float x, float y, int width, int height );
 
-            Size ComputeSize( int parent_width, int parent_height ) override;
+            Size ComputeSize( Size size ) override;
     };
 
 

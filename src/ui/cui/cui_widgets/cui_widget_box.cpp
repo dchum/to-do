@@ -13,7 +13,6 @@ extern "C"
 #include "cdk_objs.h"
 }
 
-#include "cui_border.h"
 #include "iterator/list_iter.h"
 
 namespace cui
@@ -44,7 +43,7 @@ cui::WidgetBox::WidgetBox(Widget *parent)
 WidgetBox::WidgetBox(Widget *parent, int x, int y, int width, int height)
     : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
     impl_( new widgetBox_impl_(parent) ),
-    bord_( new CUIBorder( impl_, this->x0(), this->y0(), width, height) )
+    bord_( new CUIBorder( impl_, x, y, width, height) )
 {
 }
 

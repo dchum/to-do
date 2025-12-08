@@ -7,7 +7,7 @@
 
 
 cui::CUILabel::CUILabel(Widget* parent, Message &mes, int x, int y, bool box, bool shadow)
-	: Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
+	: Widget(parent, std::make_unique<RelativeSurface>(x, y, 100, 100)),
 	  label_(nullptr)
 {
     label_ = newCDKLabel( parent->screen(), Widget::x0(), Widget::y0(), 
