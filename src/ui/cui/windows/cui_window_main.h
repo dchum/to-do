@@ -10,5 +10,7 @@ namespace cui
         WindowMain( Widget * parent = nullptr );
 
         void init() override;
+
+        void draw() override;
     };
 }

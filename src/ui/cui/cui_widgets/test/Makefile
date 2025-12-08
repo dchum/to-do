@@ -12,12 +12,13 @@ LIBS = -lncurses
 SOURCES_CPP = test.cpp cui_widget_box.cpp lib.cpp cui_lib.cpp\
 	cui_screen.cpp cui_entry.cpp cui_dialog.cpp cui_label.cpp\
 	cui_widget.cpp cui_slider.cpp cui_radio.cpp cui_window_start.cpp\
-	cui_surface.cpp cui_window_main.cpp cui_border.cpp cui_window_setting.cpp
+	cui_surface.cpp cui_window_main.cpp cui_border.cpp cui_window_setting.cpp\
+	cui_application.cpp
 
 HEADERS_CPP = cui_widget_box.h cui_widget.h lib.h cui_lib.h\
 	cui_screen.h cui_entry.h cui_dialog.h cui_label.h cui_slider.h\
 	cui_radio.h cui_window_start.h cui_surface.h cui_window_main.h\
-	cui_border.h cui_window.h cui_window_setting.h
+	cui_border.h cui_window.h cui_window_setting.h cui_application.h
 
 SOURCES_C = cdk_objs.c cdk.c cdkscreen.c draw.c traverse.c binding.c\
 	entry.c cdk_display.c dialog.c label.c slider.c radio.c scroller.c

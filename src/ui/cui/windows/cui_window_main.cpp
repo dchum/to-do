@@ -4,11 +4,11 @@
 #include "cui_slider.h"
 #include "cui_lib.h"
 #include "cui_radio.h"
+#include "cui_entry.h"
 
 cui::Message msgLabelName("</B>Kanban: task traker</B>");
-cui::Message msgLabelSupport("</B>F1<!B>: Help  </B>F2<!B>: New task  </B>F10<!B>: Menu  < >: column  ^v: task  Enter: actions");
-cui::Message msgLabelDescription("-------------------------------------------------------------------------~\
-TASK: (!) something blalblablalblablalblablalbla~blalblablalblablalbla~\
+cui::Message msgLabelSupport("</B>F1<!B>: Add columns  </B>F2<!B>: New task  </B>F10<!B>: Help");
+cui::Message msgLabelDescription("TASK: (!) something blalblablalblablalblablalbla~blalblablalblablalbla~\
 Due: 07.11         Status: DONE~\
 Tags: #build #ci~\
 Description: Set up GitLab CI pipeline for build and tests.");
@@ -44,22 +44,19 @@ cui::WindowMain::WindowMain(Widget *parent)
 
 void cui::WindowMain::init()
 {
-    AddChild<CUISlider> (40, 0, msgSliderHello_, msgSliderText_, 50);
+    AddChild<CUISlider> (40, 3, msgSliderHello_, msgSliderText_, 50);
     AddChild<CUILabel>  (msgLabelName,        0,   0, false, false );
-    // AddChild( BuilderWidgetsCollection<WidgetBox>::Create(this).release() );
+    AddChild<CUILabel> (msgLabelDescription, 3,  50, false, false);
     
-    // auto w = BuilderWidgetsCollection<WidgetBox>::Create(this);
-    // auto l = new CUILabel(w.get(), msgLabelDescription, 0,  50, false, false);
-    // l->draw();
-    // w->draw();
-    // w->AddChild<CUILabel>(msgLabelDescription, 0,  50, false, false);
-    AddChild<CUILabel> (msgLabelDescription, 0,  50, false, false);
-    
-    AddChild<CUILabel> (msgLabelSupport,     0, 100, false, false);
+    AddChild<CUILabel> (msgLabelSupport,     1, 100, false, false);
     AddChild<CUIRadio> ( 2, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG, 5);
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS, 5);
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE, 5);
     AddChild<CUILabel> (msgHello_,  50, 70, false, false);
+    // AddChild<CUIEntry> (msgLabelBACKLOG,  msgLabelBACKLOG, 50, 50, 50);
+}
 
-    // auto wdgtBox = AddChild<WidgetBox>(0,0, 10, 10);
+void cui::WindowMain::draw()
+{
+    WidgetBox::draw();
 }

@@ -2,6 +2,7 @@
 #include <memory>
 #include <signal.h>
 #include <assert.h>
+#include <time.h>
 
 #include "cui_widget_box.h"
 #include "cui_screen.h"
@@ -15,6 +16,7 @@
 #include "cui_window_start.h"
 #include "cui_border.h"
 #include "cui_window_setting.h"
+#include "cui_application.h"
 
 using namespace std;
 using namespace cui;
@@ -22,17 +24,22 @@ using namespace cui;
 
 int main( )
 {
-    CUIScreen screen;
-    auto wndMain = new WindowSetting(&screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
+    CUIApplication app;
+    
+    // CUIScreen screen;
+    // auto wndMain = new WindowMain(&screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
     // auto wdgtBox = BuilderWidgetsCollection<WidgetBox>::Create(&screen);
     // wdgtBox->ShowBorder(true);
     // wdgtBox->draw();
-    wndMain->init();
-    wndMain->draw();
-    int x;
-    std::cin >> x;
-    // delete wndMain;
-    // screen.draw();
+    // wndMain->init();
+
+    app.exec();
+    // while ( 1 )
+    // {
+    //     // screen.draw();
+    //     struct  timespec ts = {0, 1000};
+    //     nanosleep(&ts, NULL);
+    // }
 
     // int i = 0;
     // auto it = wndMain->CreateIterator();
