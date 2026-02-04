@@ -47,5 +47,9 @@ void cui::WindowSetting::init(void)
     wdgtBox->AddChild<CUILabel>( msgRadioName5, 5, 4+73, false, false);
 }
 
+void WindowSetting::input(char key)
+{
+}
+
 }//namespace cui
 

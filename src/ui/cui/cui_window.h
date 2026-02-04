@@ -18,6 +18,8 @@ public:
     virtual ~Window()=default;
     
     virtual void init( void ) = 0;
+
+    virtual void input( char ) {}
 };
 
 }

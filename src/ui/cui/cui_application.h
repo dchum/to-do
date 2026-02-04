@@ -17,8 +17,6 @@ class CUIApplication : public Application
 public:
     CUIApplication ( void );
 
-    virtual ~CUIApplication();
-    
     void exec ( void ) override;
 };
 

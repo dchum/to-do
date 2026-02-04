@@ -11,6 +11,6 @@ namespace cui
 
         void init() override;
 
-        void draw() override;
+        void input( char key ) override;
     };
 }

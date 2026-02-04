@@ -45,7 +45,7 @@ cui::WindowMain::WindowMain(Widget *parent)
 void cui::WindowMain::init()
 {
     AddChild<CUISlider> (40, 3, msgSliderHello_, msgSliderText_, 50);
-    AddChild<CUILabel>  (msgLabelName,        0,   0, false, false );
+    AddChild<CUILabel>  (msgLabelName,        1,   0, false, false );
     AddChild<CUILabel> (msgLabelDescription, 3,  50, false, false);
     
     AddChild<CUILabel> (msgLabelSupport,     1, 100, false, false);
@@ -56,7 +56,7 @@ void cui::WindowMain::init()
     // AddChild<CUIEntry> (msgLabelBACKLOG,  msgLabelBACKLOG, 50, 50, 50);
 }
 
-void cui::WindowMain::draw()
+void cui::WindowMain::input(char key)
 {
-    WidgetBox::draw();
+    
 }

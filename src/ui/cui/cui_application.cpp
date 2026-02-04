@@ -21,11 +21,6 @@ cui::CUIApplication::CUIApplication(void)
     dynamic_cast<WindowMain*>( screen_.AddChild<WindowMain>() )->init();
 }
 
-cui::CUIApplication::~CUIApplication()
-{
-
-}
-
 void cui::CUIApplication::exec(void)
 {
     static int x = 0;
@@ -60,6 +55,13 @@ void cui::CUIApplication::exec(void)
                 default: 
                     break;
             }
+            /* FIXME
+            if ( current_window.input( key ) == ВЫХОД С ОКНА ) {
+                переключение на следующее окно по порядку
+                if ( больше нет окон для индикации )
+                    завершение работы
+            } 
+            */
             // screen_.draw();
         }
         // screen_.refresh();

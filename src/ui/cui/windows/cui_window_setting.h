@@ -10,5 +10,7 @@ namespace cui
         WindowSetting( Widget * parent = nullptr );
 
         void init ( void ) override;
+
+        void input( char key ) override;
     };
 }
