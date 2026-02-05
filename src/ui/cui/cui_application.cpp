@@ -18,21 +18,23 @@ void cui::CUIApplication::add_new_columns(void)
 cui::CUIApplication::CUIApplication(void)
     : Application(), _is_run_(true)
 {
-    dynamic_cast<WindowMain*>( screen_.AddChild<WindowMain>() )->init();
+    // dynamic_cast<WindowMain*>( screen_.AddChild<WindowMain>() )->init();
+    // wdgts.push_back( dynamic_cast<WindowMain*>(screen_.AddChild<WindowMain>()) );
+    windows_.push_back( new WindowMain(&screen_) );
+
+    for ( auto w : windows_)
+        w->init();
+        
+    screen_.refresh();
+    screen_.draw();
 }
 
 void cui::CUIApplication::exec(void)
 {
-    static int x = 0;
-    if ( !x )
-    {
-        screen_.refresh();
-        screen_.draw();
-        x = 1;
-    }
-
-    int key_ = -1;
+    int key_ = 0;
     
+    auto current_window = windows_.front();
+
     while ( _is_run_ )
     {
         if ( (key_=wgetch(screen_.get()->window)) > 0 )
@@ -42,9 +44,9 @@ void cui::CUIApplication::exec(void)
             switch (key_)
             {
                 // case '\r': case '\n': key_ = KEY_ENTER;     break;
-                case '\t':               key_ = KEY_TAB;       break;
+                // case '\t':               key_ = KEY_TAB;       break;
                 // case DELETE:          key_ = KEY_DC;        break;
-                case '\b': case DELETE:  key_ = KEY_BACKSPACE; break;
+                // case '\b': case DELETE:  key_ = KEY_BACKSPACE; break;
                 // case CDK_BEGOFLINE:   key_ = KEY_HOME;      break;
                 // case CDK_ENDOFLINE:   key_ = KEY_END;       break;
                 // case CDK_FORCHAR:     key_ = KEY_RIGHT;     break;
@@ -52,7 +54,9 @@ void cui::CUIApplication::exec(void)
                 // case CDK_NEXT:        key_ = KEY_TAB;       break;
                 // case CDK_PREV:        key_ = KEY_BTAB;      break;
                 case KEY_F1:        add_new_columns();      break;
+                case KEY_ESC:       _is_run_ = false;       break;
                 default: 
+                    current_window->input( key_ );
                     break;
             }
             /* FIXME
@@ -64,7 +68,7 @@ void cui::CUIApplication::exec(void)
             */
             // screen_.draw();
         }
-        // screen_.refresh();
+
         struct  timespec ts = {0, 1000};
         nanosleep(&ts, NULL);
     }

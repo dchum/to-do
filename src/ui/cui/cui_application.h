@@ -1,8 +1,11 @@
 #pragma once
 
+#include <vector>
+
 #include "ui_application.h"
 
 #include "cui_screen.h"
+#include "cui_window.h"
 
 namespace cui
 {
@@ -13,6 +16,7 @@ class CUIApplication : public Application
     bool _is_run_;
 
     void add_new_columns( void );
+    std::vector<Window*> windows_;
 
 public:
     CUIApplication ( void );
