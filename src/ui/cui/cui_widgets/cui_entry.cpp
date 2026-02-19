@@ -4,12 +4,15 @@
 
 #include "cui_screen.h"
 
-cui::CUIEntry::CUIEntry(Widget *parent, Message &title, Message &label, int x, int y, int fieldWidth, bool box, bool shadow)
-    :Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
+cui::CUIEntry::CUIEntry(CUIScreen& screen, Message &title, Message &label, int x, int y, int fieldWidth, bool box, bool shadow)
+    :Widget(screen, std::make_unique<RelativeSurface>(x, y, screen.width(), screen.height())),
     entry_(nullptr)
 {
-    entry_ = newCDKEntry (parent->screen(), Widget::x0(), Widget::y0(),
-            *(title.get_msg()), *(label.get_msg()),
+    auto mes = CStringArray( title );
+    auto lb  = CStringArray( label );
+
+    entry_ = newCDKEntry (screen.get(), Widget::x0(), Widget::y0(),
+            *(mes.data()), *( lb.data() ),
             A_NORMAL,   // сообщает, как будет выглядеть введенный символ 
             '.',        // разделитель
             vMIXED,     // вроде как отвечает за диапазон представимых символов
@@ -35,6 +38,16 @@ void cui::CUIEntry::draw(void)
 void cui::CUIEntry::hide(void)
 {
     eraseCDKEntry(entry_);
+}
+
+char* cui::CUIEntry::handle( uint* input )
+{
+    return activateCDKEntry (entry_, input);
+}
+
+void cui::CUIEntry::move( Alignment x, Alignment y )
+{
+    moveCDKEntry( entry_, static_cast<int>( x ), static_cast<int>( y ) , false, true );
 }
 
 // void cui::CUIEntry::activate(unsigned int* key)

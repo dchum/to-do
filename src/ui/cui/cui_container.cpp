@@ -1,11 +1,7 @@
-#include "cui_widget_box.h"
+#include "cui_container.h"
 
 #include <algorithm>
 
-// #include "cui_lib.h"
-// #include "cui_label.h"
-// #include "cui_dialog.h"
-// #include "cui_entry.h"
 
 extern "C"
 {
@@ -14,84 +10,72 @@ extern "C"
 }
 
 #include "iterator/list_iter.h"
-
+#include <iostream>
 namespace cui
 {
 
-class widgetBox_impl_ : public Widget
-{
-public:
-    widgetBox_impl_(Widget* parent)
-    :Widget(nullptr, nullptr)
-    {  
-        size_ = {parent->x0(), parent->y0(), parent->width(), parent->height()};
-    }
-
-    void draw  ( void ) override {}
-    void hide  ( void ) override {}
-};
-
-// constexpr int MAX_Widget_IN_MANAGER = 20;
-
-// // constexpr char KEY_ESC = 27; //используется для выхода из работы виджета
-
-cui::WidgetBox::WidgetBox(Widget *parent)
-    :WidgetBox(parent, 0, 0, 100, 100)
+cui::Container::Container( CUIScreen& screen )
+    :Container(screen, 0, 0, 100, 100)
 {
 }
 
-WidgetBox::WidgetBox(Widget *parent, int x, int y, int width, int height)
-    : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
-    impl_( new widgetBox_impl_(parent) ),
-    bord_( new CUIBorder( impl_, x, y, width, height) )
+Container::Container( CUIScreen& screen, int x, int y, int width, int height)
+    : Widget(screen, std::make_unique<RelativeSurface>(x, y, width, height)),
+    bord_( new CUIBorder( screen, x, y, width, height ) )
 {
+
 }
 
-void WidgetBox::OnAddChild(Widget *child)
+void Container::AddChild( Widget * child )
 {
+    if ( !child ) return;
+   
     childrens_.emplace_back(child);
 }
 
-void WidgetBox::OnRemoveChild(Widget *child)
+void Container::RemoveChild(Widget * child)
 {
+    if ( !child ) return;
+    
     auto it = std::find(childrens_.begin(), childrens_.end(), child);
     if ( it != childrens_.end() ) 
         childrens_.erase(it);
 }
 
-void WidgetBox::ShowBorder(bool is_show)
+void Container::ShowBorder(bool is_show)
 {
     bord_->ShowBorder(is_show);
 }
 
-void WidgetBox::ShowBorder(bool top, bool left, bool right, bool bottom)
+void Container::ShowBorder(bool top, bool left, bool right, bool bottom)
 {
     bord_->ShowBorder(top, left, right, bottom);
 }
 
-void cui::WidgetBox::draw(void)
+void cui::Container::draw(void)
 {
     bord_->draw();
     for(const auto wdgt : childrens_)
+    {
         wdgt->draw();
+    }
 }
 
-void WidgetBox::hide(void)
+void Container::hide(void)
 {
     bord_->hide();
     for(const auto wdgt : childrens_)
         wdgt->hide();
 }
 
-IterWdgt WidgetBox::CreateIterator(void)
+IterWdgt Container::CreateIterator(void)
 {
-    return Widget::create_iterator<ListIterator>(childrens_);
+    return create_iterator<ListIterator>(childrens_);
 }
 
-WidgetBox::~WidgetBox()
+Container::~Container()
 {
     delete bord_;
-    delete impl_;
 
     for ( auto it = childrens_.begin(); it != childrens_.end(); ++it ) 
     {
@@ -100,22 +84,22 @@ WidgetBox::~WidgetBox()
 }
 
 
-// void cui::WidgetBox::add_child(Widget *child)
+// void cui::Container::add_child(Widget *child)
 // {
 //     children_.push_back(child);
 // }
 
-// it_wdgt WidgetBox::children(void)
+// it_wdgt Container::children(void)
 // {
 //     return children_.begin();
 // }
 
-// Widget *cui::WidgetBox::screen(void)
+// Widget *cui::Container::screen(void)
 // {
 //     return screen_;
 // }
 
-// void WidgetBox::correct_activ_Widget(void)
+// void Container::correct_activ_Widget(void)
 // {
 //     if ( children_.empty() ) 
 //         return;
@@ -137,7 +121,7 @@ WidgetBox::~WidgetBox()
 //     }
 // }
 
-// int cui::WidgetBox::key_input(void)
+// int cui::Container::key_input(void)
 // {
 //     int ret = 1;
         
@@ -153,7 +137,7 @@ WidgetBox::~WidgetBox()
 // }
 
 
-// void WidgetBox::activate(unsigned int*)
+// void Container::activate(unsigned int*)
 // {
 //     is_run_ = true;
 
@@ -206,7 +190,7 @@ WidgetBox::~WidgetBox()
 //     }
 // }
 
-// void cui::WidgetBox::set_next_Widget(void)
+// void cui::Container::set_next_Widget(void)
 // {
 //     activ_Widget_++;
 

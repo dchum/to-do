@@ -6,12 +6,13 @@
 #include "cui_screen.h"
 
 
-cui::CUILabel::CUILabel(Widget* parent, Message &mes, int x, int y, bool box, bool shadow)
-	: Widget(parent, std::make_unique<RelativeSurface>(x, y, 100, 100)),
+cui::CUILabel::CUILabel(CUIScreen& screen, Message &mes, int x, int y, bool box, bool shadow)
+	: Widget(screen, std::make_unique<RelativeSurface>(x, y, 100, 100)),
 	  label_(nullptr)
 {
-    label_ = newCDKLabel( parent->screen(), Widget::x0(), Widget::y0(), 
-                          (CDK_CSTRING2) mes.get_msg(), mes.count(), 
+    auto data = CStringArray( mes );
+    label_ = newCDKLabel( screen.get(), Widget::x0(), Widget::y0(), 
+                          (CDK_CSTRING2) data.data(), data.size(), 
                           box, shadow );
 
     if ( label_ == nullptr)

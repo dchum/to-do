@@ -7,10 +7,10 @@ namespace cui
     class WindowSetting final: public Window
     {
     public:
-        WindowSetting( Widget * parent = nullptr );
+        WindowSetting( CUIScreen& screen );
 
         void init ( void ) override;
 
-        void input( char key ) override;
+        // char* handle( uint* ) override;
     };
 }

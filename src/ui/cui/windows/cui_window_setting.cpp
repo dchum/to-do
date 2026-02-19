@@ -21,24 +21,24 @@ cui::Message msgRadioName4("how estimates: ");
 cui::Message msgRadioName5("Startup screen: ");
 
 
-cui::WindowSetting::WindowSetting(Widget *parent)
-    : Window(parent)
+cui::WindowSetting::WindowSetting(CUIScreen& screen)
+    : Window(screen)
 {
 }
 
 void cui::WindowSetting::init(void)
 {
     this->ShowBorder(false);
-    auto wdgtBox = dynamic_cast<WidgetBox*> (AddChild<WidgetBox>(0, 0, 50, 50) );
+    auto wdgtBox = dynamic_cast<Container*> (AddChild<Container>(0, 0, 50, 50) );
     wdgtBox->ShowBorder(true);
     
     wdgtBox->AddChild<CUILabel>( msgHelp, 0, 100, true, false );
 
-    wdgtBox->AddChild<CUIRadio>( 25, 2+2,  5, 20, msgRadio1Title, msgRadio1, msgRadio1.count(),  '#', NONE, A_REVERSE, 1,   false);
-    wdgtBox->AddChild<CUIRadio>( 25, 15+7,  10, 20, msgRadio1Title, msgRadio2, msgRadio2.count(),  '#', NONE, A_REVERSE, 1, false);
-    wdgtBox->AddChild<CUIRadio>( 25, 34+6, 5, 23, msgRadio1Title, msgRadio3, msgRadio3.count(),  '#', NONE, A_REVERSE, 1,   false);
-    wdgtBox->AddChild<CUIRadio>( 25, 55+6, 5, 19, msgRadio1Title, msgRadio4, msgRadio4.count(),  '#', NONE, A_REVERSE, 1,   false);
-    wdgtBox->AddChild<CUIRadio>( 25, 73+6, 10, 20, msgRadio1Title, msgRadio5, msgRadio5.count(),  '#', NONE, A_REVERSE, 1,   false);
+    wdgtBox->AddChild<CUIRadio>( 25, 2+2,  5, 20, msgRadio1Title, msgRadio1, '#', NONE, A_REVERSE, 1,   false);
+    wdgtBox->AddChild<CUIRadio>( 25, 15+7,  10, 20, msgRadio1Title, msgRadio2, '#', NONE, A_REVERSE, 1, false);
+    wdgtBox->AddChild<CUIRadio>( 25, 34+6, 5, 23, msgRadio1Title, msgRadio3, '#', NONE, A_REVERSE, 1,   false);
+    wdgtBox->AddChild<CUIRadio>( 25, 55+6, 5, 19, msgRadio1Title, msgRadio4, '#', NONE, A_REVERSE, 1,   false);
+    wdgtBox->AddChild<CUIRadio>( 25, 73+6, 10, 20, msgRadio1Title, msgRadio5, '#', NONE, A_REVERSE, 1,   false);
 
     wdgtBox->AddChild<CUILabel>( msgRadioName1, 5, 4+4,  false, false);
     wdgtBox->AddChild<CUILabel>( msgRadioName2, 5, 4+15, false, false);
@@ -47,9 +47,9 @@ void cui::WindowSetting::init(void)
     wdgtBox->AddChild<CUILabel>( msgRadioName5, 5, 4+73, false, false);
 }
 
-void WindowSetting::input(char key)
-{
-}
+// char* WindowSetting::handle( uint* key)
+// {
+// }
 
 }//namespace cui
 

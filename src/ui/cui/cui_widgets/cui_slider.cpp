@@ -7,12 +7,15 @@
 namespace cui
 {
 
-cui::CUISlider::CUISlider(Widget *parent, int x, int y, Message &title, Message &label, int fieldWidth, unsigned int fillerCharacter, int currentValue, int lowValue, int highValue, int increment, int fastIncrement, bool box, bool shadow)
-    : Widget(parent, std::make_unique<RelativeSurface>(x, y, fieldWidth, parent->height())),
+cui::CUISlider::CUISlider(CUIScreen& screen, int x, int y, Message &title, Message &label, int fieldWidth, unsigned int fillerCharacter, int currentValue, int lowValue, int highValue, int increment, int fastIncrement, bool box, bool shadow)
+    : Widget(screen, std::make_unique<RelativeSurface>(x, y, fieldWidth, screen.height())),
     slider_(nullptr)
 {
-    slider_ = newCDKSlider(parent->screen(), Widget::x0(), Widget::y0(), 
-                            *title.get_msg(), *label.get_msg(), 
+    auto tl = CStringArray( title );
+    auto lb = CStringArray( label );
+
+    slider_ = newCDKSlider(screen.get(), Widget::x0(), Widget::y0(), 
+                            *tl.data(), *lb.data(), 
                             fillerCharacter,  Widget::width(), 
                             currentValue, lowValue, highValue, 
                             increment, fastIncrement, box, shadow);

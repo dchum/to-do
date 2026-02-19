@@ -4,7 +4,6 @@
 #include <assert.h>
 #include <time.h>
 
-#include "cui_widget_box.h"
 #include "cui_screen.h"
 #include "cui_lib.h"
 #include "cui_label.h"
@@ -12,28 +11,87 @@
 #include "cui_slider.h"
 #include "cui_dialog.h"
 #include "cui_radio.h"
-#include "cui_window_main.h"
+#include "cui_container.h"
 #include "cui_window_start.h"
 #include "cui_border.h"
 #include "cui_window_setting.h"
 #include "cui_application.h"
+#include "cui_window_main.h"
+#include "add_new_task.h"
 
 using namespace std;
 using namespace cui;
 
+static Message buttn("</B/2>Ok^</B16>Cancel^</B16>Hello");
+static Message msg_button("The dialog ");
 
 int main( )
 {
     CUIApplication app;
-    
+    app.exec();
     // CUIScreen screen;
-    // auto wndMain = new WindowMain(&screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
-    // auto wdgtBox = BuilderWidgetsCollection<WidgetBox>::Create(&screen);
+
+    // InputTextCommand command(screen);
+    // CUILabel* lb_   = new CUILabel (&screen, msg_button, 0, 50, true, true); 
+    // CUIEntry* entr2  = new CUIEntry (lb_, msg_button, buttn, 50, 0, 40);
+    // command.Execute();
+    // auto m = msg_button.tokens();
+    // auto s = CStringArray( msg_button );
+    // for ( auto & i : m )
+    //     std::cout << i << std:: endl;
+
+    // int x = s.size();
+    // for ( int i = 0; i < x ; i++){
+    //     std::cerr << s.data()[i];
+    // }
+
+
+    // CUIEntry* entr  = new CUIEntry (screen, msg_button, buttn, 50, 50, 40);
+    // entr->draw();
+    // auto wndMain = new WindowMain(screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
+    // auto wdgtBox = BuilderWidgetsCollection<Container>::Create(&screen);
     // wdgtBox->ShowBorder(true);
     // wdgtBox->draw();
+    // refreshCDKScreen ( screen.get() );
     // wndMain->init();
+    // wndMain->draw();
 
-    app.exec();
+    // wgetch( screen.get()->window);
+    // screen.draw();
+
+    // pause();
+
+    // CDKSCREEN *cdkscreen = NULL;
+    // CDKENTRY *directory  = NULL;
+    // const char *title    = "<C>Enter a\n<C>directory name.";
+    // const char *label    = "</U/5>Directory:<!U!5>";
+    // char *info;
+    // const char *mesg[10];
+    // char temp[256];
+
+    // cdkscreen = initCDKScreen (NULL);
+
+    // /* Start CDK colors. */
+    // initCDKColor ();
+
+    // /* Create the entry field widget. */
+    // directory = newCDKEntry (cdkscreen,
+    //             'X',
+    //             'Y',
+    //             title, label, A_NORMAL, '.', vMIXED,
+    //             40, 10, 256,
+    //             'N',
+    //             'S');
+
+    // info = activateCDKEntry (directory, NULL);
+
+    // CUIEntry* entr2  = new CUIEntry (&screen, msg_button, buttn, 0, 10, 40);
+    // screen.draw();
+    // screen.hide();
+    // std::cin.clear();
+    // std::cin >> x;
+    // pause();
+    // app.exec();
     // while ( 1 )
     // {
     //     // screen.draw();
@@ -53,7 +111,7 @@ int main( )
     // }
 
     // std::cout << screen.width() << " " << screen.height();
-    // WidgetBox* wdgt_box = new WidgetBox(&screen);
+    // Container* wdgt_box = new Container(&screen);
 
     // Message msg_label("<C></U>Dialog Widget Demo^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^<C>The dialog widget allows the programmer to create^<C>a popup dialog box with buttons." 
     //                 "The dialog box^<C>can contain </B/32>colours<!B!32>, </R>character attributes<!R>^<R>and even be right justified.^"
@@ -94,8 +152,6 @@ int main( )
 
     // auto wndStart = new WindowStart(&screen);
     // wndStart->draw();
-
-    // std::cin>>x;
 
     // delete wdgt_box;
 

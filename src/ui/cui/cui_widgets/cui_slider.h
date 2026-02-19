@@ -19,7 +19,7 @@ namespace cui
     public:
         CUISlider() = delete;
 
-        CUISlider(Widget* parent, int x, int y, 
+        CUISlider(CUIScreen& screen, int x, int y, 
                 Message& title, Message& label,
                 int fieldWidth,
                 unsigned int fillerCharacter = A_REVERSE | COLOR_PAIR (29) | ' ',

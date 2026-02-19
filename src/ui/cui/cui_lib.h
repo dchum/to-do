@@ -1,28 +1,59 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
+extern "C"
+{
+    #include "cdk.h"
+}
 
 namespace cui
 {
 
+enum class Alignment
+{
+    Left	   = LEFT,
+    Right	   = RIGHT,
+    Center	   = CENTER,
+    // Top	       = TOP,
+    // Bottom	   = BOTTOM,
+    // Horizontal = HORIZONTAL,
+    // Vertical   = VERTICAL,
+    // Full	   = FULL,
+};
+
+
 class Message
 {
-    char** ptr_str_;
-    int count_;
+    std::vector< std::string > strings_;
 
 public:
     Message() = delete;
     Message(const std::string& str); //сам разобьет на массив и посчитает кол-во строк
     
-    Message& operator=(const Message&) = delete;
+    ~Message() {};
 
-    ~Message();
+    const std::vector< std::string >& tokens ( void )const noexcept { return strings_; };
 
-    char** get_msg( void ) {   return ptr_str_;   }
+    int count( void ) const noexcept {    return strings_.size();    };
+    int count( void ) noexcept       {    return strings_.size();    };
+};
 
-    int count( void ) const noexcept {    return count_;    };
-    int count( void ) noexcept       {    return count_;    };
+class CStringArray {
+    std::vector<char*> pointers;
+
+public:
+    explicit CStringArray(const Message& );
+    
+    ~CStringArray(){
+        for ( auto& p : pointers )
+            delete[] p;
+    }
+
+    char** data() { return pointers.data(); }
+
+    size_t size() const { return pointers.size(); }
 };
 
 }

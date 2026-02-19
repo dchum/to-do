@@ -17,14 +17,14 @@ R"(                                                           ~
 
 
 cui::Message msgText(
-R"(Task Management, Fast. ^ ^
-Press ENTER to start ^
-Press S for Settings ^
+R"(Task Management, Fast. ~
+Press ENTER to start ~
+Press S for Settings ~
 Press Q to quit)"
 );
 
-cui::WindowStart::WindowStart(Widget *parent)
-    :Window(parent)
+cui::WindowStart::WindowStart(CUIScreen& screen)
+    :Window(screen)
 {
 
 }
@@ -35,6 +35,7 @@ void cui::WindowStart::init()
     AddChild<CUILabel>( msgText,  45, 60, false, false ) ;
 }
 
-void cui::WindowStart::input(char key)
-{
-}
+// char* cui::WindowStart::handle( uint* key)
+// {
+
+// }

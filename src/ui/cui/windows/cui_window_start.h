@@ -7,10 +7,10 @@ namespace cui
     class WindowStart final: public Window
     {
     public:
-        WindowStart( Widget * parent = nullptr );
+        WindowStart( CUIScreen& screen );
 
         void init() override;
 
-        void input( char key ) override;
+        // char* handle( uint* ) override;
     };
 }

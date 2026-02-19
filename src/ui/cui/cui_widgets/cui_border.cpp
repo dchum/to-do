@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-cui::CUIBorder::CUIBorder(Widget *parent, int x, int y, int width, int height, bool top, bool left, bool right, bool bottom_)
-    : Widget(parent, std::make_unique<RelativeSurface>(x, y, width, height)),
+cui::CUIBorder::CUIBorder(CUIScreen& screen, int x, int y, int width, int height, bool top, bool left, bool right, bool bottom_)
+    : Widget(screen, std::make_unique<RelativeSurface>(x, y, width, height)),
       win_(nullptr),
       top_(top), left_(left), right_(right), bottom_(bottom_)
 {

@@ -19,7 +19,7 @@ namespace cui
 
     public:
         CUIEntry() = delete;
-        CUIEntry(Widget* parent, Message& title, Message& label, int x, int y, int fieldWidth,
+        CUIEntry(CUIScreen& screen, Message& title, Message& label, int x, int y, int fieldWidth,
                 bool box = true, bool shadow = true);
         
         CUIEntry (const CUIEntry&) = delete;
@@ -30,6 +30,8 @@ namespace cui
     public:
         void draw  ( void ) override;
         void hide  ( void ) override;
+        char* handle( uint* ) override;
+        void move( Alignment x, Alignment y ) override;
         // void activate( unsigned int* ) override;
     };
 

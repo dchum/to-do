@@ -13,3 +13,4 @@ Makefile*
 *.internal
 *.yaml
 /build
+core*

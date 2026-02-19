@@ -15,7 +15,6 @@ class CUIApplication : public Application
     cui::CUIScreen screen_;
     bool _is_run_;
 
-    void add_new_columns( void );
     std::vector<Window*> windows_;
 
 public:

@@ -19,7 +19,7 @@ namespace cui
 
     public:
         CUIDialog() = delete;
-        CUIDialog( Widget* parent, 
+        CUIDialog( CUIScreen& screen, 
                    Message& mes,
                    Message& buttons,
                    int x, int y,

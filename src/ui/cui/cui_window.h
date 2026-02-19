@@ -1,25 +1,28 @@
 #pragma once
 
-#include "cui_widget_box.h"
+#include <functional>
+#include <vector>
+#include <map>
+
+#include "cui_container.h"
 
 namespace cui
 {
 
-class Window: public WidgetBox
+class Window: public Container
 {
-protected:
-    Window ( Widget* parent = nullptr )
-    :WidgetBox(parent)
+public:
+
+    Window ( CUIScreen& screen )
+    :Container(screen)
     {
 
     }
-    
-public:
+
     virtual ~Window()=default;
     
     virtual void init( void ) = 0;
 
-    virtual void input( char ) {}
-};
+};//cui_window
 
 }

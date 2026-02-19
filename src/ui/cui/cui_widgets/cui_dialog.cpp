@@ -9,13 +9,16 @@ extern "C"
 #include <stdexcept>
 
 
-cui::CUIDialog::CUIDialog(Widget* parent, Message& message, Message& buttons, int x, int y, bool box, bool separator, bool shadow)
-	: Widget(parent, std::make_unique<RelativeSurface>(x, y, parent->width(), parent->height())),
+cui::CUIDialog::CUIDialog(CUIScreen& screen, Message& message, Message& buttons, int x, int y, bool box, bool separator, bool shadow)
+	: Widget(screen, std::make_unique<RelativeSurface>(x, y, screen.width(), screen.height())),
 	  dialog_(nullptr)
 {
-	dialog_ = newCDKDialog (parent->screen(), Widget::x0(), Widget::y0(),
-				(CDK_CSTRING2) message.get_msg(), message.count(),
-				(CDK_CSTRING2) buttons.get_msg(), buttons.count(),
+	auto mes = CStringArray( message );
+	auto bt  = CStringArray( buttons );
+
+	dialog_ = newCDKDialog (screen.get(), Widget::x0(), Widget::y0(),
+				(CDK_CSTRING2) mes.data(), mes.size(),
+				(CDK_CSTRING2) bt.data(), bt.size(),
 				COLOR_PAIR (buttons.count()) | A_REVERSE,
 				box       ? 1:0,
 				separator ? 1:0,

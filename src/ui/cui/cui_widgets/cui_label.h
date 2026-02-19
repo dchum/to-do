@@ -1,5 +1,6 @@
 #pragma once
 
+
 extern "C" 
 { 
 #include "cdk/cdkscreen.h"//FIXME - все ли эти заголовочные файлы нужны
@@ -20,7 +21,7 @@ namespace cui
 
     public:
         CUILabel() = delete;
-        CUILabel(Widget* parent, Message& mes, int x, int y, 
+        CUILabel(CUIScreen& screen, Message& mes, int x, int y, 
                 bool box = true, bool shadow = true);
 
         CUILabel ( const CUILabel& ) = delete;

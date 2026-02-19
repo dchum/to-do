@@ -6,11 +6,12 @@ namespace cui
 {
     class WindowMain final: public Window
     {
+        Widget* target;
     public:
-        WindowMain( Widget * parent = nullptr );
+        WindowMain( CUIScreen& screen );
 
         void init() override;
 
-        void input( char key ) override;
+        char* handle( uint* ) override;
     };
 }

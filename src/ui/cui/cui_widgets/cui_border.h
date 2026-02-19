@@ -13,7 +13,7 @@ namespace cui
 
     public:
         CUIBorder() = delete;
-        CUIBorder(Widget* parent, int x, int y, int width, int height,
+        CUIBorder(CUIScreen& screen, int x, int y, int width, int height,
                 bool top = true, bool left = true, bool right = true, bool down = true);
 
         CUIBorder ( const CUIBorder& ) = delete;

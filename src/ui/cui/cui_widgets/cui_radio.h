@@ -18,9 +18,9 @@ namespace cui
 
     public:
         CUIRadio() = delete;
-        CUIRadio( Widget* parent, int x, int y,
+        CUIRadio( CUIScreen& screen, int x, int y,
                 int width, int height, 
-                Message& title, Message& list, int count_list,//FIXME - избавиться от параметра count_list
+                Message& title, Message& list,
                 int choiceCharacter = '#', 
                 int spos = NONE,
                 int highlight = A_REVERSE, int defaultItem = 1,
@@ -34,7 +34,7 @@ namespace cui
     public:
         void draw   ( void ) override;
         void hide   ( void ) override;
-        // void activate( unsigned int* ) override;
+        char* handle( uint* ) override;
     };
 
 }//namespace cui
