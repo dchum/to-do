@@ -33,9 +33,7 @@ cui::CStringArray::CStringArray(const Message& message) {
         auto buf = std::make_unique<char[]>(s.size()+1);
         std::strcpy(buf.get(), s.c_str());
 
-        std::cerr << buf.get() << std::endl;
         pointers.push_back(buf.release());
-        std::cerr << buf.get() << std::endl;
     }
 
     for (const auto& s : pointers) {

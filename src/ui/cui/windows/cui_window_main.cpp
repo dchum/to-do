@@ -56,7 +56,7 @@ void cui::WindowMain::init()
     target = AddChild<CUIRadio> ( 2, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG,' ');
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS,' ');
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE,' ');
-    AddChild<CUILabel> (msgHello_,  50, 70, false, false);
+    AddChild<CUILabel> (msgHello_,  40, 70, false, false);
     // assert( typeid( CUIEntry) == typeid( target ) );
     // widgets.push_back( AddChild<CUIEntry> (msgLabelBACKLOG,  msgLabelBACKLOG, 50, 50, 50) );
 }
