@@ -223,9 +223,7 @@ static void fixCursorPosition (CDKRADIO *widget)
 int activateCDKRadio (CDKRADIO *radio, chtype *actions)
 {
    /* Draw the radio list. */
-   int x = ObjOf (radio)->hasFocus;
    drawCDKRadio (radio, ObjOf (radio)->box);
-   x = ObjOf (radio)->hasFocus;
    if (actions == NULL)
    {
       boolean functionKey;
@@ -470,15 +468,12 @@ static void _drawCDKRadio (CDKOBJS *object, boolean Box GCC_UNUSED)
 {
    int x = object->hasFocus;
    CDKRADIO *radio = (CDKRADIO *)object;
-   x = object->hasFocus;
    /* Do we need to draw in the shadow??? */
    if (radio->shadowWin != NULL)
    {
       drawShadow (radio->shadowWin);
    }
-   x = object->hasFocus;
    drawCdkTitle (radio->win, object);
-   x = object->hasFocus;
    /* Draw in the radio list. */
    drawCDKRadioList (radio, ObjOf (radio)->box);
 }

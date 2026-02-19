@@ -39,7 +39,3 @@ void cui::CUIRadio::hide(void)
     eraseCDKRadio(radio_);
 }
 
-char *cui::CUIRadio::handle(uint *)
-{
-    
-}

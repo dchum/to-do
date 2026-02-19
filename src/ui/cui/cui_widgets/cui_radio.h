@@ -34,7 +34,6 @@ namespace cui
     public:
         void draw   ( void ) override;
         void hide   ( void ) override;
-        char* handle( uint* ) override;
     };
 
 }//namespace cui
