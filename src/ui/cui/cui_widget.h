@@ -12,14 +12,9 @@
 #pragma once
 
 #include <memory>
-#include <tuple>
 
-extern "C"
-{
-#include "cdkscreen.h"
-// #include "cdk_test.h"
-}
-
+#include "cui_lib.h"
+#include "cui_screen.h"
 #include "cui_iterator.h"
 #include "cui_surface.h"
 
@@ -27,85 +22,48 @@ extern "C"
 namespace cui
 {   
 
-    class Widget
-    {
-        Widget*  parent_;
+class Widget
+{
+    static inline ssize_t new_id;
+    const ssize_t id_;
+    
+    std::unique_ptr<Surface> surface_imp_;
+    
+protected:
+    CUIScreen& screen_;
+    Size size_; //< размеры пространства доступные для отрисовки, физически реальные размеры
 
-        static inline ssize_t new_id;
-        const ssize_t id_;
+protected:
+    Widget( CUIScreen& screen, std::unique_ptr<Surface> surface_imp );
 
-        std::unique_ptr<Surface> surface_imp_;
+public:
+    virtual ~Widget();
 
-        void SetParentInternal( Widget* new_parent );
-        void RemoveChild  ( Widget* child      );
+public:
+    int x0( void );
+    int y0( void );
+    virtual int  width ( void ) const noexcept;
+    virtual int  height( void ) const noexcept;
+    virtual void draw  ( void ) = 0;
+    virtual void hide  ( void ) = 0;
+    virtual char* handle( uint* ) { return nullptr; }
+    virtual void move( Alignment, Alignment ) {}
 
-    protected:
-        Size size_; //< размеры пространства доступные для отрисовки, физически реальные размеры
+public:
+    ssize_t get_id( void ) const noexcept;
 
-    protected:
-        virtual void OnAddChild   (Widget* child);
-        virtual void OnRemoveChild(Widget* child);
+    CUIScreen& get_screen() { return screen_; }
+};//class Widget
 
-    protected:
-        template <typename Iter, typename... Args>
-        IterWdgt create_iterator(Args&&... args);
-        Widget(Widget* parent, std::unique_ptr<Surface> surface_imp);
 
-    public:
-        Widget(const Widget& ) = delete;
-        Widget(const Widget&&) = delete;
-        Widget& operator=(const Widget& ) = delete;
-        Widget& operator=(const Widget&&) = delete;
+inline bool operator == (const Widget& lhs, const Widget& rhs)
+{
+    return lhs.get_id() == rhs.get_id();
+}
 
-        virtual ~Widget();
-
-    public:
-        virtual IterWdgt CreateIterator( void );
-
-    public:
-        template<typename T, typename... Args>
-        Widget* AddChild ( Args&&... args     );
-        void    AddChild ( Widget* child      );
-        
-        Widget* getParent ( void );
-
-    public:    
-        virtual CDKSCREEN * screen();
-
-    public:
-        int x0( void );
-        int y0( void );
-        virtual int  width ( void ) const noexcept;
-        virtual int  height( void ) const noexcept;
-        virtual void draw  ( void ) = 0;
-        virtual void hide  ( void ) = 0;
-        // virtual void update( void ) = 0;
-
-    public:
-        ssize_t get_id( void ) const noexcept;
-    };//class Widget
-
-    template <typename Iter, typename... Args>
-    inline IterWdgt Widget::create_iterator(Args&&... args)
-    {
-        return std::make_unique<Iter>( std::forward<Args>(args)... );
-    }
-
-    template <typename T, typename... Args>
-    inline Widget* Widget::AddChild(Args &&...args)
-    {
-        Widget* wdgt = new T(this, std::forward<Args>(args)...);
-        return wdgt;
-    }
-
-    inline bool operator == (const Widget& lhs, const Widget& rhs)
-    {
-        return lhs.get_id() == rhs.get_id();
-    }
-
-    inline bool operator < (const Widget& lhs, const Widget& rhs)
-    {
-        return lhs.get_id() < rhs.get_id();
-    }
+inline bool operator < (const Widget& lhs, const Widget& rhs)
+{
+    return lhs.get_id() < rhs.get_id();
+}
 
 } // namespace cui

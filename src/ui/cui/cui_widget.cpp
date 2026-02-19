@@ -4,68 +4,18 @@
 
 namespace cui
 {
-    Widget::Widget(Widget* parent, std::unique_ptr<Surface> surface_imp)
-    : parent_(parent),
-      id_(new_id++), 
-      surface_imp_(std::move(surface_imp))
+    Widget::Widget( CUIScreen& screen, std::unique_ptr<Surface> surface_imp )
+    : id_(new_id++),
+      surface_imp_( std::move(surface_imp) ),
+      screen_(screen)
     {
-        if ( parent_ )
-        {
-            parent->AddChild(this);
-        }
         if ( surface_imp_ )
-            size_ = surface_imp_->ComputeSize( parent_->size_ );
-    }
-
-    void Widget::SetParentInternal(Widget *new_parent)
-    {
-        parent_ = new_parent;
-    }
-
-    void Widget::OnAddChild(Widget *child)
-    {
-        (void)child;
-    }
-
-    void Widget::OnRemoveChild(Widget *child)
-    {
-        (void)child;
-    }
-
-    void Widget::AddChild( Widget * child )
-    {
-        if ( !child ) return;
-        if ( child->parent_)
-            child->parent_->RemoveChild(child);
-        OnAddChild(child);
-        child->SetParentInternal(this);
-    }
-
-    void Widget::RemoveChild(Widget * child)
-    {
-        if ( !child ) return;
-        OnRemoveChild(child);
-        child->SetParentInternal(nullptr);
-    }
-
-    Widget *Widget::getParent(void)
-    {
-        return parent_;
-    }
-
-    CDKSCREEN *Widget::screen()
-    {
-        return ( parent_ ? parent_->screen() : nullptr );
+            size_ = surface_imp_->ComputeSize( {0, 0, screen.width(), screen.height()} );
     }
 
     ssize_t Widget::get_id(void) const noexcept
     {
         return id_;
-    }
-
-    IterWdgt Widget::CreateIterator( )
-    {   
-        return create_iterator<NULLIterWdgt>();
     }
 
     int Widget::x0(void)

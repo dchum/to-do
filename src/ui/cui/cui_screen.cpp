@@ -7,80 +7,29 @@ namespace cui
 {
 
 cui::CUIScreen::CUIScreen( void )
-    :Widget(nullptr, nullptr),
-    screen_( initCDKScreen (nullptr) )
+    :screen_( initCDKScreen (nullptr) )
 {   
     initCDKColor ();
     
     keypad (screen_->window, TRUE);
-    int w, h;
-    getmaxyx(screen_->window, h, w);
-    Widget::size_ = {0, 0, w, h};
+    curs_set(0);
 }
 
 cui::CUIScreen::~CUIScreen()
 { 
-    for ( auto it = children_.begin(); it != children_.end(); it++ )
-    {
-        delete(*it);
-    }
-
-    destroyCDKScreen(screen_);
+    destroyCDKScreen(screen_.release());
     endCDK();
     ExitProgram (EXIT_SUCCESS);
 }
 
-void cui::CUIScreen::refresh(void)
-{
-    refreshCDKScreen(screen_);
-}
-
 int CUIScreen::width(void) const noexcept
 {
-    int w, h;
-    getmaxyx(stdscr, h, w);
-    return w;
+    return getmaxx(stdscr);
 }
 
 int CUIScreen::height(void) const noexcept
 {
-    int w, h;
-    getmaxyx(stdscr, h, w);
-    return h;
+    return getmaxy(stdscr);
 }
-
-void CUIScreen::draw(void)
-{
-    for ( const auto wdgt: children_ )
-        wdgt->draw();
-}
-
-void CUIScreen::hide(void)
-{
-    eraseCDKScreen(screen_);
-}
-
-IterWdgt CUIScreen::CreateIterator(void)
-{
-    return Widget::create_iterator<ListIterator>(children_);
-}
-
-CDKSCREEN *CUIScreen::screen()
-{
-    return screen_;
-}
-
-void CUIScreen::OnAddChild(Widget *child)
-{
-    children_.emplace_back(child);
-}
-
-void CUIScreen::OnRemoveChild(Widget *child)
-{
-    auto it = std::find(children_.begin(), children_.end(), child);
-    if ( it != children_.end() ) 
-        children_.erase(it);
-}
-
 
 }
