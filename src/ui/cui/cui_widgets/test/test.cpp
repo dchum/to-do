@@ -10,7 +10,7 @@
 #include "cui_entry.h"
 #include "cui_slider.h"
 #include "cui_dialog.h"
-#include "cui_radio.h"
+#include "cui_scroll_list.h"
 #include "cui_container.h"
 #include "cui_window_start.h"
 #include "cui_border.h"
@@ -27,9 +27,18 @@ static Message msg_button("The dialog ");
 
 int main( )
 {
-    CUIApplication app;
-    app.exec();
-    // CUIScreen screen;
+    // CUIApplication app;
+    // app.exec();
+    CUIScreen screen;
+    Message scrlist(" ScrollList");
+    Message list("A~B~C");
+
+    CUIScrollList rd ( screen, 0, 0, Alignment::Right, 20, 20, scrlist, list, true, A_REVERSE, true, false );
+    rd.draw();
+    sleep(4);
+    rd.addItem("hello");
+    rd.draw();
+    pause();
 
     // InputTextCommand command(screen);
     // CUILabel* lb_   = new CUILabel (&screen, msg_button, 0, 50, true, true); 
@@ -137,7 +146,7 @@ int main( )
     // CUIDialog * dl  = new CUIDialog(wdgt_box, msg_button, buttn, 0, 50);
     // CUIEntry* entr  = new CUIEntry (wdgt_box, msg_button, buttn, 0, 50, 40);
     // CUISlider* sldr = new CUISlider(wdgt_box, 0, 50, sld_mes, sld_lb, 50);
-    // CUIRadio* rd    = new CUIRadio (wdgt_box, 0, 50, 20, 20, radio, list, list.count(), 35, 9001, 262144, 1, 1, 0);
+    // CUIScrollList* rd    = new CUIScrollList (wdgt_box, 0, 50, 20, 20, radio, list, list.count(), 35, 9001, 262144, 1, 1, 0);
 
     // wdgt_box->AddChild<CUILabel>( msg_label, 50, 15, false, false ) ;
     // wdgt_box->AddChild<CUILabel>( msg_label, 70, 30, false, false ) ;

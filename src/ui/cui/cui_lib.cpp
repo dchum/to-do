@@ -35,8 +35,4 @@ cui::CStringArray::CStringArray(const Message& message) {
 
         pointers.push_back(buf.release());
     }
-
-    for (const auto& s : pointers) {
-        std::cerr << s << std::endl;
-    }
 }
