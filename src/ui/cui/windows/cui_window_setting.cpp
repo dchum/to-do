@@ -28,7 +28,7 @@ cui::WindowSetting::WindowSetting(CUIScreen& screen)
 
 void cui::WindowSetting::init(void)
 {
-    this->ShowBorder(false);
+    ShowBorder(false);
     auto wdgtBox = dynamic_cast<Container*> (AddChild<Container>(0, 0, 50, 50) );
     wdgtBox->ShowBorder(true);
     

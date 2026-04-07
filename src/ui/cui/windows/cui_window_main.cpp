@@ -33,7 +33,7 @@ cui::Command& cui::WindowMain::get_command_binding(unsigned int key)
 void cui::WindowMain::init_bindigs_keys(void)
 {    
     bindings_['?'] = std::make_unique<cui::NoneCommand>(  );
-    bindings_['n'] = std::make_unique<cui::AddNewTask>( this->screen() );
+    bindings_['n'] = std::make_unique<cui::AddNewTask>( screen() );
 }
 
 void cui::WindowMain::init()

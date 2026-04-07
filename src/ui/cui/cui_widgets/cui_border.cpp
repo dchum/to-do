@@ -42,9 +42,9 @@ void cui::CUIBorder::hide(void)
 void cui::CUIBorder::ShowBorder(bool is_show)
 {
     if ( is_show )
-        this->ShowBorder(true, true, true, true);
+        ShowBorder(true, true, true, true);
     else
-        this->ShowBorder(false, false, false, false);
+        ShowBorder(false, false, false, false);
 }
 
 void cui::CUIBorder::ShowBorder(bool top, bool left, bool right, bool bottom)

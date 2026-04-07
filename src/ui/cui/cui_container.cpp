@@ -148,9 +148,9 @@ Container::~Container()
     
 //     correct_activ_Widget();
 
-//     this->screen_->refresh();
+//     screen_->refresh();
 
-//     this->draw();
+//     draw();
 
 //     int tmp_key = 0;    
 //     while(is_run_)
@@ -177,7 +177,7 @@ Container::~Container()
 //             }
 //             if ( key_input() )
 //             {   
-//                 // this->screen_->refresh(); //FIXME - заменить на обновление конкретного виджета
+//                 // screen_->refresh(); //FIXME - заменить на обновление конкретного виджета
 //                 if ( (*activ_Widget_)->active_ )
 //                 {
 //                     (*activ_Widget_)->activate(&key_);
