@@ -11,6 +11,6 @@ namespace cui
 
         void init() override;
 
-        // char* handle( uint* ) override;
+        // char* handle_input( uint* ) override;
     };
 }

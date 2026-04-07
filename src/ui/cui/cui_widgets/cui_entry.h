@@ -30,7 +30,7 @@ namespace cui
     public:
         void draw  ( void ) override;
         void hide  ( void ) override;
-        char* handle( uint* ) override;
+        char* handle_input( uint* ) override;
         void move( Alignment x, Alignment y ) override;
         // void activate( unsigned int* ) override;
     };

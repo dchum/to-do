@@ -22,9 +22,6 @@ class Container : public Widget
 
     CUIBorder* bord_;//FIXME - использовать умный указатель
 
-    // void OnAddChild   (Widget* child);
-    // void OnRemoveChild(Widget* child);
-
     template <typename Iter, typename... Args>
     inline IterWdgt create_iterator(Args&&... args)
     {

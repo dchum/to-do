@@ -18,6 +18,8 @@
 #include "cui_iterator.h"
 #include "cui_surface.h"
 
+
+
 //FIXME - упорядочить функции: какие просто наследуем, какие обязательно переопределяем
 namespace cui
 {   
@@ -46,7 +48,8 @@ public:
     virtual int  height( void ) const noexcept;
     virtual void draw  ( void ) = 0;
     virtual void hide  ( void ) = 0;
-    virtual char* handle( uint* ) { return nullptr; }
+    virtual char* handle_input( uint* ) { return nullptr; }
+    virtual void  handle_input( uint  ) {  }
     virtual void move( Alignment, Alignment ) {}
 
 public:

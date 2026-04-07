@@ -10,7 +10,7 @@ cui::CUIEntry::CUIEntry(CUIScreen& screen, Message &title, Message &label, int x
 {
     auto mes = CStringArray( title );
     auto lb  = CStringArray( label );
-
+    
     entry_ = newCDKEntry (screen.get(), Widget::x0(), Widget::y0(),
             *(mes.data()), *( lb.data() ),
             A_NORMAL,   // сообщает, как будет выглядеть введенный символ 
@@ -40,7 +40,7 @@ void cui::CUIEntry::hide(void)
     eraseCDKEntry(entry_);
 }
 
-char* cui::CUIEntry::handle( uint* input )
+char* cui::CUIEntry::handle_input( uint* input )
 {
     return activateCDKEntry (entry_, input);
 }
@@ -49,9 +49,3 @@ void cui::CUIEntry::move( Alignment x, Alignment y )
 {
     moveCDKEntry( entry_, static_cast<int>( x ), static_cast<int>( y ) , false, true );
 }
-
-// void cui::CUIEntry::activate(unsigned int* key)
-// {
-//     entry_->obj.hasFocus = 1;
-//     activateCDKEntry (entry_, key);
-// }

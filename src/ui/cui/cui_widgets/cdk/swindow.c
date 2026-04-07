@@ -910,7 +910,7 @@ static void _eraseCDKSwindow (CDKOBJS *object)
 }
 
 /*
- * This exec's a command and redirects the output to the scrolling window.
+ * This handleInput's a command and redirects the output to the scrolling window.
  */
 int execCDKSwindow (CDKSWINDOW *swindow, const char *command, int insertPos)
 {

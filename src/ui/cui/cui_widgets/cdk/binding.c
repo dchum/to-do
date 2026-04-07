@@ -221,7 +221,7 @@ int getcCDKWidget (CDKOBJS *obj)
 
 /*
  * Use this function rather than getcCDKWidget(), since we can extend it to
- * handle wide-characters.
+ * handle_input wide-characters.
  */
 int getchCDKWidget (CDKOBJS *obj, boolean *functionKey)
 {

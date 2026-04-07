@@ -1,16 +1,16 @@
 #pragma once
 
-namespace cui 
+#include "message_ui2core.h"
+
+namespace cui
 {
 
-class Command{
+class Command
+{
 public:
-    virtual ~Command(){}
+    virtual ~Command() = default;
 
-    virtual void Execute( void ) = 0;
-
-protected:
-    Command(){}
+    virtual CommandMessage Execute( void ) = 0;
 };
 
 }//namespace cui

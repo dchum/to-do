@@ -6,6 +6,6 @@
 namespace cui
 {
 
-
+int main( void );
 
 }

@@ -1,14 +1,13 @@
 #include <iostream>
 
-#include "pos_lib.h"
-#include "ui_main.h"
+#include "app/application.h"
 
 
 int main()
 {
-    // pos_main(); //< инициализация кадров из pos_main.h
+    app::Application app;
 
-    ui::ui_main();  //< инициализация UI из ui_main.h, отдельный поток
+    app.exec();
 
     return 0;
 }

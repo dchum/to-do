@@ -26,39 +26,3 @@ typedef struct
         month,
         year;
 } data_t;
-
-/*Дни недели*/
-enum class WEEKDAY
-{
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    SUNDAY,
-    NUM_DAY_WEEK
-};
-
-/*Классы обслуживания для канбан-доски, по-умолчанию*/
-enum SERVISE_CLASS
-{
-    BACKLOG,     /*Запланировано*/
-    IN_PROGRESS, /*В процессе*/
-    DONE         /*Готово*/
-};
-
-typedef struct Rect
-{
-    int xc_, yc_,
-        w_,  h_;
-}Rect;
-
-enum class UI_type
-{
-    GUI = 0,
-    CUI,
-    NUM_UI,
-};
-
-std::ostream &operator<<(std::ostream &os, const std::vector<std::string>& vector_to_string);

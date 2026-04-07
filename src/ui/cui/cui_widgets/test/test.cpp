@@ -15,7 +15,7 @@
 #include "cui_window_start.h"
 #include "cui_border.h"
 #include "cui_window_setting.h"
-#include "cui_application.h"
+#include "cui_core.h"
 #include "cui_window_main.h"
 #include "add_new_task.h"
 
@@ -27,18 +27,18 @@ static Message msg_button("The dialog ");
 
 int main( )
 {
-    // CUIApplication app;
-    // app.exec();
+    // CUICore app;
+    // app.handleInput();
     CUIScreen screen;
-    Message scrlist(" ScrollList");
-    Message list("A~B~C");
+    // Message scrlist(" ScrollList");
+    // Message list("A~B~C");
 
-    CUIScrollList rd ( screen, 0, 0, Alignment::Right, 20, 20, scrlist, list, true, A_REVERSE, true, false );
-    rd.draw();
-    sleep(4);
-    rd.addItem("hello");
-    rd.draw();
-    pause();
+    // CUIScrollList rd ( screen, 0, 0, Alignment::Left, 20, 20, scrlist, list, true, A_REVERSE, true, false );
+    // rd.draw();
+    // sleep(4);
+    // rd.addItem("hello");
+    // rd.draw();
+    // pause();
 
     // InputTextCommand command(screen);
     // CUILabel* lb_   = new CUILabel (&screen, msg_button, 0, 50, true, true); 
@@ -55,8 +55,8 @@ int main( )
     // }
 
 
-    // CUIEntry* entr  = new CUIEntry (screen, msg_button, buttn, 50, 50, 40);
-    // entr->draw();
+    CUIEntry* entr  = new CUIEntry (screen, msg_button, buttn, 50, 50, 40);
+    entr->draw();
     // auto wndMain = new WindowMain(screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
     // auto wdgtBox = BuilderWidgetsCollection<Container>::Create(&screen);
     // wdgtBox->ShowBorder(true);
@@ -68,7 +68,7 @@ int main( )
     // wgetch( screen.get()->window);
     // screen.draw();
 
-    // pause();
+    pause();
 
     // CDKSCREEN *cdkscreen = NULL;
     // CDKENTRY *directory  = NULL;
@@ -100,7 +100,7 @@ int main( )
     // std::cin.clear();
     // std::cin >> x;
     // pause();
-    // app.exec();
+    // app.handleInput();
     // while ( 1 )
     // {
     //     // screen.draw();

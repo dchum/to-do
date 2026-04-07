@@ -1,19 +1,39 @@
 #include "cui_window_main.h"
 
+#include <iostream>
+#include <cassert>
+
 #include "cui_label.h"
 #include "cui_slider.h"
 #include "cui_lib.h"
 #include "cui_radio.h"
 #include "cui_entry.h"
+
 #include "add_new_task.h"
+#include "none_command.h"
 
-#include <iostream>
-#include <cassert>
-
-cui::WindowMain::WindowMain(CUIScreen& screen)
-    :Window(screen)
+cui::WindowMain::WindowMain(CUIScreen &screen)
+    : Window(screen)
 {
 
+}
+
+cui::Command& cui::WindowMain::get_command_binding(unsigned int key)
+{
+    for (const auto& [k, ptr] : bindings_) {
+        assert(ptr != nullptr && "unique_ptr is null!");
+    }
+    
+    if ( bindings_.count( key )>0 )
+        return *(bindings_.at( key ));
+    else
+        return *(bindings_.at( '?' ));
+}
+
+void cui::WindowMain::init_bindigs_keys(void)
+{    
+    bindings_['?'] = std::make_unique<cui::NoneCommand>(  );
+    bindings_['n'] = std::make_unique<cui::AddNewTask>( this->screen() );
 }
 
 void cui::WindowMain::init()
@@ -49,24 +69,22 @@ void cui::WindowMain::init()
                                             To-Do CLI v0.1.0 | Created by: @dchum )"//FIXME - вынести номер версии в отдельный макрос
     );
     
-    AddChild<CUISlider> (40, 3, msgSliderHello_, msgSliderText_, 50);
-    AddChild<CUILabel>  (msgLabelName,        1,   0, false, false );
+    AddChild<CUISlider>(40, 3, msgSliderHello_, msgSliderText_, 50);
+    AddChild<CUILabel> (msgLabelName,        1,   0, false, false );
     AddChild<CUILabel> (msgLabelDescription, 3,  50, false, false);
     AddChild<CUILabel> (msgLabelSupport,     1, 100, false, false);
-    target = AddChild<CUIRadio> ( 2, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG,' ');
+    AddChild<CUIRadio> ( 2, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG,' ');
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS,' ');
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE,' ');
     AddChild<CUILabel> (msgHello_,  40, 70, false, false);
-    // assert( typeid( CUIEntry) == typeid( target ) );
-    // widgets.push_back( AddChild<CUIEntry> (msgLabelBACKLOG,  msgLabelBACKLOG, 50, 50, 50) );
+
+    init_bindigs_keys();
 }
 
-char* cui::WindowMain::handle( uint* key )
-{
-    if ( key  ) {
-        AddNewTask command( *target, "<C></B>Enter a\n<C></B>directory name.", " " ); 
-        command.Execute();
-    }
 
-    return nullptr;
+CommandMessage cui::WindowMain::update( uint key )
+{
+    auto& cmd = get_command_binding( key );
+
+    return cmd.Execute();
 }

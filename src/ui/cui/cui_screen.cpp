@@ -9,7 +9,7 @@ namespace cui
 cui::CUIScreen::CUIScreen( void )
     :screen_( initCDKScreen (nullptr) )
 {   
-    initCDKColor ();
+    // initCDKColor ();
     
     keypad (screen_->window, TRUE);
     curs_set(0);

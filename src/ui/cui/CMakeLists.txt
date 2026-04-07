@@ -1,30 +1,32 @@
-cmake_minimum_required(VERSION 3.22)
-project(console_ui)
-
-include_directories(
-    cui_widgets
-    ../../lib
-    ..
-)
-
-file(GLOB LIB_INCLUDES
-     "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
-     "${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
-)
-
-file(GLOB LIB_SOURCES
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.c"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.cc"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
-)
-
+message("#### BUILD cui ####")
 
 add_subdirectory(cui_widgets)
 
-add_library(console_ui ${LIB_SOURCES} ${LIB_INCLUDES})
+add_library(cui
+    cui_container.cpp
+    cui_core.cpp
+    cui_lib.cpp
+    cui_main.cpp
+    cui_screen.cpp
+    cui_surface.cpp
+    cui_widget.cpp
 
-target_link_libraries(console_ui PUBLIC cui_widgets)
-# target_link_libraries(console_ui PUBLIC global_lib)
-# target_link_libraries(console_ui PUBLIC cdk_lib)
+    windows/cui_window_main.cpp
+    windows/cui_window_setting.cpp
+    windows/cui_window_start.cpp
 
-target_include_directories(console_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+    commands/add_new_task.cpp
+)
+
+target_include_directories(cui 
+    PRIVATE cui_widgets
+    PRIVATE windows
+    PRIVATE commands
+    PRIVATE iterator
+)
+
+target_link_libraries(cui PUBLIC cui_widgets)
+target_link_libraries(cui PUBLIC cdk_lib)
+target_link_libraries(cui PUBLIC common)
+
+target_include_directories(cui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
