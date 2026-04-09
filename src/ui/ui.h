@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cui/cui_core.h"
+#include "cui/cui_main.h"
 
 namespace ui
 {

@@ -10,7 +10,7 @@ class Application
     bool is_running_ = true;
     unsigned int input_;
 
-    ui::Ui ui_core_;
+    ui::Ui      ui_core_;
     core::Model model_core_;
 
 public:

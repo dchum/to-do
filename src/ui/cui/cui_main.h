@@ -1,11 +1,25 @@
 #pragma once
 
-#include "cui_lib.h"
-#include "cui_widget.h"
+#include <vector>
+
+
+#include "cui_screen.h"
+#include "cui_window.h"
 
 namespace cui
 {
 
-int main( void );
+class CUICore
+{
+    cui::CUIScreen screen_;
+    bool _is_run_;
+
+    std::vector<Window*> windows_;
+
+public:
+    CUICore ( void );
+
+    CommandMessage handleInput( void );
+};
 
 }

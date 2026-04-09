@@ -15,7 +15,7 @@
 #include "cui_window_start.h"
 #include "cui_border.h"
 #include "cui_window_setting.h"
-#include "cui_core.h"
+#include "cui_main.h"
 #include "cui_window_main.h"
 #include "add_new_task.h"
 

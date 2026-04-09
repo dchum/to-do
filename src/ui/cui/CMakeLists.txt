@@ -4,7 +4,6 @@ add_subdirectory(cui_widgets)
 
 add_library(cui
     cui_container.cpp
-    cui_core.cpp
     cui_lib.cpp
     cui_main.cpp
     cui_screen.cpp

@@ -10,7 +10,7 @@ namespace cui
 class NoneCommand : public Command {
 public:
     NoneCommand(  ) : Command() {}
-    CommandMessage Execute() override {};
+    CommandMessage Execute() override { return CommandMessage(); };
 };
 
 }//namespace cui

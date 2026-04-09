@@ -13,5 +13,4 @@ Makefile*
 *.internal
 *.yaml
 /build
-core*
 to-do.md

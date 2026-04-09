@@ -6,7 +6,7 @@
 
 struct CmdStart
 {
-
+    std::string name_board;
 };
 
 struct CmdAddNewTask
@@ -15,7 +15,7 @@ struct CmdAddNewTask
 };
 
 
-using PayloadeUi2Core = std::variant< CmdStart, CmdAddNewTask >;
+using PayloadeUi2Core = std::variant< std::monostate, CmdStart, CmdAddNewTask >;
 
 
 struct CommandMessage{
