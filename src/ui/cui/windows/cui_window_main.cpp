@@ -88,3 +88,8 @@ CommandMessage cui::WindowMain::update( uint key )
 
     return cmd.Execute();
 }
+
+void cui::WindowMain::process(EventMessage event)
+{
+    
+}

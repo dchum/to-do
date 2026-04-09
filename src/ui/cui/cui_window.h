@@ -24,6 +24,7 @@ public:
     virtual void init( void ) = 0;
 
     virtual CommandMessage update( uint ) = 0;
+    virtual void process( EventMessage event ) = 0;
 };//cui_window
 
 }

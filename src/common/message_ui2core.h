@@ -15,10 +15,10 @@ struct CmdAddNewTask
 };
 
 
-using PayloadeUi2Core = std::variant< std::monostate, CmdStart, CmdAddNewTask >;
+using PayloadUi2Core = std::variant< std::monostate, CmdStart, CmdAddNewTask >;
 
 
 struct CommandMessage{
     uint64_t id;
-    PayloadeUi2Core payload;
+    PayloadUi2Core payload;
 };

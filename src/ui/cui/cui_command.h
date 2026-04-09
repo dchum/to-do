@@ -1,6 +1,7 @@
 #pragma once
 
 #include "message_ui2core.h"
+#include "message_core2ui.h"
 
 namespace cui
 {

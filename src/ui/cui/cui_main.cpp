@@ -49,7 +49,7 @@ CommandMessage cui::CUICore::handleInput( void )
             // case CDK_PREV:        key_ = KEY_BTAB;      break;
             case KEY_ESC:       _is_run_ = false;       break;
             case 14: 
-                ret = current_window->update( key_ );
+                ret = current_window->update( key_ );//FIXME - переименовать метод update
                 current_window->draw();
                 break;
         }
@@ -58,4 +58,10 @@ CommandMessage cui::CUICore::handleInput( void )
     return ret;
     // current_window->handle_input( reinterpret_cast<uint*>(&key_) );
     // current_window->draw();
+}
+
+void cui::CUICore::update(EventMessage event)
+{
+    auto current_window = windows_.front();
+    current_window->process(event);
 }

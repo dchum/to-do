@@ -1,22 +1,17 @@
 #include "model.h"
 
-core::Model::Model()
-    :board_(),
-    executor_(board_)
+std::optional<EventMessage> core::Model::ModelExecutor::handle(const CmdStart &cmd, Board &board)
 {
+    board.Init( cmd.name_board );
 }
 
-void core::Model::update(CommandMessage cmd)
+std::optional<EventMessage> core::Model::ModelExecutor::handle(const CmdAddNewTask &cmd, Board &board)
 {
-    std::visit( executor_, cmd.payload );
+    board.AddNewTask( cmd.name_new_task );
+    return EventMessage{ .id = 0, .payload = EventAddNewTask{.name_new_task = cmd.name_new_task} };
 }
 
-void core::Model::ModelExecutor::operator()(const CmdStart &cmd)
+EventMessage core::Model::process(void)
 {
-    board_.Init( cmd.name_board );
-}
-
-void core::Model::ModelExecutor::operator()(const CmdAddNewTask &cmd)
-{
-    board_.AddNewTask( cmd.name_new_task );
+    return events_[0];
 }

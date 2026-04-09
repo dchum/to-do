@@ -20,6 +20,7 @@ public:
     CUICore ( void );
 
     CommandMessage handleInput( void );
+    void update( EventMessage event );
 };
 
 }

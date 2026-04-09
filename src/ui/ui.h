@@ -10,6 +10,7 @@ class Ui{
 
 public:
     CommandMessage HandleInput( );
+    void update( EventMessage event );
 };//class Ui
 
 }//namespace ui

@@ -9,6 +9,7 @@ void app::Application::exec()
 
 
         model_core_.update( command );
+        ui_core_.update( model_core_.process() );
 
         // if ( command )
         //     queue_model.push_back( command );

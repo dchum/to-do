@@ -22,6 +22,7 @@ public:
     void init() override;
 
     CommandMessage update( uint key ) override;
+    virtual void process( EventMessage event ) override;
 };
 
 }
