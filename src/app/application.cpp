@@ -1,9 +1,8 @@
 #include "application.h"
 
 void app::Application::init()
-    :ui_core_(queue_ui2core)
 {
-
+    ui_core_.init(queue_ui2core);
 }
 
 void app::Application::exec()

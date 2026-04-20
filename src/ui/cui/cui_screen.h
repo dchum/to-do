@@ -4,6 +4,8 @@ extern "C"
 {
 #include "cdkscreen.h"
 #include "cdk_test.h"
+#include "cdk/binding.h"
+#include "cdk/cdk_objs.h"
 }
 
 #include <memory>

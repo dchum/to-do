@@ -30,11 +30,11 @@ cui::WindowMain::WindowMain(CUIScreen &screen)
 //     //     return *(bindings_.at( '?' ));
 // }
 
-void cui::WindowMain::init_bindigs_keys(void)
-{    
-    // bindings_[CTRL('n')] = std::make_unique<cui::AddNewTask>( screen() );
-    // bindings_[CTRL('n')] = Command<CommandId::CreateTask>;
-}
+// void cui::WindowMain::init_bindigs_keys(void)
+// {    
+//     // bindings_[CTRL('n')] = std::make_unique<cui::AddNewTask>( screen() );
+//     // bindings_[CTRL('n')] = Command<CommandId::CreateTask>;
+// }
 
 void cui::WindowMain::init()
 {
@@ -65,23 +65,19 @@ void cui::WindowMain::init()
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS,' ');
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE,' ');
 
-    init_bindigs_keys();
+    RegisterCommand(CTRL('n'), CommandId::CreateTask);
 }
 
 std::optional<CommandMessage> cui::WindowMain::update(int key)
 {
-    // CommandId id = CommandId::CreateTask;
-    // if ( key < 0)
-    //     id = CommandId::CreateTask;
-    // else
-    //     id = CommandId::DeleteTask;
-
-    // Command<id> cmd;//FIXME - добавить диспетчер
+    auto cmd = GetCommandId( key );
     
-    cmd.Execute( screen(), queue_message_ui_ );
+    cui::commands::Execute( cmd, screen(), queue_message_ui_ );
 
     if ( queue_message_ui_.size() )
-        return CommandMessage{.command = CommandId::CreateTask,
-                              .header  = {.id = 0, .version = 1},
-                              .message = queue_message_ui_.front() };
+        return CommandMessage::Create( HeaderMessage{.id = 0, .version = 1}, 
+                                       cmd, 
+                                       queue_message_ui_.front() );
+    else
+        return std::nullopt;
 }

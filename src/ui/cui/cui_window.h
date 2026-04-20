@@ -4,11 +4,12 @@
 #include <vector>
 #include <map>
 #include <queue>
+#include <optional>
+#include <cassert>
 
 #include "cui_container.h"
-#include "cui_command.h"
 
-#include "common/ui_to_core/commandmessage.h"
+#include "commandmessage.h"
 
 namespace cui
 {
@@ -16,13 +17,20 @@ namespace cui
 
 class Window: public Container
 {
-protected:
-    std::map<CommandId, Command<CommandId> > cmd_action_;
-    std::map<int, CommandId> cmd_input_;
+    std::map<int, CommandId> key_bindings;
 
+protected:
     std::queue<MessagePayload> queue_message_ui_;
 
-    virtual cui::Command& get_command_binding(unsigned int key) = 0;
+    void RegisterCommand( int key, CommandId cmd_id ) noexcept {
+        assert( key_bindings.count(key) == 0 );
+        key_bindings[key] = cmd_id;
+    }
+
+    CommandId GetCommandId( int key ) const {
+        assert( key_bindings.size()>0 );
+        return key_bindings.at( key );
+    }
 
 public:
 

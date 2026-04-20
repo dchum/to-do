@@ -5,7 +5,7 @@
 #include "ui.h"
 #include "model.h"
 
-#include "common/ui_to_core/commandmessage.h"
+#include "commandmessage.h"
 
 namespace app{
 
@@ -17,7 +17,7 @@ class Application
     ui::Ui      ui_core_;
     core::Model model_core_;
 
-    std::queue<AnyCommandMessage> queue_ui2core;
+    std::queue<CommandMessage> queue_ui2core;
 
 public:
     void init( );

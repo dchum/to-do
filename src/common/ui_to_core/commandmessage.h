@@ -10,6 +10,8 @@
  */
 #pragma once
 
+#include <variant>
+
 #include "commands_id.h"
 #include "header_message.h"
 
@@ -21,4 +23,8 @@ struct CommandMessage {
     HeaderMessage  header;
     CommandId      command;
     MessagePayload message;
+
+    static CommandMessage Create( HeaderMessage header, CommandId command, MessagePayload message ) {
+        return CommandMessage{.header = header, .command = command, .message = message};
+    }
 };

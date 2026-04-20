@@ -9,11 +9,10 @@ namespace ui
 
 class Ui final {
     cui::CUICore cui_core_;
-    std::queue<AnyCommandMessage>& queue_ui2core_;
+    std::queue<CommandMessage>* queue_ui2core_ = nullptr;
     
 public:
-    Ui (std::queue<AnyCommandMessage>& queue_ui2core)
-    :queue_ui2core_(queue_ui2core) { }
+    void init ( std::queue<CommandMessage>& queue_ui2core );
 
     void HandleInput( );
 };//class Ui

@@ -2,18 +2,19 @@ CXX:= g++
 
 CFLAGS = -Wall -g -Wno-unused-variable
 CXXFLAGS = -Wall -g -Wno-unused-variable -std=c++17 -Wall -Wextra
+INCS_common = -I../../../../common/ -I../../../../common/ui_to_core/ -I../../../../common/ui_to_core/payloads
 INCS_cdk = -I../cdk
 INCS_lib = -I../../../../lib
 INCS_ui = -I../../../ -I../../windows/ -I../../commands/
 INCS_cui = -I../..
-INCS = -I.. -I. ${INCS_cdk} ${INCS_lib} ${INCS_ui} ${INCS_cui}
+INCS = -I.. -I. ${INCS_cdk} ${INCS_lib} ${INCS_ui} ${INCS_cui} ${INCS_common}
 LIBS = -lncurses
 
 SOURCES_CPP = test.cpp cui_container.cpp lib.cpp cui_lib.cpp\
 	cui_screen.cpp cui_entry.cpp cui_dialog.cpp cui_label.cpp\
 	cui_widget.cpp cui_slider.cpp cui_scroll_list.cpp cui_window_start.cpp\
 	cui_surface.cpp cui_window_main.cpp cui_border.cpp cui_window_setting.cpp\
-	cui_main.cpp add_new_task.cpp cui_radio.cpp
+	cui_main.cpp add_new_task.cpp cui_radio.cpp cui_command.cpp
 
 HEADERS_CPP = cui_container.h cui_widget.h lib.h cui_lib.h\
 	cui_screen.h cui_entry.h cui_dialog.h cui_label.h cui_slider.h\

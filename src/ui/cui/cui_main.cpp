@@ -48,7 +48,7 @@ std::optional<CommandMessage> cui::CUICore::handleInput( void )
             // case CDK_PREV:        key_ = KEY_BTAB;      break;
             // case KEY_ESC:       _is_run_ = false;       break;
             case 14: 
-                current_window->update( key_ );
+                ret = current_window->update( key_ );
                 current_window->draw();
                 break;
         }

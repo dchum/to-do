@@ -6,7 +6,7 @@
 #include "cui_screen.h"
 #include "cui_window.h"
 
-#include "common/ui_to_core/commandmessage.h"
+#include "commandmessage.h"
 
 namespace cui
 {

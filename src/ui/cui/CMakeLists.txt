@@ -9,7 +9,8 @@ add_library(cui
     cui_screen.cpp
     cui_surface.cpp
     cui_widget.cpp
-
+    cui_command.cpp
+    
     windows/cui_window_main.cpp
     windows/cui_window_setting.cpp
     windows/cui_window_start.cpp
