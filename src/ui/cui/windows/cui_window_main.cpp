@@ -18,22 +18,22 @@ cui::WindowMain::WindowMain(CUIScreen &screen)
 
 }
 
-cui::Command& cui::WindowMain::get_command_binding(unsigned int key)
-{
-    for (const auto& [k, ptr] : bindings_) {
-        assert(ptr != nullptr && "unique_ptr is null!");
-    }
+// cui::Command& cui::WindowMain::get_command_binding(unsigned int key)
+// {
+//     for (const auto& [k, ptr] : bindings_) {
+//         assert(ptr != nullptr && "unique_ptr is null!");
+//     }
     
-    if ( bindings_.count( key )>0 )
-        return *(bindings_.at( key ));
-    else
-        return *(bindings_.at( '?' ));
-}
+//     return *(bindings_.at( key ));
+//     // if ( bindings_.count( key )>0 )
+//     // else
+//     //     return *(bindings_.at( '?' ));
+// }
 
 void cui::WindowMain::init_bindigs_keys(void)
 {    
-    bindings_['?'] = std::make_unique<cui::NoneCommand>(  );
-    bindings_[CTRL('n')] = std::make_unique<cui::AddNewTask>( screen() );
+    // bindings_[CTRL('n')] = std::make_unique<cui::AddNewTask>( screen() );
+    // bindings_[CTRL('n')] = Command<CommandId::CreateTask>;
 }
 
 void cui::WindowMain::init()
@@ -57,18 +57,6 @@ void cui::WindowMain::init()
     cui::Message msgRadioPROGRESS("No task");
     cui::Message msgRadioDONE("No task");
 
-    cui::Message msgHello_(
-    R"(                                                           ~
-    </B>__________ ________              ________  ________       ~
-    </B>|\___   ___\\   __  \            |\   ___ \|\   __  \     ~
-    </B>\|___ \  \_\ \  \|\  \  _________\ \  \_|\ \ \  \|\  \    ~
-    </B>     \ \  \ \ \  \\\  \|\_________\ \  \ \\ \ \  \\\  \   ~
-    </B>      \ \  \ \ \  \\\  \|_________|\ \  \_\\ \ \  \\\  \  ~
-    </B>       \ \__\ \ \_______\           \ \_______\ \_______\ ~
-    </B>        \|__|  \|_______|            \|_______|\|_______| ~
-                                            To-Do CLI v0.1.0 | Created by: @dchum )"//FIXME - вынести номер версии в отдельный макрос
-    );
-    
     AddChild<CUISlider>(40, 3, msgSliderHello_, msgSliderText_, 50);
     AddChild<CUILabel> (msgLabelName,        1,   0, false, false );
     AddChild<CUILabel> (msgLabelDescription, 3,  50, false, false);
@@ -76,20 +64,24 @@ void cui::WindowMain::init()
     AddChild<CUIRadio> ( 2, 20, 10, 30, msgLabelBACKLOG, msgRadioBACKLOG,' ');
     AddChild<CUIRadio> (35, 20, 10, 30, msgLabelPROGRESS, msgRadioPROGRESS,' ');
     AddChild<CUIRadio> (70, 20, 10, 30, msgLabelDONE, msgRadioDONE,' ');
-    AddChild<CUILabel> (msgHello_,  40, 70, false, false);
 
     init_bindigs_keys();
 }
 
-
-CommandMessage cui::WindowMain::update( uint key )
+std::optional<CommandMessage> cui::WindowMain::update(int key)
 {
-    auto& cmd = get_command_binding( key );
+    // CommandId id = CommandId::CreateTask;
+    // if ( key < 0)
+    //     id = CommandId::CreateTask;
+    // else
+    //     id = CommandId::DeleteTask;
 
-    return cmd.Execute();
-}
-
-void cui::WindowMain::process(EventMessage event)
-{
+    // Command<id> cmd;//FIXME - добавить диспетчер
     
+    cmd.Execute( screen(), queue_message_ui_ );
+
+    if ( queue_message_ui_.size() )
+        return CommandMessage{.command = CommandId::CreateTask,
+                              .header  = {.id = 0, .version = 1},
+                              .message = queue_message_ui_.front() };
 }

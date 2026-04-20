@@ -55,15 +55,15 @@ int main( )
     // }
 
 
-    CUIEntry* entr  = new CUIEntry (screen, msg_button, buttn, 50, 50, 40);
-    entr->draw();
-    // auto wndMain = new WindowMain(screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
+    // CUIEntry* entr  = new CUIEntry (screen, msg_button, buttn, 50, 50, 40);
+    // entr->draw();
+    auto wndMain = new WindowMain(screen);//;BuilderWidgetsCollection<WindowMain>::Create(&screen);
     // auto wdgtBox = BuilderWidgetsCollection<Container>::Create(&screen);
     // wdgtBox->ShowBorder(true);
     // wdgtBox->draw();
     // refreshCDKScreen ( screen.get() );
-    // wndMain->init();
-    // wndMain->draw();
+    wndMain->init();
+    wndMain->draw();
 
     // wgetch( screen.get()->window);
     // screen.draw();

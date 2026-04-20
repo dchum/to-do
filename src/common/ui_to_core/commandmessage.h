@@ -15,9 +15,10 @@
 
 #include "payload_create_task.h"
 
-template <CommandId ID>
-struct CommandMessage{
-    HeaderMessage header;
-    constexpr CommandId command = ID;
-    typename MessageUI<ID>::type message;
+using MessagePayload = std::variant<typename MessageUI<CommandId::CreateTask>::type >;
+
+struct CommandMessage {
+    HeaderMessage  header;
+    CommandId      command;
+    MessagePayload message;
 };

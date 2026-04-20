@@ -35,7 +35,4 @@ void cui::WindowStart::init()
     AddChild<CUILabel>( msgText,  45, 60, false, false ) ;
 }
 
-// char* cui::WindowStart::handle_input( uint* key)
-// {
 
-// }

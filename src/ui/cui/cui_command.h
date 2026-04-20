@@ -1,17 +1,38 @@
 #pragma once
 
-#include "message_ui2core.h"
-#include "message_core2ui.h"
+#include <queue>
+
+#include "common/ui_to_core/commandmessage.h"
+#include "common/commands_id.h"
 
 namespace cui
 {
 
+// class Command
+// {
+// public:
+//     virtual ~Command() = default;
+
+//     virtual void Execute( std::queue<MessagePayload>& ) = 0;
+// };
+
+template<CommandId cmd>
+class CommandImpl
+{
+    static_assert(false, 
+        "=================================================================\n"
+        "   No specialization of CommandImpl<> for this type!\n\n"
+        "=================================================================");
+};
+
+template <CommandId cmd>
 class Command
 {
+    CommandImpl<cmd>::type impl_;
 public:
-    virtual ~Command() = default;
-
-    virtual CommandMessage Execute( void ) = 0;
+    void Execute( CUIScreen& screen, std::queue<MessagePayload>& queue_mes ) {
+        impl_.execute( screen, queue_mes );
+    }
 };
 
 }//namespace cui

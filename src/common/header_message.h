@@ -1,6 +1,6 @@
 /**
  * @file header_message.h
- * @author chumakov (<d.tchumackov2013@yandex.ru)
+ * @author chumakov (<d.tchumackov2013@yandex.ru>)
  * @brief Заголовок любой посылки между модулями
  * @version 0.1
  * @date 2026-04-19

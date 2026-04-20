@@ -1,10 +1,12 @@
 #pragma once
 
 #include <vector>
-
+#include <optional>
 
 #include "cui_screen.h"
 #include "cui_window.h"
+
+#include "common/ui_to_core/commandmessage.h"
 
 namespace cui
 {
@@ -12,15 +14,12 @@ namespace cui
 class CUICore
 {
     cui::CUIScreen screen_;
-    bool _is_run_;
-
     std::vector<Window*> windows_;
 
 public:
     CUICore ( void );
 
-    CommandMessage handleInput( void );
-    void update( EventMessage event );
+    std::optional<CommandMessage> handleInput( void );
 };
 
 }

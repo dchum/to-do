@@ -11,7 +11,6 @@
 cui::Message msgLabelBACKLOG1 ("<C></B>BACKLOG</B>");
 
 cui::CUICore::CUICore(void)
-    : _is_run_(true)
 {
     windows_.push_back( new WindowMain( screen_ ) );
 
@@ -24,9 +23,9 @@ cui::CUICore::CUICore(void)
     current_window->draw();
 }
 
-CommandMessage cui::CUICore::handleInput( void )
+std::optional<CommandMessage> cui::CUICore::handleInput( void )
 {
-    CommandMessage ret;
+    std::optional<CommandMessage> ret = std::nullopt;
 
     auto current_window = windows_.front();
     keypad(stdscr, TRUE);
@@ -47,21 +46,13 @@ CommandMessage cui::CUICore::handleInput( void )
             // case CDK_BACKCHAR:    key_ = KEY_LEFT;      break;
             // case CDK_NEXT:        key_ = KEY_TAB;       break;
             // case CDK_PREV:        key_ = KEY_BTAB;      break;
-            case KEY_ESC:       _is_run_ = false;       break;
+            // case KEY_ESC:       _is_run_ = false;       break;
             case 14: 
-                ret = current_window->update( key_ );//FIXME - переименовать метод update
+                current_window->update( key_ );
                 current_window->draw();
                 break;
         }
     }
-
+ 
     return ret;
-    // current_window->handle_input( reinterpret_cast<uint*>(&key_) );
-    // current_window->draw();
-}
-
-void cui::CUICore::update(EventMessage event)
-{
-    auto current_window = windows_.front();
-    current_window->process(event);
 }

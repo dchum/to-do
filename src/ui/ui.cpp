@@ -1,11 +1,9 @@
 #include "ui.h"
 
-CommandMessage ui::Ui::HandleInput()
+void ui::Ui::HandleInput()
 {
-    return cui_core_.handleInput();
-}
+    auto cmdmessage = cui_core_.handleInput();
 
-void ui::Ui::update(EventMessage event)
-{
-    cui_core_.update( event );
+    if ( cmdmessage != std::nullopt )
+        queue_ui2core_.push( cmdmessage.value() );
 }

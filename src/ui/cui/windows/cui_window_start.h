@@ -10,7 +10,5 @@ namespace cui
         WindowStart( CUIScreen& screen );
 
         void init() override;
-
-        // char* handle_input( uint* ) override;
     };
 }

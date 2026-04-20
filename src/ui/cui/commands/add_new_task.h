@@ -13,19 +13,22 @@ extern "C"
 #include "cui_widget.h"
 #include "cui_command.h"
 
+#include "common/ui_to_core/commandmessage.h"
+
 namespace cui
 {
 
-class AddNewTask : public Command {
-    Message title_;
-    Message label_;
+class AddNewTask {
+    Message title_( "<C>New task" );
+    Message label_( "name task:" );
 
-    CUIScreen& screen_;
-    
 public:
-    AddNewTask( CUIScreen& screen );
+    void Execute( CUIScreen& screen, std::queue<MessagePayload>& queue_message_ui_  );
+};
 
-    CommandMessage Execute() override;
+template <>
+struct CommandImpl<CommandId::CreateTask> {
+    using type = AddNewTask;
 };
 
 }//namespace cui
