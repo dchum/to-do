@@ -53,34 +53,32 @@
 
 namespace core
 {
-#if 0 //пока без деления на группы задач, просто собираем все задачи подряд
 class Column
 {
+
 private:
     int _count_done_task = 0,
         _count_all_task = 0;
     std::string _name_level = "";
-    std::vector<core::Task> _tasks;
+    std::vector<core::Task*> tasks_; //FIXME - заменить позже на std::reference_wrapper
 
 public:
-    Column( std::string name = "" );
+    Column( std::string name );
 
     /*! @brief Кол-во задач в классе обслуживания */
-    int count_all_task(void) const noexcept   { return _count_all_task; };
+    int GetCountAllTask(void) const noexcept   { return _count_all_task; };
 
     /*! @brief Кол-во решенных задач в классе обслуживания  */
-    int count_done_task(void) const noexcept   { return _count_done_task; };
+    int GetCountDoneTask(void) const noexcept   { return _count_done_task; };
 
     /*! @brief Наименование класса обслуживания */
-    std::string name_level(void) const noexcept   { return _name_level; }
+    std::string name_level(void) const noexcept { return _name_level; }
 
-    /*! @brief Добавить новую задачу */
-    STATUS add_task(const std::string &name_task)  ;
+public:
+    void AttachTask( Task& task );
+    void DetachTask( Task& task );
 
-    /*! @brief Убрать задачу */
-    STATUS remove_task(const std::string &name_task)  ;
-
-private:
+public:
     /*! @brief Обновление состояния */
     void update(void);
 };
@@ -91,39 +89,18 @@ inline bool operator<(const core::Column &lhs, const core::Column &rhs)
     return std::lexicographical_compare(lhs.name_level().begin(), lhs.name_level().end(), rhs.name_level().begin(), rhs.name_level().end());
 }
 
-#endif
 
 class Board
 {
 private:
+    std::vector<Column> group_tasks_;
     std::vector<Task> tasks_;
-
     std::string name_board_;
 
-public:
-    Board() = default;
-
-    // /*! @brief Кол-во задач на доске */
-    // int count_all_task(void) const noexcept { return _count_all_task; }
-
-    // /*! @brief Кол-во решенных задач на доске */
-    // int count_done_task(void) const noexcept { return _count_done_task; }
-
-    // /*! @brief Кол-во классов обслуживания на доске */
-    // int count_service_class(void) const noexcept { return _columns.size(); }
-
-    /*! @brief Получить доступные классы обслуживания  */
-    // std::vector<Column> get_columnes() const noexcept { return _columns; }
-
-    // /*! @brief Кол-во задач в рамках конкретного класса обсуживания */
-    // int count_all_task_in_column(const std::string &name_column);
-
-    // /*! @brief Кол-во решенных задач в рамках конкретного класса обслуживния */
-    // int count_done_task_in_column(const std::string &name_column);
 
 public:
     void Init( std::string name_board );
-    void AddNewTask( std::string name_task );
+    void AddTask( std::string name_task );
 };
 
 }

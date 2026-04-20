@@ -74,10 +74,13 @@ std::optional<CommandMessage> cui::WindowMain::update(int key)
     
     cui::commands::Execute( cmd, screen(), queue_message_ui_ );
 
-    if ( queue_message_ui_.size() )
+    if ( queue_message_ui_.size() ) {
+        auto mes = queue_message_ui_.front();
+        queue_message_ui_.pop();
+
         return CommandMessage::Create( HeaderMessage{.id = 0, .version = 1}, 
-                                       cmd, 
-                                       queue_message_ui_.front() );
+                                       cmd, mes );
+    }
     else
         return std::nullopt;
 }

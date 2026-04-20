@@ -5,6 +5,8 @@
 
 #include "model_service.h"
 
+#include "commandmessage.h"
+
 
 namespace core
 {

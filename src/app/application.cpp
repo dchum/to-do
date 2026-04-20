@@ -11,8 +11,12 @@ void app::Application::exec()
 
         ui_core_.HandleInput();
 
-        // if ( queue_ui2core.size() )
-
+        if ( queue_ui2core.size() ) {
+            auto cmd = queue_ui2core.front();
+            model_core_.update( cmd );
+            queue_ui2core.pop();
+        }
+        
         // CommandMessage command;
         // command = ui_core_.HandleInput();
 

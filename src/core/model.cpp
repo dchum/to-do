@@ -1,7 +1,8 @@
 #include "model.h"
 
+#include "handler.h"
 
 void core::Model::update(CommandMessage cmd)
 {
-    //call function
+    core::commands::Execute( cmd.command, board_, cmd.message );
 }
