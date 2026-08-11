@@ -10,5 +10,8 @@ namespace cui
         WindowStart( CUIScreen& screen );
 
         void init() override;
-    };
+
+		virtual std::optional<CommandMessage> update( int key ) override { return std::nullopt; };
+		
+	};
 }

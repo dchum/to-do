@@ -11,6 +11,7 @@ namespace cui
 
         void init ( void ) override;
 
+		virtual std::optional<CommandMessage> update( int key ) override { return std::nullopt; }
         // char* handle_input( uint* ) override;
     };
 }
