@@ -7,7 +7,6 @@ add_library(cui
     cui_lib.cpp
     cui_main.cpp
     cui_screen.cpp
-    cui_surface.cpp
     cui_widget.cpp
     cui_command.cpp
     
