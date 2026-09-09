@@ -11,6 +11,12 @@ extern "C"
 namespace cui
 {
 
+struct RectangleForm
+{
+    int x, y; //< Левый верхний угол
+    int width, height;
+};
+
 enum class Alignment
 {
     Left	   = LEFT,

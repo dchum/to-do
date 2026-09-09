@@ -8,7 +8,7 @@ namespace cui
 {
 
 cui::CUISlider::CUISlider(CUIScreen& screen, int x, int y, Message &title, Message &label, int fieldWidth, unsigned int fillerCharacter, int currentValue, int lowValue, int highValue, int increment, int fastIncrement, bool box, bool shadow)
-    : Widget(screen, std::make_unique<RelativeSurface>(x, y, fieldWidth, screen.height())),
+    : Widget(screen, { LayoutMode::Relative, {x, y, fieldWidth, screen.height()} }),
     slider_(nullptr)
 {
     auto tl = CStringArray( title );

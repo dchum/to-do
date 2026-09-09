@@ -30,7 +30,7 @@ class Container : public Widget
 
 public:
     Container( CUIScreen& screen );
-    Container( CUIScreen& screen, int x, int y, int width, int height);
+    Container( CUIScreen& screen, int x, int y, int width, int height );
     
     ~Container();
 

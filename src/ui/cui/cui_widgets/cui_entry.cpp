@@ -5,7 +5,7 @@
 #include "cui_screen.h"
 
 cui::CUIEntry::CUIEntry(CUIScreen& screen, Message &title, Message &label, int x, int y, int fieldWidth, bool box, bool shadow)
-    :Widget(screen, std::make_unique<RelativeSurface>(x, y, screen.width(), screen.height())),
+    :Widget(screen, { LayoutMode::Relative, {x, y, screen.width(), screen.height()} }),
     entry_(nullptr)
 {
     auto mes = CStringArray( title );

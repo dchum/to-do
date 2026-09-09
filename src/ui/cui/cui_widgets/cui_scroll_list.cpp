@@ -6,7 +6,7 @@
 
 
 cui::CUIScrollList::CUIScrollList(CUIScreen &screen, int x, int y, Alignment al, int width, int height, Message &title, Message &list, bool is_has_numbers, chtype highlight, bool box, bool shadow)
-    :Widget(screen, std::make_unique<RelativeSurface>(x, y, width, height)),
+    :Widget(screen, { LayoutMode::Relative, {x, y, width, height} }),
     scroll_list_(nullptr)
 {
    	auto tl = CStringArray( title );

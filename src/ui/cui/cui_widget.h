@@ -16,25 +16,38 @@
 #include "cui_lib.h"
 #include "cui_screen.h"
 #include "cui_iterator.h"
-#include "cui_surface.h"
 
 
 namespace cui
 {   
 
-class Widget
+enum class LayoutMode
+{
+    Absolute,
+    Relative
+};
+
+class  Widget
 {
     static inline ssize_t new_id;
     const ssize_t id_;
-    
-    std::unique_ptr<Surface> surface_imp_;
+
+    RectangleForm actual_size_; //< размеры занимаемого виджетом прямоугольника (включая бордеры, если они есть)
+
+    struct WidgetGeometry
+    {
+        LayoutMode mode = LayoutMode::Relative;
+        RectangleForm rect; // x,y,width,height
+    };
+
+    void compute_size( const WidgetGeometry& geometry );
     
 protected:
     CUIScreen& screen_;
-    Size size_; //< размеры пространства доступные для отрисовки, физически реальные размеры
+
 
 protected:
-    Widget( CUIScreen& screen, std::unique_ptr<Surface> surface_imp );
+    Widget( CUIScreen& screen, WidgetGeometry geometry );
 
 public:
     virtual ~Widget();

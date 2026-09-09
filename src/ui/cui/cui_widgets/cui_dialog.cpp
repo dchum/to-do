@@ -10,7 +10,7 @@ extern "C"
 
 
 cui::CUIDialog::CUIDialog(CUIScreen& screen, Message& message, Message& buttons, int x, int y, bool box, bool separator, bool shadow)
-	: Widget(screen, std::make_unique<RelativeSurface>(x, y, screen.width(), screen.height())),
+	: Widget(screen, { LayoutMode::Relative, {x, y, screen.width(), screen.height()} }),
 	  dialog_(nullptr)
 {
 	auto mes = CStringArray( message );

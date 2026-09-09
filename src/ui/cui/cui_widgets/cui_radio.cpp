@@ -7,7 +7,7 @@
 
 cui::CUIRadio::CUIRadio(CUIScreen& screen, int x, int y, int width, int height, Message &title, Message &list, 
                         int choiceCharacter, int spos, int highlight, int defaultItem, bool box, bool shadow)
-    : Widget(screen, std::make_unique<RelativeSurface>(x, y, width, height)),
+    : Widget(screen, { LayoutMode::Relative, {x, y, width, height} }),
     radio_(nullptr)
 {   
 	auto tl = CStringArray( title );

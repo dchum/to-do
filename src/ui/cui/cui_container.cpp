@@ -20,7 +20,7 @@ cui::Container::Container( CUIScreen& screen )
 }
 
 Container::Container( CUIScreen& screen, int x, int y, int width, int height)
-    : Widget(screen, std::make_unique<RelativeSurface>(x, y, width, height)),
+    : Widget(screen, { LayoutMode::Relative, {x, y, width, height} }),
     bord_( new CUIBorder( screen, x, y, width, height ) )
 {
 

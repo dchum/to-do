@@ -7,7 +7,7 @@
 
 
 cui::CUILabel::CUILabel(CUIScreen& screen, Message &mes, int x, int y, bool box, bool shadow)
-	: Widget(screen, std::make_unique<RelativeSurface>(x, y, 100, 100)),
+	: Widget(screen, { LayoutMode::Relative, {x, y, 100, 100} }),
 	  label_(nullptr)
 {
     auto data = CStringArray( mes );
