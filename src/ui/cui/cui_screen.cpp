@@ -1,7 +1,6 @@
 #include "cui_screen.h"
 #include <algorithm>
 
-#include "iterator/list_iter.h"
 
 namespace cui
 {

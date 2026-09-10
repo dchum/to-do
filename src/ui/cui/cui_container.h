@@ -19,20 +19,13 @@ namespace cui
 class Container : public Widget
 {
     std::list<Widget*> childrens_;
-
-    CUIBorder* bord_;//FIXME - использовать умный указатель
-
-    template <typename Iter, typename... Args>
-    inline IterWdgt create_iterator(Args&&... args)
-    {
-        return std::make_unique<Iter>( std::forward<Args>(args)... );
-    }
+    std::unique_ptr<CUIBorder> bord_;
 
 public:
     Container( CUIScreen& screen );
     Container( CUIScreen& screen, int x, int y, int width, int height );
     
-    ~Container();
+    virtual ~Container();
 
 public:
     template<typename T, typename... Args>
@@ -45,18 +38,13 @@ public:
 
     void draw  ( void ) override;
     void hide  ( void ) override;
-    
-    IterWdgt CreateIterator( void );
-
-public:
-    CUIScreen& screen( void ){ return Widget::screen_; }
 };
 
 template <typename T, typename... Args>
 Widget* Container::AddChild(Args &&...args)
 {
     Widget* wdgt = new T(this->screen(), std::forward<Args>(args)...);
-    Container::AddChild(wdgt);
+    this->AddChild(wdgt);
     return wdgt;
 }
 

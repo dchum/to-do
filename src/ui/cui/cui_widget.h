@@ -15,7 +15,6 @@
 
 #include "cui_lib.h"
 #include "cui_screen.h"
-#include "cui_iterator.h"
 
 
 namespace cui
@@ -50,6 +49,8 @@ protected:
     Widget( CUIScreen& screen, WidgetGeometry geometry );
 
 public:
+    Widget( const Widget& ) = delete;
+    Widget& operator=( const Widget& ) = delete;
     virtual ~Widget();
 
 public:
@@ -65,7 +66,7 @@ public:
 public:
     ssize_t get_id( void ) const noexcept;
 
-    CUIScreen& get_screen() { return screen_; }
+    CUIScreen& screen() { return screen_; }
 };//class Widget
 
 

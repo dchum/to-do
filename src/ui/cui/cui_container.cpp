@@ -9,7 +9,6 @@ extern "C"
 #include "cdk_objs.h"
 }
 
-#include "iterator/list_iter.h"
 #include <iostream>
 namespace cui
 {
@@ -21,15 +20,13 @@ cui::Container::Container( CUIScreen& screen )
 
 Container::Container( CUIScreen& screen, int x, int y, int width, int height)
     : Widget(screen, { LayoutMode::Relative, {x, y, width, height} }),
-    bord_( new CUIBorder( screen, x, y, width, height ) )
+    bord_( std::unique_ptr<CUIBorder>( new CUIBorder( screen, x, y, width, height ) ) )
 {
-
+    
 }
 
 void Container::AddChild( Widget * child )
 {
-    if ( !child ) return;
-   
     childrens_.emplace_back(child);
 }
 
@@ -55,7 +52,7 @@ void Container::ShowBorder(bool top, bool left, bool right, bool bottom)
 void cui::Container::draw(void)
 {
     bord_->draw();
-    for(const auto wdgt : childrens_)
+    for( auto&& wdgt : childrens_ )
     {
         wdgt->draw();
     }
@@ -64,19 +61,13 @@ void cui::Container::draw(void)
 void Container::hide(void)
 {
     bord_->hide();
-    for(const auto wdgt : childrens_)
+    for( auto&& wdgt : childrens_)
         wdgt->hide();
 }
 
-IterWdgt Container::CreateIterator(void)
-{
-    return create_iterator<ListIterator>(childrens_);
-}
 
 Container::~Container()
 {
-    delete bord_;
-
     for ( auto it = childrens_.begin(); it != childrens_.end(); ++it ) 
     {
         delete (*it);
