@@ -5,7 +5,6 @@ extern "C"
 #include "cdk/entry.h" 
 }
 
-//FIXME - возможно стоит заменить на mentry
 
 #include "cui_widget.h"
 #include "cui_lib.h"
@@ -30,7 +29,7 @@ namespace cui
     public:
         void draw  ( void ) override;
         void hide  ( void ) override;
-        char* handle_input( uint* ) override;
+        std::optional<std::string> handle_input( uint ) override;
         void move( Alignment x, Alignment y ) override;
         // void activate( unsigned int* ) override;
     };

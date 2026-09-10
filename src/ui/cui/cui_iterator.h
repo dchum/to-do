@@ -41,7 +41,6 @@ namespace cui
 
     using NULLIterWdgt = NullIterator<Widget>;
     using IterWdgt     = std::unique_ptr<Iterator<Widget>>;
-    using PtrIterWdgt  = Iterator<Widget>;
 
     inline const NULLIterWdgt NullIterOBJ{};
 

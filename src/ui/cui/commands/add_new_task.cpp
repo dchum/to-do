@@ -11,7 +11,10 @@ void cui::AddNewTask::Execute( CUIScreen& screen, std::queue<MessagePayload>& qu
     entry.move( Alignment::Center, Alignment::Center );
     entry.draw();
 
-    char* input = entry.handle_input( nullptr );
+    auto && ret = entry.handle_input( 0 );
 
-    queue_message_ui_.push( MessageAddNewTask{.name_new_task = input} );
+    if (ret.has_value())
+    {
+        queue_message_ui_.push( MessageAddNewTask{.name_new_task = ret.value()} );
+    }
 }

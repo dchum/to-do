@@ -11,7 +11,7 @@
 *******************************************************************************************************************************************/
 #pragma once
 
-#include <memory>
+#include <optional>
 
 #include "cui_lib.h"
 #include "cui_screen.h"
@@ -59,8 +59,7 @@ public:
     virtual int  height( void ) const noexcept;
     virtual void draw  ( void ) = 0;
     virtual void hide  ( void ) = 0;
-    virtual char* handle_input( uint* ) { return nullptr; }
-    virtual void  handle_input( uint  ) {  }
+    virtual std::optional<std::string> handle_input( uint ) { return std::nullopt; }
     virtual void move( Alignment, Alignment ) {}
 
 public:

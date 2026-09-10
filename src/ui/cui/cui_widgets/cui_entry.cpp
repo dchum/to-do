@@ -40,9 +40,14 @@ void cui::CUIEntry::hide(void)
     eraseCDKEntry(entry_);
 }
 
-char* cui::CUIEntry::handle_input( uint* input )
+std::optional<std::string> cui::CUIEntry::handle_input( uint input )
 {
-    return activateCDKEntry (entry_, input);
+    char* value = activateCDKEntry(entry_, NULL);
+
+    if (value == nullptr)
+        return std::nullopt;
+
+    return std::string(value);
 }
 
 void cui::CUIEntry::move( Alignment x, Alignment y )
