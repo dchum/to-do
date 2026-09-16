@@ -89,18 +89,4 @@ inline bool operator<(const core::Column &lhs, const core::Column &rhs)
     return std::lexicographical_compare(lhs.name_level().begin(), lhs.name_level().end(), rhs.name_level().begin(), rhs.name_level().end());
 }
 
-
-class Board
-{
-private:
-    std::vector<Column> group_tasks_;
-    std::vector<Task> tasks_;
-    std::string name_board_;
-
-
-public:
-    void Init( std::string name_board );
-    void AddTask( std::string name_task );
-};
-
 }

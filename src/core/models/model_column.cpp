@@ -35,16 +35,4 @@ void Column::update(void)
                         { return task->status() == STATUS::SUCCES; });
 }
 
-
-
-void Board::Init(std::string name_board)
-{
-    name_board_ = name_board;
-}
-
-void Board::AddTask(std::string name_task)
-{
-    tasks_.push_back(name_task);
-}
-
 }//namespace core

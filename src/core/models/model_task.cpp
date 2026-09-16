@@ -8,14 +8,14 @@
 namespace core
 {
     
-Task::Task(const std::string &name, const std::string &description, STATUS is_done, const data_t &ending_date)
-    :    _name(name), _description(description), 
-         _status(is_done), _ending_date(ending_date)
+Task::Task(const std::string &name, STATUS_TASK status)
+    : id_(id++), name_(name), description_(""), 
+         status_task_(status), ending_date_({0})
 {
     auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::tm *timeInfo = std::localtime(&currentTime);
 
-    _creation_date = {
+    creation_date_ = {
         .hours   = timeInfo->tm_hour,
         .minutes = timeInfo->tm_min,
         .day     = timeInfo->tm_mday,
@@ -24,17 +24,16 @@ Task::Task(const std::string &name, const std::string &description, STATUS is_do
     };
 }
 
-STATUS Task::set_status(STATUS attribute) noexcept
+STATUS_TASK Task::set_status_task(STATUS_TASK attribute) noexcept
 {
-    if ( attribute != STATUS::VOID ) 
-        _status = attribute;
+    status_task_ = attribute;
 
-    return _status;
+    return status_task_;
 }
 
 void Task::add_ending_date(data_t date) noexcept
 {
-    memcpy(&_ending_date, &date, sizeof(data_t));
+    ending_date_ = date;
 }
 
 }

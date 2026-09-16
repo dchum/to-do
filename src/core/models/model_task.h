@@ -6,18 +6,18 @@
     Класс "Задача" - Task. Используется в интерфейсах "Еженедельное планирование" и "Проект"
     Поля класса:
     //NOTE -  v 1.0
-[x]  _name         : (string)                             -название задачи
-[x]  _description  : (string)                             -описание задачи (опционально)
-[x]  _creation_date: (пользовательский тип data_t)        -дата создания   (инициализация при создании объекта класса)
-[x]  _ending_date  : (пользовательский тип data_t)        -дата окончания  (опционально)
-[x]  _status       : (bool)                               -готова ли задача
+[x]  name_         : (string)                             -название задачи
+[x]  description_  : (string)                             -описание задачи (опционально)
+[x]  creation_date_: (пользовательский тип data_t)        -дата создания   (инициализация при создании объекта класса)
+[x]  ending_date_  : (пользовательский тип data_t)        -дата окончания  (опционально)
+[x]  status_task_       : (bool)                               -готова ли задача
 
     Методы класса:
     //NOTE -  v 1.0
         Возможны несколько видов конструкторов:
 [x]{x}   -c заполнением всех полей(некоторые поля, могут быть не проинициализированными, важно учитывать!)
-[x]{x}   получить значение/изменить _name
-[x]{x}   получить значение/изменить _description
+[x]{x}   получить значение/изменить name_
+[x]{x}   получить значение/изменить description_
 [x]{x}   добавить/убрать дату окончания
 [x]{x}   выставить/убрать признак готовности задачи
 
@@ -30,64 +30,63 @@
 #pragma once
 
 #include <string>
-#include <cstring>
+#include <stdint.h>
 
+#include "common.h"
 #include "lib.h"
 
 namespace core
 {
 
+using TaskID = std::int64_t;
+
 class Task
 {
-private:
-    std::string _name,
-                _description;
-    STATUS _status;
+    static TaskID id;
 
-    data_t _creation_date{},
-           _ending_date  {};
+private:
+    TaskID id_;
+    std::string name_,
+                description_;
+    STATUS_TASK status_task_;
+    PRIORITY_TASK priotity_;
+
+    data_t creation_date_{},
+           ending_date_  {};
 
 public:
     Task() = delete;
 
-    Task( const std::string& name, 
-          const std::string& description = "", 
-          STATUS is_done = STATUS::FAIL,
-          const data_t &ending_date = {0} );
+    Task( const std::string& name, STATUS_TASK is_done = STATUS_TASK::PROCESS );
 
 /*******************Геттеры********************************** */
     /*! @brief  Возвращает название задачи */
-    std::string name(void) const noexcept  { return _name; }
+    std::string name(void) const noexcept  { return name_; }
 
     /*! @brief  Возвращает описание задачи */
-    std::string description(void) const noexcept  { return _description; }
+    std::string description(void) const noexcept  { return description_; }
 
     /*! @brief  Возвращает текущий статус задачи */
-    STATUS status( void) const noexcept  { return _status; }
+    STATUS_TASK status_task( void) const noexcept  { return status_task_; }
 /************************************************************ */
 
 /*******************Сеттеры********************************** */
     /*! @brief Изменить название задачи */
-    STATUS set_name ( const std::string& name_task ) noexcept 
+    STATUS_TASK set_name ( const std::string& name_task ) 
     { 
-        _name = name_task; 
-        return STATUS::SUCCES; 
+        name_ = name_task; 
+        return STATUS_TASK::SUCCES; 
     };
 
     /*! @brief Изменить описание задачи */
-    STATUS set_description(const std::string& description_task) noexcept 
+    STATUS_TASK set_description(const std::string& description_task) 
     { 
-        _description = description_task; 
-        return STATUS::SUCCES; 
+        description_ = description_task; 
+        return STATUS_TASK::SUCCES; 
     }
     
-    /*! @brief Возвращает признак готовности задачи
-        @param attribute  (см task_lib.h) DONE      - пометить как готовую
-                                          NO_READY  -           не готовую
-                                          VOID- не изменять текущее состояние признака */
-    STATUS set_status(STATUS attribute) noexcept ;
+    STATUS_TASK set_status_task(STATUS_TASK attribute) noexcept ;
 /************************************************************ */
-
 
     /*! @brief Добавить дату окончания */
     void add_ending_date(data_t date) noexcept ;
@@ -95,7 +94,7 @@ public:
     /*! @brief Удалить дату окончания */
     void delete_ending_date( void ) noexcept 
     { 
-        memset(&_ending_date, 0, sizeof(data_t)); 
+        ending_date_ = {0};
     }
 
     ~Task() = default;
