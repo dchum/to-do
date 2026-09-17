@@ -13,7 +13,7 @@ struct HandlerImpl {};
 namespace commands
 {
 
-void Execute( CommandId cmd,  Board& board, MessagePayload message );
+void Execute( CommandId cmd,  WorkSpace& board, MessagePayload message );
 
 }
 

@@ -9,7 +9,7 @@ namespace core
     class AddNewTask {
     
     public:
-        void Execute( Board& board, MessageAddNewTask& message );
+        void Execute( WorkSpace& board, MessageAddNewTask& message );
     };
     
     template <>

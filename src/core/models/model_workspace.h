@@ -33,17 +33,24 @@
 namespace core
 {
 
-class Board
+using WorkSpaceID = std::uint64_t;
+
+class WorkSpace
 {
+    static WorkSpaceID id;
 private:
+    WorkSpaceID id_;
+
     std::vector<Column> group_tasks_;
     std::vector<Task> tasks_;
     std::string name_board_;
 
-
 public:
-    void Init( std::string name_board );
-    void AddTask( std::string name_task );
+    WorkSpace( const std::string& name_board );
+
+    void Init( const std::string& name_board );
+    void AddTask( const std::string& name_task );
+    void AddTask( Task&& task );
 };
 
 }

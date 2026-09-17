@@ -7,6 +7,8 @@
 
 namespace core
 {
+
+TaskID Task::id = 0;
     
 Task::Task(const std::string &name, STATUS_TASK status)
     : id_(id++), name_(name), description_(""), 

@@ -7,8 +7,8 @@
 // //     в канбан-доске.
 // //     //NOTE - v 1.0
 // //     Поля класса:
-// // []  _name_level      : (string)                           -название логического уровня
-// // []  _count_done_task : (int)                              -кол-во выполненных задач в текущем уровне
+// // []  name_level_      : (string)                           -название логического уровня
+// // []  count_done_task_ : (int)                              -кол-во выполненных задач в текущем уровне
 // // []  _tasks           : (vector<Task>)                     -все задачи
 
 // //     Методы класса:
@@ -20,7 +20,7 @@
 // // [x]{} добавить задачу
 
 // // ******************************************************************************************************************************
-// //     Класс "Доска" - Board. Используется в интерфейсах "Kanban". Состоит из классов обслуживания
+// //     Класс "Доска" - WorkSpace. Используется в интерфейсах "Kanban". Состоит из классов обслуживания
 // //     /*NOTE - Сейчас будет по умолчанию три класса обслуживания : Сделать, В работе, Готово (см task_lib.h).
 
 // //     Поля класса:
@@ -46,6 +46,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdint.h>
 
 
 #include "model_task.h"
@@ -53,34 +54,31 @@
 
 namespace core
 {
+
+using ColumnID = std::uint64_t;
+
 class Column
 {
-
+    static ColumnID id;
+    
 private:
-    int _count_done_task = 0,
-        _count_all_task = 0;
-    std::string _name_level = "";
-    std::vector<core::Task*> tasks_; //FIXME - заменить позже на std::reference_wrapper
+    ColumnID id_;
+
+    std::string name_level_ = "";
+    std::vector<TaskID> tasks_id_;
 
 public:
     Column( std::string name );
 
     /*! @brief Кол-во задач в классе обслуживания */
-    int GetCountAllTask(void) const noexcept   { return _count_all_task; };
-
-    /*! @brief Кол-во решенных задач в классе обслуживания  */
-    int GetCountDoneTask(void) const noexcept   { return _count_done_task; };
+    int GetCountAllTask(void) const noexcept   { return tasks_id_.size(); };
 
     /*! @brief Наименование класса обслуживания */
-    std::string name_level(void) const noexcept { return _name_level; }
+    std::string name_level(void) const noexcept { return name_level_; }
 
 public:
-    void AttachTask( Task& task );
-    void DetachTask( Task& task );
-
-public:
-    /*! @brief Обновление состояния */
-    void update(void);
+    void AttachTask( TaskID task );
+    void DetachTask( TaskID task );
 };
 
 

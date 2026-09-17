@@ -4,7 +4,7 @@
 
 #include "handle_add_task.h"
 
-void core::commands::Execute(CommandId cmd, Board &board, MessagePayload message)
+void core::commands::Execute(CommandId cmd, WorkSpace &board, MessagePayload message)
 {
     switch ( cmd )
     {

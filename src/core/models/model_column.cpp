@@ -1,38 +1,32 @@
-#include "model_service.h"
+#include "model_column.h"
 
 #include <algorithm>
 #include <numeric>
 
+#include <ptrcheck.h>
 
 namespace core
 {
+ColumnID Column::id = 0;
+
     Column::Column(std::string name)
-    :_count_done_task(0), _count_all_task(0),
-     _name_level(name)
+    :id_(id++), name_level_(name)
 {
 }
 
-void Column::AttachTask(Task & task)
+void Column::AttachTask( TaskID task_id )
 {
-    tasks_.push_back( &task );
+    tasks_id_.push_back( task_id );
 }
 
-void Column::DetachTask(Task &task)
+void Column::DetachTask( TaskID task_id )
 {
-    auto it = std::remove_if(tasks_.begin(), tasks_.end(),
-                             [&task](const Task *t) {
-                                 return task.name() == t->name();
-                             });
-    tasks_.erase(it, tasks_.end());
+    auto it = std::remove_if(tasks_id_.begin(), tasks_id_.end(),
+                             [task_id](const TaskID id) { return id == task_id; });
+
+    if ( it != tasks_id_.end() )                         
+        tasks_id_.erase(it, tasks_id_.end());
 }
 
-void Column::update(void)
-{
-    _count_all_task = tasks_.size();
-
-    _count_done_task = std::count_if(tasks_.begin(), tasks_.end(), 
-                        [](const Task *task)
-                        { return task->status() == STATUS::SUCCES; });
-}
 
 }//namespace core

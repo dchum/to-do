@@ -11,7 +11,7 @@ cui::Message msgRadio1("Dark~Light");
 cui::Message msgRadio2("Enabled~Disabled");
 cui::Message msgRadio3("Vim~Emacs~Classic");
 cui::Message msgRadio4("Yes~No");
-cui::Message msgRadio5("Board~Welcome");
+cui::Message msgRadio5("WorkSpace~Welcome");
 cui::Message msgRadio1Title(" ");
 
 cui::Message msgRadioName1("Theme: ");

@@ -13,9 +13,12 @@ namespace core
 
 class Model
 {
-    Board board_;
+    WorkSpace board_;
 
 public:
+    void CreateWorkSpace( const std::string& work_space_name );
+    
+
     void update ( CommandMessage cmd );
 
 };//class Model

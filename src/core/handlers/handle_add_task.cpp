@@ -1,6 +1,6 @@
 #include "handle_add_task.h"
 
-void core::AddNewTask::Execute(Board &board, MessageAddNewTask& message)
+void core::AddNewTask::Execute(WorkSpace &board, MessageAddNewTask& message)
 {
     using namespace core;
 

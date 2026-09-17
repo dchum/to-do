@@ -38,7 +38,7 @@
 namespace core
 {
 
-using TaskID = std::int64_t;
+using TaskID = std::uint64_t;
 
 class Task
 {
@@ -96,8 +96,6 @@ public:
     { 
         ending_date_ = {0};
     }
-
-    ~Task() = default;
 };
 
 
