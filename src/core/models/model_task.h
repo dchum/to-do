@@ -61,10 +61,10 @@ public:
 
 /*******************Геттеры********************************** */
     /*! @brief  Возвращает название задачи */
-    std::string name(void) const noexcept  { return name_; }
+    const std::string& name(void) const noexcept  { return name_; }
 
     /*! @brief  Возвращает описание задачи */
-    std::string description(void) const noexcept  { return description_; }
+    const std::string& description(void) const noexcept  { return description_; }
 
     /*! @brief  Возвращает текущий статус задачи */
     STATUS_TASK status_task( void) const noexcept  { return status_task_; }
@@ -72,20 +72,18 @@ public:
 
 /*******************Сеттеры********************************** */
     /*! @brief Изменить название задачи */
-    STATUS_TASK set_name ( const std::string& name_task ) 
+    void set_name ( const std::string& name_task ) 
     { 
-        name_ = name_task; 
-        return STATUS_TASK::SUCCES; 
+        name_ = std::move(name_task);
     };
 
     /*! @brief Изменить описание задачи */
-    STATUS_TASK set_description(const std::string& description_task) 
+    void set_description(const std::string& description_task) 
     { 
-        description_ = description_task; 
-        return STATUS_TASK::SUCCES; 
+        description_ = std::move(description_task);
     }
-    
-    STATUS_TASK set_status_task(STATUS_TASK attribute) noexcept ;
+
+    void set_status_task(STATUS_TASK attribute) noexcept ;
 /************************************************************ */
 
     /*! @brief Добавить дату окончания */

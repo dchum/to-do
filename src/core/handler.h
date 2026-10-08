@@ -3,7 +3,7 @@
 #include "commands_id.h"
 #include "commandmessage.h"
 
-#include "model_service.h"
+#include "model_workspace.h"
 
 namespace core{
 
