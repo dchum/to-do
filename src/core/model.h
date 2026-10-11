@@ -1,17 +1,14 @@
 #pragma once
 
-#include <vector>
-#include <optional>
-
-#include "model_service.h"
-
-#include "commandmessage.h"
+#include "common/module.h"
+#include "common/commands.h"
+#include "common/events.h"
 
 
 namespace core
 {
 
-class Model
+class Model final : public common::Module
 {
     WorkSpace board_;
 

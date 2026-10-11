@@ -1,20 +1,19 @@
 #pragma once
 
-#include <queue>
+#include "common/module.h"
+#include "common/commands.h"
+#include "common/events.h"
 
 #include "cui/cui_main.h"
 
 namespace ui
 {
 
-class Ui final {
+class Ui final : public common::Module {
     cui::CUICore cui_core_;
-    std::queue<CommandMessage>* queue_ui2core_ = nullptr;
-    
-public:
-    void init ( std::queue<CommandMessage>& queue_ui2core );
 
-    void HandleInput( );
+public:
+
 };//class Ui
 
 }//namespace ui
