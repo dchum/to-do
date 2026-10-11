@@ -27,10 +27,6 @@ enum class CommandId : uint16_t {
     OffSetting,
 };
 
-struct HeaderMessage {
-    uint64_t       id;    /* Уникальный идентификатор каждого снимка*/
-    uint32_t  version;    /* Версия снимка, принимающая сторона обязана поддерживать эту версию или выше */
-};
 
 struct CreateTaskCommand {
     std::string name;         /* Название задачи */
@@ -41,8 +37,7 @@ using CommandPayload = std::variant<
 >;
 
 struct Command {
-    CommandId command_id;   /* Идентификатор команды */
-    HeaderMessage header;   /* Заголовок команды */
+    CommandId command_id;    /* Идентификатор команды */
     CommandPayload payload; 
 };
 
