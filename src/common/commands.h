@@ -15,31 +15,35 @@
 #include <variant>
 #include <string>
 
-enum class CommandId : uint16_t {
-    CreateTask,
-    DeleteTask,
-    ExitProgram,
-    NavigateUp,
-    NavigateDown,
-    NavigateLeft,
-    NavigateRight,
-    OnSetting,
-    OffSetting,
-};
-
-
-struct CreateTaskCommand {
-    std::string name;         /* Название задачи */
-};
-
-using CommandPayload = std::variant<
-    CreateTaskCommand,
->;
-
-struct Command {
-    CommandId command_id;    /* Идентификатор команды */
-    CommandPayload payload; 
-};
+namespace common
+{
+    enum class CommandId : uint16_t {
+        None,
+        CreateTask,
+        DeleteTask,
+        ExitProgram,
+        NavigateUp,
+        NavigateDown,
+        NavigateLeft,
+        NavigateRight,
+        OnSetting,
+        OffSetting,
+    };
+    
+    
+    struct CreateTaskCommand {
+        std::string name;         /* Название задачи */
+    };
+    
+    using CommandPayload = std::variant<
+        CreateTaskCommand,
+    >;
+    
+    struct Command {
+        CommandId command_id;    /* Идентификатор команды */
+        CommandPayload payload; 
+    };
+}
 
 
 

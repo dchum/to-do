@@ -4,8 +4,11 @@
 #include "events.h"
 #include "header_message.h"
 
-struct Message
+namespace common
 {
-    HeaderMessage header;
-    std::variant<Command,Event> payload;
-};
+    struct Message
+    {
+        HeaderMessage header;
+        std::variant<Command,Event> payload;
+    };
+}
