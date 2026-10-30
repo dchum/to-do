@@ -21,7 +21,7 @@ int main()
     {
         wint_t wc;
         int rc = get_wch(&wc);
-        std::cout << "rc=" << rc << " wc=" << std::hex << wc << std::dec << " wc=" << wc << std::endl;
+        std::cout << "rc=" << rc << " wc=" << std::hex << wc << std::dec << " wc=" << wc <<" " << KEY_CODE_YES << std::endl;
     }
     // ваш цикл
 

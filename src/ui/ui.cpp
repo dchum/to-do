@@ -11,11 +11,11 @@ void ui::Ui::update(void) const
 
     CommandId id_cmd = cui_core_.GetUserInput();
 
-    EventId id_event = Module::take_input_msg_internal();
+    Message input_msg = Module::take_input_msg_internal();
 
-    cui_core_.ProcessEvent( id_event );
+    // cui_core_.ProcessEvent( input_msg );
 
-    Message msg = cui_core_.Update( id_cmd );
+    // Message output_msg = cui_core_.Update( id_cmd );
 
-    Module::push_output_msg_internal( msg );
+    Module::push_output_msg_internal( output_msg );
 }

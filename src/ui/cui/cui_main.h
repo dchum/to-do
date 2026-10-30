@@ -8,7 +8,6 @@
 #include "cui_screen.h"
 #include "cui_window.h"
 
-#include "commandmessage.h"
 
 namespace cui
 {
@@ -16,13 +15,12 @@ namespace cui
 class CUICore
 {
     cui::CUIScreen screen_;
-    std::vector<std::unique_ptr<Window>> windows_;
-    size_t index_curr_wnd;
+    std::vector<std::unique_ptr<Window>> windows_;//FIXME - объединить в некий класс, управляющий активными окнами
+    size_t index_curr_wnd;//FIXME - объединить в некий класс, управляющий активными окнами
 
-    const RegisterCommands * reqister_cmds_;
+    RegisterCommands reqister_cmds_;//FIXME - объект читающий конфиг и формирующий таблицу команд
 
 public:
-    // std::optional<CommandMessage> handleInput( void );
     void ProcessEvent( common::EventId );
 
     common::CommandId GetUserInput( void );

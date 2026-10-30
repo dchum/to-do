@@ -5,6 +5,8 @@
 
 // KeySpec — это логическое сочетание: базовая клавиша плюс модификаторы
 
+namespace cui {
+
 enum class ModifierKey {
     None  = 0,
     Shift = 1 << 0,
@@ -49,3 +51,5 @@ struct KeySpec
 
     std::variant<CharKey, NamedKey> base;
 };
+
+};//namespace cui

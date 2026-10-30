@@ -6,7 +6,9 @@
 #include "cui_window_main.h"
 #include "cui_window_setting.h"
 #include "cui_window_start.h"
-#include "cui_entry.h"
+
+#include "input.h"
+#include "keyspec.h"
 
 cui::Message msgLabelBACKLOG1 ("<C></B>BACKLOG</B>");
 
@@ -59,7 +61,10 @@ cui::CUICore::CUICore(void)
 
 common::CommandId cui::CUICore::GetUserInput(void)
 {
-    int user_input = wgetch( screen_.get()->window );
+    wint_t key_ = 0;
+    int user_input = wget_wch( screen_.get()->window, &key_ );
 
-    return RegisterCommands.GetCommand( user_input );
+    cui::KeySpec key_spec = cui::parse_key_spec( user_input );
+
+    return RegisterCommands.GetCommand( key_spec );
 }
