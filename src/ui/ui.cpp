@@ -2,10 +2,13 @@
 
 #include "common/events.h"
 
-/**
- *  Позже update будет работать в свой потоке
- */
-void ui::Ui::update(void) const
+void ui::Ui::init(void)
+{
+    //TODO - чтение конфигурации, создание всех оконо
+}
+
+/* Позже update будет работать в свой потоке */
+void ui::Ui::update(void)
 {
     using namespace common;
 

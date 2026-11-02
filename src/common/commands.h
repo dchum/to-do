@@ -1,7 +1,7 @@
 /**
- * @file header_message.h
+ * @file commands.h
  * @author chumakov (<d.tchumackov2013@yandex.ru>)
- * @brief Заголовок любой посылки между модулями
+ * @brief Описание сущности Команда - сообщения от модуля интерфейса
  * @version 0.1
  * @date 2026-04-19
  * 

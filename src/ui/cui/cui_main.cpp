@@ -41,10 +41,10 @@ cui::CUICore::CUICore(void)
             // case '\r': case '\n': key_ = KEY_ENTER;     break;
             // case '\t':            key_ = KEY_TAB;       break;
             // case DELETE:          key_ = KEY_BACKSPACE; break;
-            case '\b': case 127: case 330:  key_ = KEY_BACKSPACE; break;
-            case CDK_BEGOFLINE:   key_ = KEY_HOME;      break;
-            case CDK_ENDOFLINE:   key_ = KEY_END;       break;
-            case CDK_FORCHAR:     key_ = KEY_RIGHT;     break;
+            // case '\b': case 127: case 330:  key_ = KEY_BACKSPACE; break;
+            // case CDK_BEGOFLINE:   key_ = KEY_HOME;      break;
+            // case CDK_ENDOFLINE:   key_ = KEY_END;       break;
+            // case CDK_FORCHAR:     key_ = KEY_RIGHT;     break;
             // case CDK_BACKCHAR:    key_ = KEY_LEFT;      break;
             // case CDK_NEXT:        key_ = KEY_TAB;       break;
             // case CDK_PREV:        key_ = KEY_BTAB;      break;
@@ -61,10 +61,10 @@ cui::CUICore::CUICore(void)
 
 common::CommandId cui::CUICore::GetUserInput(void)
 {
-    wint_t key_ = 0;
-    int user_input = wget_wch( screen_.get()->window, &key_ );
+    wint_t key = 0;
 
-    cui::KeySpec key_spec = cui::parse_key_spec( user_input );
+    cui::KeySpec key_spec = cui::parse_key_spec( wget_wch( screen_.get()->window, &key ) );
 
-    return RegisterCommands.GetCommand( key_spec );
+    // return RegisterCommands.GetCommand( key_spec );
+    return common::CommandId();
 }

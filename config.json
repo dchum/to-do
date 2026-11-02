@@ -1,0 +1,15 @@
+{
+    "description": "Keybindings configuration for TaskManager CLI",
+
+    "bindings": {
+        "CreateTask": ["n"],
+        "DeleteTask": ["d"],
+        "NavigateUp": ["k", "Up", "Ctrl+p"],
+        "NavigateDown": ["j", "Down", "Ctrl+n"],
+        "NavigateLeft": ["h", "Left"],
+        "NavigateRight": ["l", "Right"],
+        "OnSetting": ["o"],
+        "OffSetting": ["O"],
+        "ExitProgram": ["q", "Q", "Ctrl+c"]
+    }
+}

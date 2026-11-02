@@ -13,7 +13,8 @@ class Ui final : public common::Module {
     cui::CUICore cui_core_;
 
 public:
-    void update( void ) const;
+    void init( void );
+    void update( void );
 
 };//class Ui
 
