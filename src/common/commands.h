@@ -36,7 +36,7 @@ namespace common
     };
     
     using CommandPayload = std::variant<
-        CreateTaskCommand,
+        CreateTaskCommand
     >;
     
     struct Command {
