@@ -1,7 +1,7 @@
 CXX:= g++
 
 CFLAGS = -Wall -g -Wno-unused-variable
-CXXFLAGS = -Wall -g -Wno-unused-variable -std=c++17 -Wall -Wextra
+CXXFLAGS = -Wall -g -Wno-unused-variable -std=c++20 -Wall -Wextra
 DEFS = -DNCURSES_WIDECHAR
 INCS = -I. -I../ -Ijson/ -I../../../../common/
 LIBS = -lncurses

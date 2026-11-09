@@ -1,7 +1,7 @@
 CXX:= g++
 
 CFLAGS = -Wall -g -Wno-unused-variable
-CXXFLAGS = -Wall -g -Wno-unused-variable -std=c++17 -Wall -Wextra
+CXXFLAGS = -Wall -g -Wno-unused-variable -std=c++20 -Wall -Wextra
 INCS_common = -I../../../../common/ -I../../../../common/ui_to_core/ -I../../../../common/ui_to_core/payloads
 INCS_cdk = -I../cdk
 INCS_lib = -I../../../../lib
