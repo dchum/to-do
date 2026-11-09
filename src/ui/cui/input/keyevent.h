@@ -57,22 +57,34 @@ struct KeyEvent
 
     std::variant<CharCode, NamedKey> base;
 
-    //FIXME - чехарда с конструкторами
-    
     KeyEvent () :kind(KeyKind::KEY_INVALID)
     { }
 
-    KeyEvent (KeyKind) : KeyEvent ()
+    KeyEvent (CharCode ch, Modifiers m = 0) : kind(KeyKind::KEY_CHAR), mods(m), base(ch)
     {}
 
-    KeyEvent (CharCode ch, ModifierKey m = ModifierKey::None) : kind(KeyKind::KEY_CHAR), mods(m), base(ch)
-    {}
-
-    KeyEvent (NamedKey nk, ModifierKey m = ModifierKey::None) : kind(KeyKind::KEY_NAMED), mods(m), base(nk)
+    KeyEvent (NamedKey nk, Modifiers m = 0) : kind(KeyKind::KEY_NAMED), mods(m), base(nk)
     {}
 };
 
+inline bool operator==(const KeyEvent& lhs, const KeyEvent& rhs) {
+    return lhs.kind == rhs.kind && lhs.mods == rhs.mods && lhs.base == rhs.base;
+}
+
+inline bool operator<(const KeyEvent& lhs, const KeyEvent& rhs) {
+    if (lhs.kind != rhs.kind) {
+        return lhs.kind < rhs.kind;
+    }
+    if (lhs.mods != rhs.mods) {
+        return lhs.mods < rhs.mods;
+    }
+    return lhs.base < rhs.base;
+}
+
 };//namespace cui
+
+
+
 
 inline std::ostream& operator<<(std::ostream& out, cui::NamedKey k) 
 {
@@ -107,7 +119,7 @@ inline std::ostream& operator<<(std::ostream& out, cui::KeyKind k)
     }
 }
 
-inline std::ostream& operator << ( std::ostream& out, cui::KeyEvent key )
+inline std::ostream& operator << ( std::ostream& out, const cui::KeyEvent& key )
 {
     out << "[" << key.kind << ":";
 

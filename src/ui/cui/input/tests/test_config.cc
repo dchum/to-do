@@ -5,18 +5,29 @@
 #include "keyevent.h"
 #include "input.h"
 #include "config.h"
+#include "command_registry.h"
 
 int main() try
 {
     using namespace cui;
 
-    ConfigStorage cnfg{"config.json"};
+    ConfigStorage cnfg{"bindKeys.json"};
 
     cnfg.readConfig();
+
+    for ( auto&& bind : cnfg )
+    {
+        std::cout << bind.first << ": ";
+        for ( const auto& key : bind.second )
+        {
+            std::cout << key << " ";
+        }
+        std::cout << std::endl;
+    }
     
 #if 0
-    CommandRegistry cmdreg;
 
+    CommandRegistry cmdreg;
     cmdreg.registerBindings( cnfg.begin(), cnfg.end() );
 
     for ( ; ; )
@@ -25,7 +36,7 @@ int main() try
 
         if ( cmdreg.hasBinding( kevent ) )
         {
-            std << kevent << "->" << cmdreg.getCommand( kevent );
+            std::cout << kevent << "->" << cmdreg.getCommand( kevent );
         }
         else
         {
