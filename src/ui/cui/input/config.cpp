@@ -1,6 +1,6 @@
 #include "config.h"
 
-#include "json/json.hpp"
+#include "json.hpp"
 
 cui::ConfigStorage::ConfigStorage(std::string_view configFile) noexcept
     :configFile( configFile )
