@@ -14,3 +14,4 @@ Makefile*
 *.yaml
 /build
 to-do.md
+/src/tests/*

@@ -7,8 +7,8 @@
 #include "cui_window_setting.h"
 #include "cui_window_start.h"
 
-#include "input.h"
-#include "keyspec.h"
+#include "key_input.h"
+#include "keyevent.h"
 
 cui::Message msgLabelBACKLOG1 ("<C></B>BACKLOG</B>");
 
